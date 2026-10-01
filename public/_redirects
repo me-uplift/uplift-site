@@ -1,0 +1,8 @@
+# Retired blog category URLs → current category pages (src/lib/categories.js)
+/blog/category/social-media-strategy   /blog/category/social-media/     301
+/blog/category/creator-economy-ugc     /blog/category/social-media/     301
+/blog/category/content-copywriting     /blog/category/content-email/    301
+/blog/category/email-newsletters       /blog/category/content-email/    301
+/blog/category/agency-life-tools       /blog/category/strategy-brand/   301
+/blog/category/marketing-strategy      /blog/category/strategy-brand/   301
+/blog/category/branding-design         /blog/category/strategy-brand/   301

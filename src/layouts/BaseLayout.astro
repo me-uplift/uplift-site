@@ -1,4 +1,5 @@
 ---
+import '../styles/tokens.css';
 import '../styles/global.css';
 
 interface Props {
@@ -59,8 +60,8 @@ const ogImageURL = new URL(ogImage, Astro.site);
   <meta name="twitter:title" content={title}>
   <meta name="twitter:description" content={description}>
   <meta name="twitter:image" content={ogImageURL}>
-  <link rel="preconnect" href="https://api.fontshare.com">
-  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,800,700,500,400&display=swap" rel="stylesheet">
+  <link rel="preload" href="/fonts/Satoshi-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/Satoshi-Medium.woff2" as="font" type="font/woff2" crossorigin>
   <slot name="head" />
 </head>
 <body>
@@ -68,7 +69,7 @@ const ogImageURL = new URL(ogImage, Astro.site);
 <!-- NAV -->
 <nav id="nav" data-static-nav={transparentNav ? 'false' : 'true'} class:list={[{ scrolled: !transparentNav }]}>
   <a href="/" class="nav-logo" id="nav-logo-link">
-    <img src={transparentNav ? '/assets/UpliftLogo_White.svg' : '/assets/UpliftLogo_GradientFixed.svg'} alt="Uplift Digital Studio" id="nav-logo-img">
+    <img src={transparentNav ? '/assets/UpliftLogo_White.svg' : '/assets/UpliftLogo_Black.svg'} alt="Uplift Digital Studio" id="nav-logo-img">
     <span class="nav-logo-text">Uplift Digital Studio</span>
   </a>
   <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
@@ -90,7 +91,7 @@ const ogImageURL = new URL(ogImage, Astro.site);
 <footer id="footer">
   <div class="footer-inner">
     <div class="footer-top">
-      <div class="footer-logo"><img src="/assets/UpliftLogo_GradientTextFixed.svg" alt="Uplift Digital Studio"></div>
+      <div class="footer-logo"><img src="/assets/UpliftLogo_Black.svg" alt="Uplift Digital Studio"></div>
       <nav class="footer-nav">
         <a href="/#what">Services</a>
         <a href="/#pass">Studio Pass</a>
@@ -118,8 +119,8 @@ const ogImageURL = new URL(ogImage, Astro.site);
     const syncLogo = () => {
       const img = document.getElementById('nav-logo-img');
       if (!img) return;
-      const useGradient = isStatic || navEl.classList.contains('menu-open') || window.scrollY > 40;
-      img.setAttribute('src', useGradient ? '/assets/UpliftLogo_GradientFixed.svg' : '/assets/UpliftLogo_White.svg');
+      const useDark = isStatic || navEl.classList.contains('menu-open') || window.scrollY > 40;
+      img.setAttribute('src', useDark ? '/assets/UpliftLogo_Black.svg' : '/assets/UpliftLogo_White.svg');
     };
     const close = () => {
       navEl.classList.remove('menu-open');
@@ -143,7 +144,7 @@ const ogImageURL = new URL(ogImage, Astro.site);
     window.addEventListener('scroll', () => {
       const scrolled = window.scrollY > 40;
       nav.classList.toggle('scrolled', scrolled);
-      navLogoImg.setAttribute('src', scrolled ? '/assets/UpliftLogo_GradientFixed.svg' : '/assets/UpliftLogo_White.svg');
+      navLogoImg.setAttribute('src', scrolled ? '/assets/UpliftLogo_Black.svg' : '/assets/UpliftLogo_White.svg');
     }, { passive: true });
   })();
 

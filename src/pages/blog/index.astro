@@ -1,94 +1,136 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getPublishedPosts, getFeaturedPosts, getCategories, getTags, formatDate, slugify } from '../../lib/notion.js';
+import { getPublishedPosts, getFeaturedPosts, formatDate } from '../../lib/notion.js';
+import { CATEGORIES, categorySlug, categoryStyle } from '../../lib/categories.js';
 
 const posts = await getPublishedPosts();
-const featured = await getFeaturedPosts();
-const categories = await getCategories();
-const tags = await getTags();
+// Posts are already sorted newest first, so the first featured one is the newest.
+const featured = (await getFeaturedPosts())[0];
+const gridPosts = posts.filter((p) => p !== featured);
 
-const title = 'Insights — Uplift Digital Studio';
-const description = 'Notes on social media strategy, content, and growth from Uplift Digital Studio.';
+const title = 'Insights | Uplift Digital Studio';
+const description = 'Marketing insights for small brands that want consistency without a full team, from Uplift Digital Studio.';
 ---
 <BaseLayout title={title} description={description} canonicalPath="/blog/" ogImage={posts[0]?.ogImage ?? posts[0]?.cover ?? '/assets/og-image.png'}>
   <section id="blog-index" data-screen-label="Insights">
-    <div class="wrap">
-      <div class="blog-index-header reveal">
-        <p class="eyebrow">Insights</p>
-        <h1 class="blog-index-headline">Notes on building brands that show up.</h1>
+    <div class="wrap blog-wrap">
+      <header class="blog-index-header reveal">
+        <p class="blog-eyebrow">Insights</p>
+        <h1 class="blog-index-headline">Marketing insights for small brands that want <span class="gradient-text">consistency without a full team.</span></h1>
+      </header>
+
+      {featured && (
+        <article class="featured-card reveal">
+          <a class="featured-media" href={`/blog/${featured.slug}/`} tabindex="-1" aria-hidden="true">
+            {featured.cover
+              ? <img src={featured.cover} alt="" loading="lazy">
+              : <span class="cover-fallback" style={categoryStyle(featured.categories[0])}></span>}
+          </a>
+          <div class="featured-body">
+            <div class="featured-tags">
+              <span class="badge badge-featured">Featured</span>
+              {featured.categories[0] && <span class="badge cat" style={categoryStyle(featured.categories[0])}>{featured.categories[0]}</span>}
+            </div>
+            <h2 class="featured-title"><a href={`/blog/${featured.slug}/`}>{featured.title}</a></h2>
+            {featured.excerpt && <p class="featured-excerpt">{featured.excerpt}</p>}
+            <p class="card-meta">
+              {featured.date && <time datetime={featured.date}>{formatDate(featured.date)}</time>}
+              {featured.readingTime && <span>{featured.readingTime} min read</span>}
+            </p>
+            <a class="read-link" href={`/blog/${featured.slug}/`}>
+              Read the post
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </article>
+      )}
+
+      <div class="filter-bar" role="group" aria-label="Filter posts by category">
+        <button type="button" class="filter-chip" data-filter="all" aria-pressed="true">All</button>
+        {CATEGORIES.map((c) => (
+          <button type="button" class="filter-chip" data-filter={c.slug} aria-pressed="false">{c.name}</button>
+        ))}
       </div>
 
-      {(categories.length > 0 || tags.length > 0) && (
-        <div class="blog-taxonomy reveal">
-          {categories.length > 0 && (
-            <div class="blog-taxonomy-group">
-              <span class="blog-taxonomy-label">Categories</span>
-              <div class="blog-taxonomy-pills">
-                {categories.map((c) => <a class="post-category" href={`/blog/category/${c.slug}/`}>{c.name}</a>)}
-              </div>
+      <div class="post-grid" id="post-grid">
+        {gridPosts.map((post) => (
+          <a class="post-card" href={`/blog/${post.slug}/`} data-categories={post.categories.map(categorySlug).join(' ')}>
+            <div class="post-card-media">
+              {post.cover
+                ? <img src={post.cover} alt="" loading="lazy">
+                : <span class="cover-fallback" style={categoryStyle(post.categories[0])}></span>}
             </div>
-          )}
-          {tags.length > 0 && (
-            <div class="blog-taxonomy-group">
-              <span class="blog-taxonomy-label">Tags</span>
-              <div class="blog-taxonomy-pills">
-                {tags.map((t) => <a class="post-tag" href={`/blog/tag/${t.slug}/`}>{t.name}</a>)}
-              </div>
+            <div class="post-card-body">
+              {post.categories[0] && <span class="badge cat" style={categoryStyle(post.categories[0])}>{post.categories[0]}</span>}
+              <h3 class="post-card-title">{post.title}</h3>
+              {post.excerpt && <p class="post-card-desc">{post.excerpt}</p>}
+              <p class="card-meta">
+                {post.date && <time datetime={post.date}>{formatDate(post.date)}</time>}
+                {post.readingTime && <span>{post.readingTime} min read</span>}
+              </p>
             </div>
-          )}
-        </div>
-      )}
+          </a>
+        ))}
+      </div>
+      <p class="blog-empty" id="blog-empty" role="status" hidden={gridPosts.length > 0}>No posts here yet</p>
 
-      {featured.length > 0 && (
-        <div class="featured-section reveal">
-          <p class="eyebrow featured-eyebrow">Featured</p>
-          <div class="blog-grid featured-grid">
-            {featured.map((post) => (
-              <a class="post-card featured" href={`/blog/${post.slug}/`}>
-                {post.cover && (
-                  <div class="post-card-media">
-                    <img src={post.cover} alt="" loading="lazy">
-                  </div>
-                )}
-                <div class="post-card-body">
-                  <div class="post-card-meta-row">
-                    {post.categories.length > 0 && <span class="post-category">{post.categories[0]}</span>}
-                    {post.readingTime && <span class="post-card-reading-time">{post.readingTime} min read</span>}
-                  </div>
-                  <h2 class="post-card-title">{post.title}</h2>
-                  {post.excerpt && <p class="post-card-desc">{post.excerpt}</p>}
-                  {post.date && <p class="post-card-date">{formatDate(post.date)}</p>}
-                </div>
-              </a>
-            ))}
+      <section class="newsletter" aria-labelledby="newsletter-title">
+        <div class="newsletter-copy">
+          <h2 id="newsletter-title" class="newsletter-title">Marketing Notes for Small Brands</h2>
+          <p class="newsletter-sub">New posts and practical ideas from the studio, straight to your inbox. Unsubscribe any time.</p>
+        </div>
+        <form class="newsletter-form" id="newsletter-form" novalidate>
+          <label for="newsletter-email">Email address</label>
+          <div class="newsletter-row">
+            <input id="newsletter-email" name="email" type="email" autocomplete="email" placeholder="you@yourbrand.com" required>
+            <button type="submit" class="btn-gradient">Subscribe</button>
           </div>
-        </div>
-      )}
+          <p class="newsletter-status" id="newsletter-status" role="status"></p>
+        </form>
+      </section>
 
-      {posts.length === 0 ? (
-        <p class="blog-empty">New posts are on the way — check back soon.</p>
-      ) : (
-        <div class="blog-grid">
-          {posts.map((post, idx) => (
-            <a class={`post-card reveal ${idx % 3 === 1 ? 'reveal-d1' : idx % 3 === 2 ? 'reveal-d2' : ''}`} href={`/blog/${post.slug}/`}>
-              {post.cover && (
-                <div class="post-card-media">
-                  <img src={post.cover} alt="" loading="lazy">
-                </div>
-              )}
-              <div class="post-card-body">
-                <div class="post-card-meta-row">
-                  {post.categories.length > 0 && <span class="post-category">{post.categories[0]}</span>}
-                  {post.readingTime && <span class="post-card-reading-time">{post.readingTime} min read</span>}
-                </div>
-                <h2 class="post-card-title">{post.title}</h2>
-                {post.excerpt && <p class="post-card-desc">{post.excerpt}</p>}
-                {post.date && <p class="post-card-date">{formatDate(post.date)}</p>}
-              </div>
-            </a>
-          ))}
+      <section class="cta-band" aria-labelledby="cta-title">
+        <div>
+          <h2 id="cta-title" class="cta-title">Want This for Your Brand?</h2>
+          <p class="cta-sub">Book a call and we'll tell you what to fix first.</p>
         </div>
-      )}
+        <a href="/#contact" class="btn-gradient">Book a call</a>
+      </section>
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  // Category filter: a card matches when any of its categories is the selected one.
+  const chips = Array.from(document.querySelectorAll<HTMLButtonElement>('.filter-chip'));
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('#post-grid .post-card'));
+  const empty = document.getElementById('blog-empty');
+  chips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      const filter = chip.dataset.filter;
+      chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+      let shown = 0;
+      cards.forEach((card) => {
+        const match = filter === 'all' || (card.dataset.categories || '').split(' ').includes(filter!);
+        card.hidden = !match;
+        if (match) shown++;
+      });
+      if (empty) empty.hidden = shown > 0;
+    });
+  });
+
+  // TODO: connect the newsletter form to an email service once one is chosen.
+  // Until then nothing is sent or stored; the form only validates the address.
+  const form = document.getElementById('newsletter-form') as HTMLFormElement | null;
+  const status = document.getElementById('newsletter-status');
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!status) return;
+    const input = form.querySelector('input');
+    if (input && !input.checkValidity()) {
+      status.textContent = 'Please enter a valid email address.';
+      return;
+    }
+    status.textContent = "Sign-ups aren't open yet. Email hello@upliftdigital.studio to join the list.";
+  });
+</script>

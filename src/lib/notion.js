@@ -2,6 +2,9 @@ import { Client } from '@notionhq/client';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import { slugify, CATEGORIES, getCategory } from './categories.js';
+
+export { slugify };
 
 // Loads .env into process.env so this module works identically whether it's
 // imported from Astro pages (Vite/Node) or from astro.config.mjs (plain
@@ -66,17 +69,10 @@ function getFileObjectUrl(fileObj) {
   return fileObj.type === 'external' ? fileObj.external?.url : fileObj.file?.url;
 }
 
-export function slugify(str = '') {
-  return str
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-}
-
 export function formatDate(dateStr) {
   if (!dateStr) return '';
-  return new Date(dateStr).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  // Notion dates are plain YYYY-MM-DD; format in UTC so they don't shift a day in US time zones.
+  return new Date(dateStr).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 }
 
 /**
@@ -112,6 +108,22 @@ async function resolveImage(fileObj) {
   }
 }
 
+const warnedCategories = new Set();
+
+/** Keeps only categories defined in categories.js; unknown values are skipped with a warning. */
+function normalizeCategories(options = [], postTitle = '') {
+  return options
+    .map((o) => o.name)
+    .filter((name) => {
+      if (getCategory(name)) return true;
+      if (!warnedCategories.has(name)) {
+        warnedCategories.add(name);
+        console.warn(`[notion] Skipping unknown category "${name}" on "${postTitle}" — add it to src/lib/categories.js.`);
+      }
+      return false;
+    });
+}
+
 function mapPageToPost(page) {
   const props = page.properties;
   return {
@@ -122,7 +134,7 @@ function mapPageToPost(page) {
     updated: props.Updated?.date?.start,
     excerpt: plainText(props.Excerpt?.rich_text),
     tags: (props.Tags?.multi_select || []).map((t) => t.name),
-    categories: (props.Category?.multi_select || []).map((c) => c.name),
+    categories: normalizeCategories(props.Category?.multi_select, plainText(props.Title?.title)),
     status: getStatusName(props.Status),
     coverFile: props.Cover?.files?.[0],
     ogImageFile: props['OG Image']?.files?.[0],
@@ -201,9 +213,25 @@ function collectTerms(posts, field) {
   return Array.from(map.values()).sort((a, b) => a.name.localeCompare(b.name));
 }
 
+/** Every defined category in canonical order (including empty ones), with post counts. */
 export async function getCategories() {
   const posts = await getPublishedPosts();
-  return collectTerms(posts, 'categories');
+  return CATEGORIES.map((c) => ({
+    ...c,
+    count: posts.filter((p) => p.categories.includes(c.name)).length,
+  }));
+}
+
+/** Up to `limit` other posts: ones sharing a category first, then newest. */
+export async function getRelatedPosts(post, limit = 3) {
+  const posts = await getPublishedPosts();
+  const shares = (p) => p.categories.some((c) => post.categories.includes(c));
+  return posts
+    .filter((p) => p.id !== post.id)
+    .map((p, i) => ({ p, i, rank: shares(p) ? 0 : 1 }))
+    .sort((a, b) => a.rank - b.rank || a.i - b.i)
+    .map(({ p }) => p)
+    .slice(0, limit);
 }
 
 export async function getTags() {
