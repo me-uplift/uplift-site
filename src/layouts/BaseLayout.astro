@@ -1,0 +1,276 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  transparentNav?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonicalPath = '/',
+  ogImage = '/assets/og-image.png',
+  ogType = 'website',
+  transparentNav = false,
+} = Astro.props;
+
+const canonicalURL = new URL(canonicalPath, Astro.site);
+const ogImageURL = new URL(ogImage, Astro.site);
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <link rel="canonical" href={canonicalURL}>
+  <meta name="theme-color" content="#10101A">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192.png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <meta property="og:type" content={ogType}>
+  <meta property="og:site_name" content="Uplift Digital Studio">
+  <meta property="og:url" content={canonicalURL}>
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:image" content={ogImageURL}>
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={title}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content={ogImageURL}>
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,800,700,500,400&display=swap" rel="stylesheet">
+  <slot name="head" />
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav" data-static-nav={transparentNav ? 'false' : 'true'} class:list={[{ scrolled: !transparentNav }]}>
+  <a href="/" class="nav-logo" id="nav-logo-link">
+    <img src={transparentNav ? '/assets/UpliftLogo_White.svg' : '/assets/UpliftLogo_GradientFixed.svg'} alt="Uplift Digital Studio" id="nav-logo-img">
+    <span class="nav-logo-text">Uplift Digital Studio</span>
+  </a>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="/#what">Services</a>
+      <a href="/#pass">Studio Pass</a>
+      <a href="/blog/">Blog</a>
+    </div>
+    <a href="/#contact" class="nav-cta">Work with us</a>
+  </div>
+</nav>
+
+<slot />
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-logo"><img src="/assets/UpliftLogo_GradientTextFixed.svg" alt="Uplift Digital Studio"></div>
+      <nav class="footer-nav">
+        <a href="/#what">Services</a>
+        <a href="/#pass">Studio Pass</a>
+        <a href="/blog/">Blog</a>
+        <a href="/#contact">Contact</a>
+        <a href="mailto:hello@upliftdigital.studio">hello@upliftdigital.studio</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Uplift Digital Studio by MyaEliza LLC. All rights reserved.</span>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/company/uplift-digital-studio/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  (function () {
+    const navEl = document.getElementById('nav');
+    const toggle = document.getElementById('nav-toggle');
+    if (!navEl || !toggle) return;
+    const isStatic = navEl.dataset.staticNav === 'true';
+    const syncLogo = () => {
+      const img = document.getElementById('nav-logo-img');
+      if (!img) return;
+      const useGradient = isStatic || navEl.classList.contains('menu-open') || window.scrollY > 40;
+      img.setAttribute('src', useGradient ? '/assets/UpliftLogo_GradientFixed.svg' : '/assets/UpliftLogo_White.svg');
+    };
+    const close = () => {
+      navEl.classList.remove('menu-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      syncLogo();
+    };
+    toggle.addEventListener('click', () => {
+      const open = navEl.classList.toggle('menu-open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      syncLogo();
+    });
+    navEl.querySelectorAll('.nav-right a').forEach(a => a.addEventListener('click', close));
+  })();
+
+  // Nav scroll (skipped entirely on pages without a transparent hero)
+  (function () {
+    const nav = document.getElementById('nav');
+    const navLogoImg = document.getElementById('nav-logo-img');
+    if (!nav || !navLogoImg) return;
+    if (nav.dataset.staticNav === 'true') return;
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY > 40;
+      nav.classList.toggle('scrolled', scrolled);
+      navLogoImg.setAttribute('src', scrolled ? '/assets/UpliftLogo_GradientFixed.svg' : '/assets/UpliftLogo_White.svg');
+    }, { passive: true });
+  })();
+
+  // Hero parallax (only present on the homepage)
+  (function () {
+    const heroBg = document.getElementById('hero-bg-img');
+    const hero = document.getElementById('hero');
+    if (!heroBg || !hero) return;
+    function updateParallax() {
+      const scrollY = window.scrollY;
+      if (scrollY < hero.offsetHeight + 200) {
+        heroBg.style.transform = 'translateY(' + (scrollY * 0.35) + 'px)';
+      }
+    }
+    window.addEventListener('scroll', updateParallax, { passive: true });
+  })();
+
+  // Reveal on scroll
+  (function () {
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    reveals.forEach(el => {
+      if (el.closest('#hero')) { setTimeout(() => el.classList.add('visible'), 100); }
+      else { obs.observe(el); }
+    });
+  })();
+
+  // Service select -> swap left descriptor (persistent active + hover preview)
+  (function () {
+    const body = document.getElementById('what-body');
+    const eyebrow = document.getElementById('what-eyebrow');
+    const dotsWrap = document.getElementById('what-dots');
+    const rows = Array.from(document.querySelectorAll('#services-list .service-row'));
+    if (!body || !eyebrow || !rows.length) return;
+
+    let selected = 0;   // persistent (clicked) index
+    let timer;
+    const dots = [];
+    if (dotsWrap) {
+      rows.forEach((_, i) => {
+        const d = document.createElement('button');
+        d.type = 'button';
+        d.setAttribute('aria-label', 'View service ' + (i + 1));
+        dotsWrap.appendChild(d);
+        d.addEventListener('click', () => select(i));
+        dots.push(d);
+      });
+    }
+
+    function paint(i) {
+      rows.forEach((r, idx) => r.classList.toggle('active', idx === i));
+      dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+    }
+    function swap(i) {
+      clearTimeout(timer);
+      body.classList.add('swapping');
+      eyebrow.classList.add('swapping');
+      paint(i);
+      const row = rows[i];
+      timer = setTimeout(() => {
+        eyebrow.textContent = row.getAttribute('data-name');
+        body.textContent = row.getAttribute('data-desc');
+        body.classList.remove('swapping');
+        eyebrow.classList.remove('swapping');
+      }, 200);
+    }
+    function select(i) { selected = i; swap(i); }
+
+    rows.forEach((row, i) => {
+      row.addEventListener('mouseenter', () => swap(i));
+      row.addEventListener('focus', () => swap(i));
+      row.addEventListener('click', () => select(i));
+    });
+    const list = document.getElementById('services-list');
+    if (list) list.addEventListener('mouseleave', () => swap(selected));
+
+    paint(0);
+  })();
+
+  // Plans carousel (mobile): dots indicator + start on the Growth tier
+  (function () {
+    const grid = document.querySelector('#plans .plans-grid');
+    const dotsWrap = document.getElementById('plans-dots');
+    if (!grid || !dotsWrap) return;
+    const cards = Array.from(grid.querySelectorAll('.plan-card'));
+    if (!cards.length) return;
+    const centerOf = (c) => c.offsetLeft + c.offsetWidth / 2;
+    const target = (c) => centerOf(c) - grid.clientWidth / 2;
+
+    const dots = cards.map((_, i) => {
+      const d = document.createElement('button');
+      d.type = 'button';
+      d.setAttribute('aria-label', 'View plan ' + (i + 1));
+      d.addEventListener('click', () => grid.scrollTo({ left: target(cards[i]), behavior: 'smooth' }));
+      dotsWrap.appendChild(d);
+      return d;
+    });
+
+    function activeIndex() {
+      const mid = grid.scrollLeft + grid.clientWidth / 2;
+      let best = 0, bestDist = Infinity;
+      cards.forEach((c, i) => {
+        const dist = Math.abs(centerOf(c) - mid);
+        if (dist < bestDist) { bestDist = dist; best = i; }
+      });
+      return best;
+    }
+    function paintDots() {
+      const a = activeIndex();
+      dots.forEach((d, i) => d.classList.toggle('active', i === a));
+    }
+
+    let raf;
+    grid.addEventListener('scroll', () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(paintDots);
+    }, { passive: true });
+
+    const featured = grid.querySelector('.plan-card.featured') || cards[Math.floor(cards.length / 2)];
+    const isMobile = () => window.matchMedia('(max-width: 1024px)').matches;
+    function reset() {
+      if (isMobile() && featured) {
+        grid.scrollLeft = target(featured);
+      } else {
+        grid.scrollLeft = 0;
+      }
+      paintDots();
+    }
+    reset();
+    window.addEventListener('load', reset);
+    let rt;
+    window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(reset, 150); });
+  })();
+</script>
+
+</body>
+</html>

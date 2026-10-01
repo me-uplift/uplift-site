@@ -1,0 +1,217 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Uplift Digital Studio — Premium Social Media Management';
+const description = "Uplift Digital Studio is a bilingual social media management and UGC agency for premium brands. Done-for-you content strategy, community management, and creator-led content in English and Spanish.";
+---
+<BaseLayout title={title} description={description} canonicalPath="/" ogImage="/assets/og-image.png" transparentNav={true}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Uplift Digital Studio",
+      "legalName": "MyaEliza LLC",
+      "url": "https://upliftdigital.studio/",
+      "logo": "https://upliftdigital.studio/assets/UpliftLogo_GradientFixed.svg",
+      "image": "https://upliftdigital.studio/assets/og-image.png",
+      "description": "Bilingual social media management and UGC agency for premium brands. Content strategy, community management, and creator-led content production.",
+      "email": "hello@upliftdigital.studio",
+      "sameAs": ["https://www.linkedin.com/company/uplift-digital-studio/"],
+      "availableLanguage": ["en", "es"],
+      "areaServed": ["United States", "Latin America"],
+      "serviceType": ["Social Media Management", "User-Generated Content", "Content Strategy", "Community Management"]
+    })} />
+  </Fragment>
+
+  <!-- HERO -->
+  <section id="hero" data-screen-label="Hero">
+    <img id="hero-bg-img" src="/assets/hero.jpg" alt="" aria-hidden="true">
+    <h1 class="hero-headline reveal reveal-d1">Build a Brand,
+Without the Burnout.</h1>
+    <div class="hero-bottom">
+      <p class="hero-sub reveal reveal-d2">Uplift Digital Studio is the social media partner for brands tired of posting in bursts and going quiet. We pair sharp strategy with premium content and senior attention, so your brand shows up consistently and turns followers into customers. Serving the USA, Latin America &amp; beyond.</p>
+      <a href="#contact" class="btn-hero reveal reveal-d3">Work with us</a>
+    </div>
+  </section>
+
+  <!-- VALUE -->
+  <section id="what" data-screen-label="Value">
+    <div class="wrap">
+      <div class="what-grid">
+        <div class="what-detail">
+          <h2 class="what-headline reveal reveal-d1">The attention your brand needs.</h2>
+          <p class="what-eyebrow reveal reveal-d2" id="what-eyebrow">Bilingual content, multicultural instinct</p>
+          <p class="what-body reveal reveal-d2" id="what-body">We study each audience before we create for it, so content lands natively in English and Spanish for people who buy and respond differently.</p>
+          <div class="what-dots reveal reveal-d3" id="what-dots" aria-hidden="true"></div>
+        </div>
+        <div class="services-list" id="services-list">
+          <button type="button" class="service-row reveal active" data-name="Bilingual content, multicultural instinct" data-desc="We study each audience before we create for it, so content lands natively in English and Spanish for people who buy and respond differently.">
+            <span class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>
+            </span>
+            <span class="service-name">Bilingual content, multicultural instinct</span>
+            <span class="service-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </span>
+          </button>
+          <button type="button" class="service-row reveal reveal-d1" data-name="Strategy-first content creation" data-desc="Nothing gets posted without a reason. We build around your goals and your audience, so every piece of content earns its place.">
+            <span class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+            </span>
+            <span class="service-name">Strategy-first content creation</span>
+            <span class="service-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </span>
+          </button>
+          <button type="button" class="service-row reveal reveal-d2" data-name="Full-funnel support" data-desc="From strategy and content to community management and UGC, we cover the whole journey. One studio turning attention into customers.">
+            <span class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>
+            </span>
+            <span class="service-name">Full-funnel support</span>
+            <span class="service-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </span>
+          </button>
+          <button type="button" class="service-row reveal reveal-d3" data-name="Boutique attention, premium results" data-desc="A small team means you work directly with senior strategists who know your brand inside out.">
+            <span class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg>
+            </span>
+            <span class="service-name">Boutique attention, premium results</span>
+            <span class="service-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANS -->
+  <section id="plans" data-screen-label="Plans">
+    <div class="wrap">
+      <div class="plans-header reveal">
+        <h2 class="plans-headline">Social media, handled.</h2>
+        <p class="plans-sub">Done-for-you social media. Every plan covers strategy, content, and consistent publishing, so your brand shows up without you lifting a finger.</p>
+      </div>
+      <div class="plans-dots" id="plans-dots" aria-hidden="true"></div>
+      <div class="plans-grid">
+
+        <div class="plan-card reveal">
+          <div class="plan-label">Essentials</div>
+          <div class="plan-price">$600</div>
+          <div class="plan-price-sub">per month</div>
+          <div class="plan-divider"></div>
+          <p class="plan-desc">Consistent, strategic social presence on one platform, done for you.</p>
+          <div class="plan-features">
+            <div class="plan-feature">9 posts and 9 stories</div>
+            <div class="plan-feature">1 platform</div>
+            <div class="plan-feature">Caption writing</div>
+            <div class="plan-feature">Content calendar and scheduling</div>
+            <div class="plan-feature">Monthly strategy check-in</div>
+            <div class="plan-feature">Monthly performance report</div>
+          </div>
+          <p class="plan-addons-note">Add-ons: Email bundle $250</p>
+          <a href="mailto:hello@upliftdigital.studio" class="btn-outline">Get started</a>
+        </div>
+
+        <div class="plan-card featured reveal reveal-d1">
+          <div class="plan-label">Growth <span class="plan-badge">Most popular</span></div>
+          <div class="plan-price">$800</div>
+          <div class="plan-price-sub">per month</div>
+          <div class="plan-divider"></div>
+          <p class="plan-desc">Expanded presence across two platforms with engagement management included.</p>
+          <div class="plan-features">
+            <div class="plan-feature">Everything in Essentials</div>
+            <div class="plan-feature">16 posts and 16 stories</div>
+            <div class="plan-feature">2 platforms</div>
+            <div class="plan-feature">Comment-triggered DM automation (Instagram/Facebook)</div>
+          </div>
+          <p class="plan-addons-note">Add-ons: Email bundle $250</p>
+          <a href="mailto:hello@upliftdigital.studio" class="btn-outline">Get started</a>
+        </div>
+
+        <div class="plan-card reveal reveal-d2">
+          <div class="plan-label">Full Digital</div>
+          <div class="plan-price">$1,100</div>
+          <div class="plan-price-sub">per month</div>
+          <div class="plan-divider"></div>
+          <p class="plan-desc">Full-service social management with proactive community growth, built for scale.</p>
+          <div class="plan-features">
+            <div class="plan-feature">Everything in Growth</div>
+            <div class="plan-feature">20 posts and 20 stories</div>
+            <div class="plan-feature">Live engagement management for DMs and comments</div>
+            <div class="plan-feature">Monthly Growth Guide: curated accounts, hashtags, and outreach talking points for visibility</div>
+            <div class="plan-feature">Priority communication</div>
+          </div>
+          <p class="plan-addons-note">Add-ons: Email bundle $250</p>
+          <a href="mailto:hello@upliftdigital.studio" class="btn-outline">Get started</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- STUDIO PASS -->
+  <section id="pass" data-screen-label="Studio Pass">
+    <div class="pass-bg"></div>
+    <div class="wrap pass-content">
+      <div class="pass-header">
+        <h2 class="pass-headline reveal reveal-d1">The Studio Pass</h2>
+        <p class="pass-tagline reveal reveal-d2">Your fractional digital team.</p>
+        <p class="pass-sub reveal reveal-d2">More than social media. The Studio Pass is an on-demand digital strategist for everything your brand needs built, from content and campaigns to landing pages and SEO. All the value of a senior hire, without the salary or the commitment. One flat monthly rate, unlimited requests, built for brands that move fast.</p>
+      </div>
+
+      <div class="pass-layout">
+      <div class="pass-steps">
+        <div class="pass-step reveal">
+          <div class="pass-step-num">01</div>
+          <h3 class="pass-step-title">Subscribe</h3>
+          <p class="pass-step-desc">Subscribe to the Studio Pass and request as many projects as you'd like.</p>
+        </div>
+        <div class="pass-step reveal reveal-d1">
+          <div class="pass-step-num">02</div>
+          <h3 class="pass-step-title">Add requests</h3>
+          <p class="pass-step-desc">We work through your requests one at a time, in priority order.</p>
+        </div>
+        <div class="pass-step reveal reveal-d2">
+          <div class="pass-step-num">03</div>
+          <h3 class="pass-step-title">Receive your work</h3>
+          <p class="pass-step-desc">Get deliverables in 72 hours on average, revised until you're 100% happy.</p>
+        </div>
+      </div>
+
+      <div class="pass-card reveal reveal-d2">
+        <div class="pass-benefits">
+
+          <div class="pass-price-block">
+            <div class="pass-price">$1,900</div>
+            <div class="pass-price-mo">/month</div>
+          </div>
+          <ul class="pass-list">
+            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path d="m9 11 3 3L22 4"></path></svg>Unlimited requests</li>
+            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path d="m9 11 3 3L22 4"></path></svg>72-hour average turnaround</li>
+            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path d="m9 11 3 3L22 4"></path></svg>Social content, creative and UGC</li>
+            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path d="m9 11 3 3L22 4"></path></svg>Copywriting, strategy and campaign planning</li>
+            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path d="m9 11 3 3L22 4"></path></svg>SEO, landing pages and presentations</li>
+            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path d="m9 11 3 3L22 4"></path></svg>No long-term contracts, cancel anytime</li>
+          </ul>
+          <a href="mailto:hello@upliftdigital.studio" class="btn-grad full">Apply for the Studio Pass</a>
+          <p class="pass-note">Includes UGC creation. See Mya's portfolio at <a href="https://myaeliza.com" target="_blank" rel="noopener">myaeliza.com</a>.</p>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" data-screen-label="Contact">
+    <div class="wrap">
+      <div class="contact-close">
+        <h2 class="contact-headline reveal reveal-d1">Ready to grow?</h2>
+        <p class="contact-sub reveal reveal-d2">Tell us about your brand and we'll be in touch soon.</p>
+        <a href="mailto:hello@upliftdigital.studio" class="contact-email reveal reveal-d3">hello@upliftdigital.studio</a>
+        <p class="contact-meta reveal reveal-d3">Thanks for your business · English + Spanish · USA, Latin America &amp; beyond</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPublishedPosts } from '../../lib/notion.js';
+
+const posts = await getPublishedPosts();
+
+const title = 'Blog — Uplift Digital Studio';
+const description = 'Notes on social media strategy, content, and growth from Uplift Digital Studio.';
+
+function formatDate(dateStr) {
+  if (!dateStr) return '';
+  return new Date(dateStr).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+---
+<BaseLayout title={title} description={description} canonicalPath="/blog/" ogImage={posts[0]?.cover ?? '/assets/og-image.png'}>
+  <section id="blog-index" data-screen-label="Blog">
+    <div class="wrap">
+      <div class="blog-index-header reveal">
+        <p class="eyebrow">Journal</p>
+        <h1 class="blog-index-headline">Notes on building brands that show up.</h1>
+      </div>
+
+      {posts.length === 0 ? (
+        <p class="blog-empty">New posts are on the way — check back soon.</p>
+      ) : (
+        <div class="blog-grid">
+          {posts.map((post, idx) => (
+            <a class={`post-card reveal ${idx % 3 === 1 ? 'reveal-d1' : idx % 3 === 2 ? 'reveal-d2' : ''}`} href={`/blog/${post.slug}/`}>
+              {post.cover && (
+                <div class="post-card-media">
+                  <img src={post.cover} alt="" loading="lazy">
+                </div>
+              )}
+              <div class="post-card-body">
+                {post.tags.length > 0 && (
+                  <div class="post-card-tags">
+                    {post.tags.map((t) => <span class="post-tag">{t}</span>)}
+                  </div>
+                )}
+                <h2 class="post-card-title">{post.title}</h2>
+                {post.description && <p class="post-card-desc">{post.description}</p>}
+                {post.date && <p class="post-card-date">{formatDate(post.date)}</p>}
+              </div>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>

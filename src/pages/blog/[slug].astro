@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPublishedPosts, getPostBlocks, renderBlocks } from '../../lib/notion.js';
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const blocks = await getPostBlocks(post.id);
+const contentHtml = renderBlocks(blocks);
+
+function formatDate(dateStr) {
+  if (!dateStr) return '';
+  return new Date(dateStr).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+const title = `${post.title} — Uplift Digital Studio`;
+const description = post.description || `Read ${post.title} on the Uplift Digital Studio blog.`;
+---
+<BaseLayout title={title} description={description} canonicalPath={`/blog/${post.slug}/`} ogImage={post.cover ?? '/assets/og-image.png'} ogType="article">
+  <article id="post" data-screen-label="Post">
+    <div class="wrap post-wrap">
+      <a href="/blog/" class="post-back">&larr; Back to Blog</a>
+
+      {post.tags.length > 0 && (
+        <div class="post-tags">
+          {post.tags.map((t) => <span class="post-tag">{t}</span>)}
+        </div>
+      )}
+
+      <h1 class="post-title reveal">{post.title}</h1>
+      {post.date && <p class="post-date">{formatDate(post.date)}</p>}
+
+      {post.cover && (
+        <div class="post-cover reveal">
+          <img src={post.cover} alt="">
+        </div>
+      )}
+
+      <div class="post-body" set:html={contentHtml} />
+    </div>
+  </article>
+</BaseLayout>
