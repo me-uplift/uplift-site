@@ -7,14 +7,14 @@ const featured = await getFeaturedPosts();
 const categories = await getCategories();
 const tags = await getTags();
 
-const title = 'Blog — Uplift Digital Studio';
+const title = 'Insights — Uplift Digital Studio';
 const description = 'Notes on social media strategy, content, and growth from Uplift Digital Studio.';
 ---
 <BaseLayout title={title} description={description} canonicalPath="/blog/" ogImage={posts[0]?.ogImage ?? posts[0]?.cover ?? '/assets/og-image.png'}>
-  <section id="blog-index" data-screen-label="Blog">
+  <section id="blog-index" data-screen-label="Insights">
     <div class="wrap">
       <div class="blog-index-header reveal">
-        <p class="eyebrow">Journal</p>
+        <p class="eyebrow">Insights</p>
         <h1 class="blog-index-headline">Notes on building brands that show up.</h1>
       </div>
 

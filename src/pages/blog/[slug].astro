@@ -12,7 +12,7 @@ const blocks = await getPostBlocks(post.id);
 const contentHtml = renderBlocks(blocks);
 
 const pageTitle = post.seoTitle || `${post.title} — Uplift Digital Studio`;
-const description = post.seoDescription || post.excerpt || `Read ${post.title} on the Uplift Digital Studio blog.`;
+const description = post.seoDescription || post.excerpt || `Read ${post.title} on the Uplift Digital Studio Insights.`;
 const ogImage = post.ogImage || post.cover || '/assets/og-image.png';
 const canonicalPath = `/blog/${post.slug}/`;
 const pageUrl = new URL(canonicalPath, Astro.site).toString();
@@ -53,7 +53,7 @@ const jsonLd = {
 
   <article id="post" data-screen-label="Post">
     <div class="wrap post-wrap">
-      <a href="/blog/" class="post-back">&larr; Back to Blog</a>
+      <a href="/blog/" class="post-back">&larr; Back to Insights</a>
 
       {post.categories.length > 0 && (
         <div class="post-categories">
