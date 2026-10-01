@@ -3,8 +3,18 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 
-const NOTION_TOKEN = import.meta.env.NOTION_TOKEN;
-const DATABASE_ID = import.meta.env.NOTION_DATABASE_ID;
+// Loads .env into process.env so this module works identically whether it's
+// imported from Astro pages (Vite/Node) or from astro.config.mjs (plain
+// Node, no Vite import.meta.env injection). No-op (caught) when a .env file
+// isn't present, e.g. in CI where real env vars are already set.
+try {
+  process.loadEnvFile?.();
+} catch {
+  // ignore — rely on already-set process.env vars (CI, Netlify, etc.)
+}
+
+const NOTION_TOKEN = process.env.NOTION_TOKEN;
+const DATABASE_ID = process.env.NOTION_DATABASE_ID;
 
 const IMAGE_DIR = path.join(process.cwd(), 'public', 'blog-images');
 const IMAGE_URL_PREFIX = '/blog-images';
@@ -56,6 +66,19 @@ function getFileObjectUrl(fileObj) {
   return fileObj.type === 'external' ? fileObj.external?.url : fileObj.file?.url;
 }
 
+export function slugify(str = '') {
+  return str
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+export function formatDate(dateStr) {
+  if (!dateStr) return '';
+  return new Date(dateStr).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
 /**
  * Downloads a Notion-hosted (expiring) file to public/blog-images at build
  * time and returns the local, stable URL to use instead. External URLs are
@@ -96,10 +119,21 @@ function mapPageToPost(page) {
     title: plainText(props.Title?.title),
     slug: plainText(props.Slug?.rich_text).trim(),
     date: props.Date?.date?.start,
-    description: plainText(props.Description?.rich_text),
+    updated: props.Updated?.date?.start,
+    excerpt: plainText(props.Excerpt?.rich_text),
     tags: (props.Tags?.multi_select || []).map((t) => t.name),
+    categories: (props.Category?.multi_select || []).map((c) => c.name),
     status: getStatusName(props.Status),
     coverFile: props.Cover?.files?.[0],
+    ogImageFile: props['OG Image']?.files?.[0],
+    author: plainText(props.Author?.rich_text),
+    canonicalUrl: props['Canonical URL']?.url || undefined,
+    featured: props.Featured?.checkbox ?? false,
+    focusKeyword: plainText(props['Focus Keyword']?.rich_text),
+    noindex: props.Noindex?.checkbox ?? false,
+    readingTime: props['Reading Time']?.number ?? undefined,
+    seoDescription: plainText(props['SEO Description']?.rich_text),
+    seoTitle: plainText(props['SEO Title']?.rich_text),
   };
 }
 
@@ -122,7 +156,7 @@ async function getAllPages() {
   return results;
 }
 
-/** Published posts only, with cover images resolved to stable local URLs. */
+/** Published posts only, with cover/OG images resolved to stable local URLs. */
 export async function getPublishedPosts() {
   if (postsCache) return postsCache;
 
@@ -131,9 +165,12 @@ export async function getPublishedPosts() {
 
   const posts = await Promise.all(
     mapped.map(async (post) => {
-      const cover = await resolveImage(post.coverFile);
-      const { coverFile, ...rest } = post;
-      return { ...rest, cover };
+      const [cover, ogImage] = await Promise.all([
+        resolveImage(post.coverFile),
+        resolveImage(post.ogImageFile),
+      ]);
+      const { coverFile, ogImageFile, ...rest } = post;
+      return { ...rest, cover, ogImage };
     })
   );
 
@@ -145,6 +182,33 @@ export async function getPublishedPosts() {
 export async function getPostBySlug(slug) {
   const posts = await getPublishedPosts();
   return posts.find((p) => p.slug === slug);
+}
+
+export async function getFeaturedPosts() {
+  const posts = await getPublishedPosts();
+  return posts.filter((p) => p.featured);
+}
+
+function collectTerms(posts, field) {
+  const map = new Map();
+  posts.forEach((post) => {
+    post[field].forEach((name) => {
+      const slug = slugify(name);
+      if (!map.has(slug)) map.set(slug, { name, slug, count: 0 });
+      map.get(slug).count++;
+    });
+  });
+  return Array.from(map.values()).sort((a, b) => a.name.localeCompare(b.name));
+}
+
+export async function getCategories() {
+  const posts = await getPublishedPosts();
+  return collectTerms(posts, 'categories');
+}
+
+export async function getTags() {
+  const posts = await getPublishedPosts();
+  return collectTerms(posts, 'tags');
 }
 
 async function fetchBlockChildren(blockId) {

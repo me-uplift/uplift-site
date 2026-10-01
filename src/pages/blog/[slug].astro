@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getPublishedPosts, getPostBlocks, renderBlocks } from '../../lib/notion.js';
+import { getPublishedPosts, getPostBlocks, renderBlocks, formatDate, slugify } from '../../lib/notion.js';
 
 export async function getStaticPaths() {
   const posts = await getPublishedPosts();
@@ -11,27 +11,71 @@ const { post } = Astro.props;
 const blocks = await getPostBlocks(post.id);
 const contentHtml = renderBlocks(blocks);
 
-function formatDate(dateStr) {
-  if (!dateStr) return '';
-  return new Date(dateStr).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-}
+const pageTitle = post.seoTitle || `${post.title} — Uplift Digital Studio`;
+const description = post.seoDescription || post.excerpt || `Read ${post.title} on the Uplift Digital Studio blog.`;
+const ogImage = post.ogImage || post.cover || '/assets/og-image.png';
+const canonicalPath = `/blog/${post.slug}/`;
+const pageUrl = new URL(canonicalPath, Astro.site).toString();
 
-const title = `${post.title} — Uplift Digital Studio`;
-const description = post.description || `Read ${post.title} on the Uplift Digital Studio blog.`;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.title,
+  description,
+  ...(ogImage ? { image: [new URL(ogImage, Astro.site).toString()] } : {}),
+  ...(post.date ? { datePublished: post.date } : {}),
+  dateModified: post.updated || post.date,
+  author: post.author
+    ? { '@type': 'Person', name: post.author }
+    : { '@type': 'Organization', name: 'Uplift Digital Studio' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Uplift Digital Studio',
+    logo: { '@type': 'ImageObject', url: new URL('/assets/UpliftLogo_GradientFixed.svg', Astro.site).toString() },
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': post.canonicalUrl || pageUrl },
+};
 ---
-<BaseLayout title={title} description={description} canonicalPath={`/blog/${post.slug}/`} ogImage={post.cover ?? '/assets/og-image.png'} ogType="article">
+<BaseLayout
+  title={pageTitle}
+  description={description}
+  canonicalPath={canonicalPath}
+  canonicalURL={post.canonicalUrl}
+  ogImage={ogImage}
+  ogType="article"
+  noindex={post.noindex}
+  publishedTime={post.date}
+  modifiedTime={post.updated || post.date}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
   <article id="post" data-screen-label="Post">
     <div class="wrap post-wrap">
       <a href="/blog/" class="post-back">&larr; Back to Blog</a>
 
-      {post.tags.length > 0 && (
-        <div class="post-tags">
-          {post.tags.map((t) => <span class="post-tag">{t}</span>)}
+      {post.categories.length > 0 && (
+        <div class="post-categories">
+          {post.categories.map((c) => (
+            <a class="post-category" href={`/blog/category/${slugify(c)}/`}>{c}</a>
+          ))}
         </div>
       )}
 
       <h1 class="post-title reveal">{post.title}</h1>
-      {post.date && <p class="post-date">{formatDate(post.date)}</p>}
+
+      <div class="post-meta">
+        {post.author && <span class="post-byline">By {post.author}</span>}
+        {post.date && <span class="post-date">{formatDate(post.date)}</span>}
+        {post.readingTime && <span class="post-reading-time">{post.readingTime} min read</span>}
+      </div>
+
+      {post.tags.length > 0 && (
+        <div class="post-tags">
+          {post.tags.map((t) => <a class="post-tag" href={`/blog/tag/${slugify(t)}/`}>{t}</a>)}
+        </div>
+      )}
 
       {post.cover && (
         <div class="post-cover reveal">
