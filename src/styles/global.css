@@ -369,6 +369,7 @@ body {
 #plans {
   padding: clamp(80px, 10vw, 160px) 0;
   border-bottom: 1px solid var(--rule);
+  background: var(--bg-light);
 }
 .plans-header {
   display: flex;
