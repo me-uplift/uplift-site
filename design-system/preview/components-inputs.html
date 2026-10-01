@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" name="Form Inputs" subtitle="Dark + light — default, focused, error, select" viewport="700x200" -->
+<html><head><meta charset="utf-8">
+<style>
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Regular.woff2') format('woff2'); font-weight: 400; }
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Medium.woff2') format('woff2'); font-weight: 500; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Satoshi', sans-serif; display: flex; }
+  .panel { flex: 1; padding: 20px 22px; display: flex; flex-direction: column; gap: 12px; }
+  .dark  { background: #10101A; }
+  .light { background: #F5F4FA; border-left: 1px solid rgba(16,16,26,0.08); }
+  .mode-tag { font-size: 9px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
+  .dark  .mode-tag { color: #3A3A54; }
+  .light .mode-tag { color: #B0B0C8; }
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .fl { font-size: 11px; font-weight: 500; letter-spacing: 0.05em; }
+  .dark  .fl { color: #B0B0C8; }
+  .light .fl { color: #6B6B85; }
+  input, select {
+    font-family: 'Satoshi', sans-serif; font-size: 14px; font-weight: 400;
+    border-radius: 12px; padding: 10px 13px; outline: none; width: 100%; border: none;
+  }
+  .dark input, .dark select  { background: #1A1A28; color: #fff; border: 1px solid rgba(255,255,255,0.12); }
+  .light input, .light select { background: #fff; color: #10101A; border: 1px solid rgba(16,16,26,0.12); }
+  .dark input::placeholder  { color: #3A3A54; }
+  .light input::placeholder { color: #B0B0C8; }
+  .dark  .focused { border-color: #9B70C0 !important; box-shadow: 0 0 0 3px rgba(155,112,192,0.18); }
+  .light .focused { border-color: #9B70C0 !important; box-shadow: 0 0 0 3px rgba(155,112,192,0.12); }
+  .dark  .errored { border-color: #E87A7A !important; }
+  .light .errored { border-color: #E87A7A !important; }
+  .hint-d { font-size: 11px; color: #6B6B85; }
+  .hint-l { font-size: 11px; color: #B0B0C8; }
+  .err-msg { font-size: 11px; color: #E87A7A; font-weight: 500; }
+  .row { display: flex; gap: 10px; }
+</style>
+</head><body>
+<div class="panel dark">
+  <div class="mode-tag">Dark</div>
+  <div class="row">
+    <div class="field" style="flex:1">
+      <div class="fl">Brand name</div>
+      <input type="text" placeholder="e.g. Uplift Digital Studio">
+      <div class="hint-d">Used across all your profiles</div>
+    </div>
+    <div class="field" style="flex:1">
+      <div class="fl">Monthly budget</div>
+      <input class="focused" value="$2,500">
+    </div>
+  </div>
+  <div class="row">
+    <div class="field" style="flex:1">
+      <div class="fl">Email address</div>
+      <input class="errored" value="hello@brand">
+      <div class="err-msg">Enter a valid email address</div>
+    </div>
+    <div class="field" style="flex:1">
+      <div class="fl">Primary platform</div>
+      <select><option>Instagram</option><option>TikTok</option><option>LinkedIn</option></select>
+    </div>
+  </div>
+</div>
+<div class="panel light">
+  <div class="mode-tag">Light</div>
+  <div class="row">
+    <div class="field" style="flex:1">
+      <div class="fl">Brand name</div>
+      <input type="text" placeholder="e.g. Uplift Digital Studio">
+      <div class="hint-l">Used across all your profiles</div>
+    </div>
+    <div class="field" style="flex:1">
+      <div class="fl">Monthly budget</div>
+      <input class="focused" value="$2,500">
+    </div>
+  </div>
+  <div class="row">
+    <div class="field" style="flex:1">
+      <div class="fl">Email address</div>
+      <input class="errored" value="hello@brand">
+      <div class="err-msg">Enter a valid email address</div>
+    </div>
+    <div class="field" style="flex:1">
+      <div class="fl">Primary platform</div>
+      <select><option>Instagram</option><option>TikTok</option><option>LinkedIn</option></select>
+    </div>
+  </div>
+</div>
+</body></html>

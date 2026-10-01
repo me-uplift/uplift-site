@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Type" name="Heading Scale" subtitle="Dark + light — Satoshi H1–H4" viewport="700x220" -->
+<html><head><meta charset="utf-8">
+<style>
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Regular.woff2') format('woff2'); font-weight: 400; }
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Medium.woff2') format('woff2'); font-weight: 500; }
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Medium.woff2') format('woff2'); font-weight: 700; }
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Medium.woff2') format('woff2'); font-weight: 900; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Satoshi', sans-serif; display: flex; }
+  .panel { flex: 1; padding: 18px 22px; display: flex; flex-direction: column; gap: 0; }
+  .dark  { background: #10101A; }
+  .light { background: #F5F4FA; border-left: 1px solid rgba(16,16,26,0.08); }
+  .mode-tag { font-size: 9px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 10px; }
+  .dark  .mode-tag { color: #3A3A54; }
+  .light .mode-tag { color: #B0B0C8; }
+  .row { display: flex; align-items: baseline; gap: 12px; padding: 9px 0; }
+  .tag { font-size: 9px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; width: 22px; flex-shrink: 0; }
+  .dark  .tag { color: #6B6B85; }
+  .light .tag { color: #B0B0C8; }
+  .meta { font-size: 9px; font-weight: 500; margin-left: auto; white-space: nowrap; }
+  .dark  .meta { color: #3A3A54; }
+  .light .meta { color: #B0B0C8; }
+  .h1 { font-size: 36px; font-weight: 900; line-height: 1.1; letter-spacing: -0.02em; }
+  .h2 { font-size: 28px; font-weight: 700; line-height: 1.2; letter-spacing: -0.01em; }
+  .h3 { font-size: 22px; font-weight: 700; line-height: 1.3; }
+  .h4 { font-size: 18px; font-weight: 700; line-height: 1.4; }
+  .divider-d { border: none; border-top: 1px solid rgba(255,255,255,0.06); }
+  .divider-l { border: none; border-top: 1px solid rgba(16,16,26,0.06); }
+</style>
+</head><body>
+<div class="panel dark">
+  <div class="mode-tag">Dark</div>
+  <div class="row"><div class="tag">H1</div><div class="h1" style="color:#fff">Your content, elevated.</div><div class="meta">Black · 36px</div></div>
+  <hr class="divider-d">
+  <div class="row"><div class="tag">H2</div><div class="h2" style="color:#fff">Social Media Management</div><div class="meta">Bold · 28px</div></div>
+  <hr class="divider-d">
+  <div class="row"><div class="tag">H3</div><div class="h3" style="color:#fff">UGC Production</div><div class="meta">Bold · 22px</div></div>
+  <hr class="divider-d">
+  <div class="row"><div class="tag">H4</div><div class="h4" style="color:#fff">What's included</div><div class="meta">Bold · 18px</div></div>
+</div>
+<div class="panel light">
+  <div class="mode-tag">Light</div>
+  <div class="row"><div class="tag">H1</div><div class="h1" style="color:#10101A">Your content, elevated.</div><div class="meta">Black · 36px</div></div>
+  <hr class="divider-l">
+  <div class="row"><div class="tag">H2</div><div class="h2" style="color:#10101A">Social Media Management</div><div class="meta">Bold · 28px</div></div>
+  <hr class="divider-l">
+  <div class="row"><div class="tag">H3</div><div class="h3" style="color:#10101A">UGC Production</div><div class="meta">Bold · 22px</div></div>
+  <hr class="divider-l">
+  <div class="row"><div class="tag">H4</div><div class="h4" style="color:#10101A">What's included</div><div class="meta">Bold · 18px</div></div>
+</div>
+</body></html>

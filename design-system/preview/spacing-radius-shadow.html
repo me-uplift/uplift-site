@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Spacing" name="Border Radius & Shadows" subtitle="Dark + light — 5 radius stops, 4 shadow levels" viewport="700x230" -->
+<html><head><meta charset="utf-8">
+<style>
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Medium.woff2') format('woff2'); font-weight: 500; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Satoshi', sans-serif; display: flex; }
+  .panel { flex: 1; padding: 18px 20px; display: flex; flex-direction: column; gap: 14px; }
+  .dark  { background: #10101A; }
+  .light { background: #F5F4FA; border-left: 1px solid rgba(16,16,26,0.08); }
+  .mode-tag { font-size: 9px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
+  .dark  .mode-tag { color: #3A3A54; }
+  .light .mode-tag { color: #B0B0C8; }
+  .lbl { font-size: 9px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+  .dark  .lbl { color: #6B6B85; }
+  .light .lbl { color: #B0B0C8; }
+  .radius-row { display: flex; gap: 10px; align-items: center; }
+  .ritem { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+  .rbox { width: 52px; height: 38px; }
+  .dark  .rbox { background: #2A2A3C; }
+  .light .rbox { background: #fff; border: 1px solid rgba(16,16,26,0.1); }
+  .rname { font-size: 9px; font-weight: 500; }
+  .dark  .rname { color: #B0B0C8; }
+  .light .rname { color: #6B6B85; }
+  .shadow-row { display: flex; gap: 12px; }
+  .sitem { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .sbox { width: 80px; height: 48px; border-radius: 12px; }
+  .dark  .sbox { background: #1A1A28; }
+  .light .sbox { background: #fff; }
+  .sname { font-size: 9px; font-weight: 500; }
+  .dark  .sname { color: #B0B0C8; }
+  .light .sname { color: #6B6B85; }
+  .divider-d { border: none; border-top: 1px solid rgba(255,255,255,0.07); }
+  .divider-l { border: none; border-top: 1px solid rgba(16,16,26,0.07); }
+</style>
+</head><body>
+<div class="panel dark">
+  <div class="mode-tag">Dark</div>
+  <div class="lbl">Radius</div>
+  <div class="radius-row">
+    <div class="ritem"><div class="rbox" style="border-radius:8px"></div><div class="rname">8</div></div>
+    <div class="ritem"><div class="rbox" style="border-radius:12px"></div><div class="rname">12</div></div>
+    <div class="ritem"><div class="rbox" style="border-radius:16px"></div><div class="rname">16</div></div>
+    <div class="ritem"><div class="rbox" style="border-radius:24px"></div><div class="rname">24</div></div>
+    <div class="ritem"><div class="rbox" style="border-radius:999px"></div><div class="rname">Pill</div></div>
+  </div>
+  <hr class="divider-d">
+  <div class="lbl">Shadows</div>
+  <div class="shadow-row">
+    <div class="sitem"><div class="sbox" style="box-shadow:0 2px 8px rgba(0,0,0,0.14)"></div><div class="sname">SM</div></div>
+    <div class="sitem"><div class="sbox" style="box-shadow:0 4px 24px rgba(0,0,0,0.20)"></div><div class="sname">MD</div></div>
+    <div class="sitem"><div class="sbox" style="box-shadow:0 8px 48px rgba(0,0,0,0.30)"></div><div class="sname">LG</div></div>
+    <div class="sitem"><div class="sbox" style="box-shadow:0 0 40px rgba(155,112,192,0.28)"></div><div class="sname">Glow</div></div>
+  </div>
+</div>
+<div class="panel light">
+  <div class="mode-tag">Light</div>
+  <div class="lbl">Radius</div>
+  <div class="radius-row">
+    <div class="ritem"><div class="rbox" style="border-radius:8px"></div><div class="rname">8</div></div>
+    <div class="ritem"><div class="rbox" style="border-radius:12px"></div><div class="rname">12</div></div>
+    <div class="ritem"><div class="rbox" style="border-radius:16px"></div><div class="rname">16</div></div>
+    <div class="ritem"><div class="rbox" style="border-radius:24px"></div><div class="rname">24</div></div>
+    <div class="ritem"><div class="rbox" style="border-radius:999px"></div><div class="rname">Pill</div></div>
+  </div>
+  <hr class="divider-l">
+  <div class="lbl">Shadows</div>
+  <div class="shadow-row">
+    <div class="sitem"><div class="sbox" style="box-shadow:0 2px 8px rgba(16,16,26,0.07)"></div><div class="sname">SM</div></div>
+    <div class="sitem"><div class="sbox" style="box-shadow:0 4px 24px rgba(16,16,26,0.10)"></div><div class="sname">MD</div></div>
+    <div class="sitem"><div class="sbox" style="box-shadow:0 8px 40px rgba(16,16,26,0.14)"></div><div class="sname">LG</div></div>
+    <div class="sitem"><div class="sbox" style="box-shadow:0 0 40px rgba(155,112,192,0.20)"></div><div class="sname">Glow</div></div>
+  </div>
+</div>
+</body></html>

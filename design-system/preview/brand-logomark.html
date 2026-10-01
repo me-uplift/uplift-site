@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Brand" name="Logomark & Usage" subtitle="UP monogram at 4 sizes + clear space & usage rules" viewport="700x200" -->
+<html><head><meta charset="utf-8">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Regular.woff2') format('woff2'), url('../fonts/Satoshi-Regular.woff') format('woff'); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Italic.woff2') format('woff2'), url('../fonts/Satoshi-Italic.woff') format('woff'); font-weight: 400; font-style: italic; font-display: swap; }
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Medium.woff2') format('woff2'), url('../fonts/Satoshi-Medium.woff') format('woff'); font-weight: 500; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Medium.woff2') format('woff2'), url('../fonts/Satoshi-Medium.woff') format('woff'); font-weight: 700; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Medium.woff2') format('woff2'), url('../fonts/Satoshi-Medium.woff') format('woff'); font-weight: 900; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Instrument Serif'; src: url('../fonts/InstrumentSerif-Regular.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
+</style>
+  <style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #10101A; font-family: 'Satoshi', sans-serif; padding: 20px 24px; }
+  .row { display: flex; gap: 16px; align-items: flex-start; }
+  .section { flex: 1; }
+  .label { font-size: 9px; color: #6B6B85; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; margin-bottom: 10px; }
+  .icons-row { display: flex; gap: 10px; align-items: center; }
+  .icon-bg { border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+  img { object-fit: contain; display: block; }
+  .rule { background: #1A1A28; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 12px 14px; }
+  .rule-text { font-size: 12px; color: #B0B0C8; line-height: 1.6; }
+  .rule-text strong { color: #fff; }
+  .divider { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 6px 0; }
+  .clearspace {
+    position: relative; border: 1px dashed rgba(155,112,192,0.3); border-radius: 8px; display: inline-flex;
+    align-items: center; justify-content: center; padding: 16px;
+  }
+  .cs-arrow { position: absolute; font-size: 8px; color: #9B70C0; }
+</style>
+</head><body>
+  <div class="row">
+    <div class="section">
+      <div class="label">Logomark — "UP" Monogram</div>
+      <div class="icons-row">
+        <div class="icon-bg" style="background:#1A1A28; padding:10px; border: 1px solid rgba(255,255,255,0.08);">
+          <img src="../assets/UpliftLogo_GradientIcon.svg" width="48" height="48">
+        </div>
+        <div class="icon-bg" style="background:#F5F4FA; padding:10px;">
+          <img src="../assets/UpliftLogo_BlackIcon.svg" width="40" height="40">
+        </div>
+        <div class="icon-bg" style="background:#10101A; border:1px solid rgba(255,255,255,0.08); padding:10px;">
+          <img src="../assets/UpliftLogo_WhiteIcon.svg" width="32" height="32">
+        </div>
+        <div class="icon-bg" style="background:#10101A; border:1px solid rgba(255,255,255,0.08); padding:6px;">
+          <img src="../assets/UpliftLogo_GradientIcon.svg" width="20" height="20">
+        </div>
+      </div>
+      <div style="margin-top:8px; font-size:10px; color:#6B6B85">Sizes: 48px · 40px · 32px · 20px (favicon)</div>
+    </div>
+    <div class="section">
+      <div class="label">Usage Rules</div>
+      <div class="rule">
+        <div class="rule-text">
+          <strong>Dark bg</strong> → White or Gradient logo<br>
+          <strong>Light bg</strong> → Black logo only<br>
+          <strong>Small (&lt;32px)</strong> → Monogram only
+        </div>
+        <div class="divider"></div>
+        <div class="rule-text">
+          Clear space: equal to height of "u" letterform on all sides.<br>
+          Min width: <strong>120px</strong> full wordmark · <strong>32px</strong> monogram
+        </div>
+      </div>
+    </div>
+  </div>
+</body></html>

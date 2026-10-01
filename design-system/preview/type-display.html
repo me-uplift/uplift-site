@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Type" name="Display Typography" subtitle="Dark + light — Satoshi Black & gradient fill" viewport="700x210" -->
+<html><head><meta charset="utf-8">
+<style>
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Regular.woff2') format('woff2'); font-weight: 400; }
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Medium.woff2') format('woff2'); font-weight: 500; }
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Medium.woff2') format('woff2'); font-weight: 900; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Satoshi', sans-serif; display: flex; }
+  .panel { flex: 1; padding: 22px 26px; display: flex; flex-direction: column; gap: 14px; }
+  .dark  { background: #10101A; }
+  .light { background: #F5F4FA; border-left: 1px solid rgba(16,16,26,0.08); }
+  .mode-tag { font-size: 9px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
+  .dark  .mode-tag { color: #3A3A54; }
+  .light .mode-tag { color: #B0B0C8; }
+  .lbl { font-size: 9px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 2px; }
+  .dark  .lbl { color: #6B6B85; }
+  .light .lbl { color: #B0B0C8; }
+  .meta { font-size: 10px; margin-top: 3px; }
+  .dark  .meta { color: #3A3A54; }
+  .light .meta { color: #B0B0C8; }
+  .serif { font-family: 'Satoshi', sans-serif; font-size: 46px; font-weight: 900; line-height: 1.05; letter-spacing: -0.02em; }
+  .serif-grad { font-family: 'Satoshi', sans-serif; font-size: 46px; font-weight: 900; line-height: 1.05; letter-spacing: -0.02em;
+    background: linear-gradient(90deg,#E8998A,#C97BAF,#9B70C0,#5E65B5);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .divider-d { border: none; border-top: 1px solid rgba(255,255,255,0.07); }
+  .divider-l { border: none; border-top: 1px solid rgba(16,16,26,0.07); }
+</style>
+</head><body>
+<div class="panel dark">
+  <div class="mode-tag">Dark</div>
+  <div>
+    <div class="lbl">Satoshi — Black</div>
+    <div class="serif" style="color:#fff">Full-service social.</div>
+    <div class="meta">52px · 900 · tracking −0.02em</div>
+  </div>
+  <hr class="divider-d">
+  <div>
+    <div class="lbl">Satoshi — Black Gradient</div>
+    <div class="serif-grad">Real results.</div>
+    <div class="meta">Hero &amp; pull quotes only</div>
+  </div>
+</div>
+<div class="panel light">
+  <div class="mode-tag">Light</div>
+  <div>
+    <div class="lbl">Satoshi — Black</div>
+    <div class="serif" style="color:#10101A">Full-service social.</div>
+    <div class="meta">52px · 900 · tracking −0.02em</div>
+  </div>
+  <hr class="divider-l">
+  <div>
+    <div class="lbl">Satoshi — Black Gradient</div>
+    <div class="serif-grad">Real results.</div>
+    <div class="meta">Hero &amp; pull quotes only</div>
+  </div>
+</div>
+</body></html>

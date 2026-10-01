@@ -25,3 +25,6 @@ public/blog-images/
 
 # jetbrains setting folder
 .idea/
+
+# design system source uploads (raw brand files, not needed in the repo)
+design-system/uploads/

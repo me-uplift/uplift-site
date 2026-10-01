@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" name="Badges & Tags" subtitle="Dark + light — all badge & tag variants" viewport="700x185" -->
+<html><head><meta charset="utf-8">
+<style>
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Regular.woff2') format('woff2'); font-weight: 400; }
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Medium.woff2') format('woff2'); font-weight: 500; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Satoshi', sans-serif; display: flex; }
+  .panel { flex: 1; padding: 20px 22px; display: flex; flex-direction: column; gap: 12px; }
+  .dark  { background: #10101A; }
+  .light { background: #F5F4FA; border-left: 1px solid rgba(16,16,26,0.08); }
+  .mode-tag { font-size: 9px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
+  .dark  .mode-tag { color: #3A3A54; }
+  .light .mode-tag { color: #B0B0C8; }
+  .label { font-size: 9px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; }
+  .dark  .label { color: #6B6B85; }
+  .light .label { color: #B0B0C8; }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .badge { display: inline-flex; align-items: center; border-radius: 999px; font-weight: 500; font-size: 11px; padding: 4px 12px; letter-spacing: 0.07em; text-transform: uppercase; }
+  .b-grad  { background: linear-gradient(90deg,#E8998A,#C97BAF,#9B70C0,#5E65B5); color: #fff; }
+  .b-surf-d { background: #2A2A3C; color: #B0B0C8; }
+  .b-surf-l { background: #EEEDF7; color: #6B6B85; }
+  .b-out-d  { background: transparent; border: 1px solid rgba(255,255,255,0.16); color: #B0B0C8; padding: 3px 11px; }
+  .b-out-l  { background: transparent; border: 1px solid rgba(16,16,26,0.14); color: #6B6B85; padding: 3px 11px; }
+  .b-ok  { background: rgba(91,181,133,0.14); color: #5BB585; }
+  .b-vi  { background: rgba(155,112,192,0.14); color: #9B70C0; }
+  .b-pe  { background: rgba(232,153,138,0.14); color: #E8998A; }
+  .tag-d { background: #1A1A28; color: #B0B0C8; border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 5px 11px; font-size: 13px; font-weight: 500; }
+  .tag-l { background: #fff; color: #3A3A54; border: 1px solid rgba(16,16,26,0.08); border-radius: 8px; padding: 5px 11px; font-size: 13px; font-weight: 500; }
+  .divider-d { border: none; border-top: 1px solid rgba(255,255,255,0.07); }
+  .divider-l { border: none; border-top: 1px solid rgba(16,16,26,0.07); }
+</style>
+</head><body>
+<div class="panel dark">
+  <div class="mode-tag">Dark</div>
+  <div class="label">Badges</div>
+  <div class="row">
+    <span class="badge b-grad">New</span>
+    <span class="badge b-surf-d">Social Media</span>
+    <span class="badge b-out-d">UGC</span>
+    <span class="badge b-ok">Active</span>
+    <span class="badge b-vi">Strategy</span>
+    <span class="badge b-pe">Premium</span>
+  </div>
+  <hr class="divider-d">
+  <div class="label">Tags</div>
+  <div class="row">
+    <span class="tag-d">Instagram</span>
+    <span class="tag-d">TikTok</span>
+    <span class="tag-d">Analytics</span>
+    <span class="tag-d">UGC</span>
+  </div>
+</div>
+<div class="panel light">
+  <div class="mode-tag">Light</div>
+  <div class="label">Badges</div>
+  <div class="row">
+    <span class="badge b-grad">New</span>
+    <span class="badge b-surf-l">Social Media</span>
+    <span class="badge b-out-l">UGC</span>
+    <span class="badge b-ok">Active</span>
+    <span class="badge b-vi">Strategy</span>
+    <span class="badge b-pe">Premium</span>
+  </div>
+  <hr class="divider-l">
+  <div class="label">Tags</div>
+  <div class="row">
+    <span class="tag-l">Instagram</span>
+    <span class="tag-l">TikTok</span>
+    <span class="tag-l">Analytics</span>
+    <span class="tag-l">UGC</span>
+  </div>
+</div>
+</body></html>

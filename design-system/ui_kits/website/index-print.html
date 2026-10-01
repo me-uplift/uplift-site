@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Uplift Digital Studio — Website</title>
+  <style>
+    @font-face { font-family: 'Satoshi'; src: url('../../fonts/Satoshi-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; }
+    @font-face { font-family: 'Satoshi'; src: url('../../fonts/Satoshi-Italic.woff2') format('woff2'); font-weight: 400; font-style: italic; }
+    @font-face { font-family: 'Satoshi'; src: url('../../fonts/Satoshi-Medium.woff2') format('woff2'); font-weight: 500; }
+    @font-face { font-family: 'Satoshi'; src: url('../../fonts/Satoshi-Medium.woff2') format('woff2'); font-weight: 700; }
+    @font-face { font-family: 'Satoshi'; src: url('../../fonts/Satoshi-Medium.woff2') format('woff2'); font-weight: 900; }
+    @font-face { font-family: 'Instrument Serif'; src: url('../../fonts/InstrumentSerif-Regular.ttf') format('truetype'); font-weight: 400; }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Satoshi', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: #fff;
+      color: #10101A;
+    }
+
+    /* ── Print page setup ── */
+    @page { size: 1280px 800px; margin: 0; }
+
+    @media print {
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      .page { page-break-after: always; break-after: page; }
+      .page:last-child { page-break-after: avoid; break-after: avoid; }
+    }
+
+    /* ── Page shell ── */
+    .page {
+      width: 1280px;
+      height: 800px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Shared ── */
+    .grad-text {
+      background: linear-gradient(90deg, #E8998A 0%, #C97BAF 35%, #9B70C0 65%, #5E65B5 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .grad-bar {
+      background: linear-gradient(90deg, #E8998A 0%, #C97BAF 30%, #9B70C0 60%, #5E65B5 100%);
+    }
+    .eyebrow {
+      font-size: 11px; font-weight: 500; color: #9B70C0;
+      text-transform: uppercase; letter-spacing: 0.15em;
+      margin-bottom: 16px;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 64px; padding: 0 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(245,244,250,0.95);
+      border-bottom: 1px solid rgba(16,16,26,0.07);
+      z-index: 10;
+    }
+    .nav-links { display: flex; gap: 36px; }
+    .nav-link { font-size: 12px; font-weight: 500; color: #6B6B85; letter-spacing: 0.1em; text-transform: uppercase; }
+    .nav-cta {
+      font-size: 13px; font-weight: 700; color: #fff;
+      background: linear-gradient(90deg,#E8998A,#C97BAF,#9B70C0,#5E65B5);
+      border-radius: 999px; padding: 10px 22px;
+    }
+
+    /* ── PAGE 1: HERO ── */
+    .hero-page { background: #F5F4FA; }
+    .hero-body {
+      flex: 1; padding-top: 64px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding-bottom: 40px;
+      position: relative;
+    }
+    .hero-glow {
+      position: absolute; top: 10%; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 300px;
+      background: radial-gradient(ellipse, rgba(155,112,192,0.12) 0%, transparent 70%);
+    }
+    .hero-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(155,112,192,0.10); border: 1px solid rgba(155,112,192,0.22);
+      border-radius: 999px; padding: 6px 16px; margin-bottom: 28px;
+      font-size: 11px; font-weight: 500; color: #9B70C0;
+      text-transform: uppercase; letter-spacing: 0.1em;
+    }
+    .hero-pill-dot { width: 6px; height: 6px; border-radius: 50%; background: linear-gradient(135deg,#E8998A,#9B70C0); }
+    .hero-h1 { font-family: 'Satoshi', sans-serif; font-size: 72px; font-weight: 900; line-height: 1.05; letter-spacing: -0.02em; color: #10101A; margin-bottom: 8px; }
+    .hero-h1-grad { font-family: 'Satoshi', sans-serif; font-size: 72px; font-weight: 900; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 28px; }
+    .hero-sub { font-size: 18px; color: #6B6B85; line-height: 1.7; max-width: 500px; margin-bottom: 40px; }
+    .hero-btns { display: flex; gap: 14px; align-items: center; }
+    .btn-primary { font-size: 15px; font-weight: 700; color: #fff; background: linear-gradient(90deg,#E8998A,#C97BAF,#9B70C0,#5E65B5); border-radius: 999px; padding: 15px 36px; }
+    .btn-secondary { font-size: 15px; font-weight: 700; color: #10101A; background: transparent; border: 1px solid rgba(16,16,26,0.18); border-radius: 999px; padding: 14px 36px; }
+    .hero-stats { display: flex; gap: 64px; margin-top: 56px; padding-top: 40px; border-top: 1px solid rgba(16,16,26,0.08); }
+    .stat-num { font-size: 32px; font-weight: 900; letter-spacing: -0.02em; }
+    .stat-lbl { font-size: 11px; font-weight: 500; color: #6B6B85; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
+
+    /* ── PAGE 2: SERVICES ── */
+    .services-page { background: #F5F4FA; }
+    .section-body { flex: 1; padding: 64px; display: flex; flex-direction: column; justify-content: center; }
+    .section-header { margin-bottom: 40px; }
+    .section-h2 { font-size: 40px; font-weight: 900; color: #10101A; letter-spacing: -0.02em; line-height: 1.1; max-width: 480px; margin-top: 10px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+    .card-light { background: #fff; border: 1px solid rgba(16,16,26,0.07); border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(16,16,26,0.07); }
+    .icon-pip { width: 40px; height: 40px; border-radius: 11px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+    .card-title { font-size: 16px; font-weight: 700; color: #10101A; margin-bottom: 8px; }
+    .card-desc  { font-size: 13px; color: #6B6B85; line-height: 1.65; }
+
+    /* ── PAGE 3: RESULTS ── */
+    .results-page { background: #EEEDF7; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .result-card { background: #fff; border: 1px solid rgba(16,16,26,0.07); border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 2px 12px rgba(16,16,26,0.06); }
+    .result-badge { display: inline-flex; align-items: center; background: rgba(155,112,192,0.10); border: 1px solid rgba(155,112,192,0.2); border-radius: 999px; padding: 5px 14px; align-self: flex-start; font-size: 11px; font-weight: 700; color: #9B70C0; letter-spacing: 0.06em; }
+    .result-quote { font-family: 'Satoshi', sans-serif; font-weight: 400; font-size: 17px; color: #10101A; line-height: 1.55; font-style: italic; flex: 1; }
+    .result-footer { display: flex; align-items: center; gap: 10px; border-top: 1px solid rgba(16,16,26,0.07); padding-top: 14px; }
+    .avatar { width: 32px; height: 32px; border-radius: 50%; }
+    .result-name { font-size: 13px; font-weight: 700; color: #10101A; }
+    .result-role { font-size: 11px; color: #6B6B85; }
+
+    /* ── PAGE 4: PRICING ── */
+    .pricing-page { background: #F5F4FA; }
+    .pricing-header { text-align: center; margin-bottom: 40px; }
+    .pricing-h2 { font-size: 40px; font-weight: 900; color: #10101A; letter-spacing: -0.02em; margin-top: 10px; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; max-width: 1000px; margin: 0 auto; }
+    .plan-card { background: #fff; border: 1px solid rgba(16,16,26,0.07); border-radius: 20px; padding: 28px; position: relative; overflow: hidden; box-shadow: 0 2px 12px rgba(16,16,26,0.07); }
+    .plan-card.featured { border-color: rgba(155,112,192,0.35); box-shadow: 0 0 40px rgba(155,112,192,0.10); }
+    .plan-top-bar { position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg,#E8998A,#C97BAF,#9B70C0,#5E65B5); }
+    .plan-name  { font-size: 11px; font-weight: 500; color: #6B6B85; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px; }
+    .plan-price { font-size: 40px; font-weight: 900; color: #10101A; letter-spacing: -0.03em; }
+    .plan-mo    { font-size: 13px; color: #6B6B85; font-weight: 500; }
+    .plan-desc  { font-size: 13px; color: #6B6B85; line-height: 1.6; margin: 10px 0 18px; }
+    .plan-features { display: flex; flex-direction: column; gap: 8px; margin-bottom: 22px; }
+    .plan-feat { display: flex; gap: 8px; align-items: center; font-size: 13px; color: #3A3A54; }
+    .feat-dot { width: 14px; height: 14px; border-radius: 50%; background: linear-gradient(135deg,#9B70C0,#5E65B5); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .plan-btn { width: 100%; font-size: 14px; font-weight: 700; border-radius: 999px; padding: 13px; text-align: center; }
+    .plan-btn.featured-btn { background: linear-gradient(90deg,#E8998A,#C97BAF,#9B70C0,#5E65B5); color: #fff; }
+    .plan-btn.sec-btn { background: #EEEDF7; color: #10101A; }
+  </style>
+</head>
+<body>
+
+<!-- ── PAGE 1: HERO ───────────────────────────────────────── -->
+<div class="page hero-page">
+  <nav class="nav">
+    <img src="../../assets/UpliftLogo_Black.png" alt="Uplift" style="height:28px">
+    <div class="nav-links">
+      <span class="nav-link">Services</span>
+      <span class="nav-link">Work</span>
+      <span class="nav-link">Pricing</span>
+      <span class="nav-link">About</span>
+    </div>
+    <div class="nav-cta">Book a call</div>
+  </nav>
+  <div class="hero-body">
+    <div class="hero-glow"></div>
+    <div class="hero-pill"><div class="hero-pill-dot"></div>Social Media &amp; UGC Agency</div>
+    <div class="hero-h1">Your audience is ready.</div>
+    <div class="hero-h1-grad grad-text">Let's give them something worth watching.</div>
+    <p class="hero-sub">Full-service social media management and UGC content — built for brands ready to grow.</p>
+    <div class="hero-btns">
+      <div class="btn-primary">See pricing</div>
+      <div class="btn-secondary">View our work</div>
+    </div>
+    <div class="hero-stats">
+      <div style="text-align:center">
+        <div class="stat-num grad-text">340%</div>
+        <div class="stat-lbl">Avg. reach increase</div>
+      </div>
+      <div style="text-align:center">
+        <div class="stat-num grad-text">50+</div>
+        <div class="stat-lbl">Brands managed</div>
+      </div>
+      <div style="text-align:center">
+        <div class="stat-num grad-text">2M+</div>
+        <div class="stat-lbl">Impressions delivered</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── PAGE 2: SERVICES ───────────────────────────────────── -->
+<div class="page services-page">
+  <nav class="nav">
+    <img src="../../assets/UpliftLogo_Black.png" alt="Uplift" style="height:28px">
+    <div class="nav-links">
+      <span class="nav-link" style="color:#9B70C0">Services</span>
+      <span class="nav-link">Work</span><span class="nav-link">Pricing</span><span class="nav-link">About</span>
+    </div>
+    <div class="nav-cta">Book a call</div>
+  </nav>
+  <div class="section-body" style="padding-top:80px">
+    <div class="section-header">
+      <div class="eyebrow">What we do</div>
+      <div class="section-h2">Everything your brand needs to grow.</div>
+    </div>
+    <div class="grid-4">
+      <div class="card-light">
+        <div class="icon-pip" style="background:linear-gradient(135deg,#E8998A,#C97BAF)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div class="card-title">Content Strategy</div>
+        <div class="card-desc">Platform-specific strategy built around your audience, goals, and competitive landscape.</div>
+      </div>
+      <div class="card-light">
+        <div class="icon-pip" style="background:linear-gradient(135deg,#C97BAF,#9B70C0)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><path d="M15 10l4.553-2.069A1 1 0 0121 8.87V15.13a1 1 0 01-1.447.898L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>
+        </div>
+        <div class="card-title">UGC Production</div>
+        <div class="card-desc">Creator-led content that feels native — shot, edited, and delivered on your schedule.</div>
+      </div>
+      <div class="card-light">
+        <div class="icon-pip" style="background:linear-gradient(135deg,#9B70C0,#7878C8)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="card-title">Community Management</div>
+        <div class="card-desc">Daily engagement, DM handling, and comment moderation — your brand, always present.</div>
+      </div>
+      <div class="card-light">
+        <div class="icon-pip" style="background:linear-gradient(135deg,#7878C8,#5E65B5)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+        </div>
+        <div class="card-title">Analytics &amp; Reporting</div>
+        <div class="card-desc">Monthly reports with real numbers — reach, engagement, growth, and what to do next.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── PAGE 3: RESULTS ────────────────────────────────────── -->
+<div class="page results-page">
+  <nav class="nav" style="background:rgba(238,237,247,0.95)">
+    <img src="../../assets/UpliftLogo_Black.png" alt="Uplift" style="height:28px">
+    <div class="nav-links">
+      <span class="nav-link">Services</span><span class="nav-link" style="color:#9B70C0">Work</span><span class="nav-link">Pricing</span><span class="nav-link">About</span>
+    </div>
+    <div class="nav-cta">Book a call</div>
+  </nav>
+  <div class="section-body" style="padding-top:80px">
+    <div class="section-header">
+      <div class="eyebrow">Results</div>
+      <div class="section-h2">Brands that invested. Results that prove it.</div>
+    </div>
+    <div class="grid-3">
+      <div class="result-card">
+        <div class="result-badge">+600% follower growth</div>
+        <p class="result-quote">"We went from 4,000 to 28,000 followers in three months. The content actually sounds like us."</p>
+        <div class="result-footer">
+          <div class="avatar" style="background:linear-gradient(135deg,#E8998A,#C97BAF)"></div>
+          <div><div class="result-name">Maria González</div><div class="result-role">Founder, Solana Skincare</div></div>
+        </div>
+      </div>
+      <div class="result-card">
+        <div class="result-badge">2.3M impressions / month</div>
+        <p class="result-quote">"Uplift handles everything. I stopped thinking about content and started thinking about the business."</p>
+        <div class="result-footer">
+          <div class="avatar" style="background:linear-gradient(135deg,#C97BAF,#9B70C0)"></div>
+          <div><div class="result-name">James Okafor</div><div class="result-role">CEO, Verve Apparel</div></div>
+        </div>
+      </div>
+      <div class="result-card">
+        <div class="result-badge">4.8× ROAS on paid social</div>
+        <p class="result-quote">"The UGC videos perform better than anything our in-house team ever made. And they cost less."</p>
+        <div class="result-footer">
+          <div class="avatar" style="background:linear-gradient(135deg,#9B70C0,#5E65B5)"></div>
+          <div><div class="result-name">Sofia Reyes</div><div class="result-role">Marketing Director, Tierra Foods</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── PAGE 4: PRICING ────────────────────────────────────── -->
+<div class="page pricing-page">
+  <nav class="nav">
+    <img src="../../assets/UpliftLogo_Black.png" alt="Uplift" style="height:28px">
+    <div class="nav-links">
+      <span class="nav-link">Services</span><span class="nav-link">Work</span><span class="nav-link" style="color:#9B70C0">Pricing</span><span class="nav-link">About</span>
+    </div>
+    <div class="nav-cta">Book a call</div>
+  </nav>
+  <div class="section-body" style="padding-top:80px; align-items:center">
+    <div class="pricing-header">
+      <div class="eyebrow">Pricing</div>
+      <div class="pricing-h2">Simple, transparent pricing.</div>
+    </div>
+    <div class="pricing-grid">
+      <div class="plan-card">
+        <div class="plan-name">Starter</div>
+        <div><span class="plan-price">$1,200</span><span class="plan-mo">/mo</span></div>
+        <div class="plan-desc">For brands just getting serious about social.</div>
+        <div class="plan-features">
+          <div class="plan-feat"><div class="feat-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>8 posts/month</div>
+          <div class="plan-feat"><div class="feat-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>2 platforms</div>
+          <div class="plan-feat"><div class="feat-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Monthly strategy call</div>
+          <div class="plan-feat"><div class="feat-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Basic analytics</div>
+        </div>
+        <div class="plan-btn sec-btn">Get started</div>
+      </div>
+      <div class="plan-card featured">
+        <div class="plan-top-bar"></div>
+        <div class="plan-name">Growth</div>
+        <div><span class="plan-price">$2,500</span><span class="plan-mo">/mo</span></div>
+        <div class="plan-desc">Full-service management for scaling brands.</div>
+        <div class="plan-features">
+          <div class="plan-feat"><div class="feat-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>20 posts/month</div>
+          <div class="plan-feat"><div class="feat-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>3 platforms</div>
+          <div class="plan-feat"><div class="feat-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>UGC content (4 videos)</div>
+          <div class="plan-feat"><div class="feat-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Community management</div>
+        </div>
+        <div class="plan-btn featured-btn">Most popular</div>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">Premium</div>
+        <div><span class="plan-price">$4,800</span><span class="plan-mo">/mo</span></div>
+        <div class="plan-desc">End-to-end creative and social infrastructure.</div>
+        <div class="plan-features">
+          <div class="plan-feat"><div class="feat-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Unlimited posts</div>
+          <div class="plan-feat"><div class="feat-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>All platforms</div>
+          <div class="plan-feat"><div class="feat-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>UGC content (12 videos)</div>
+          <div class="plan-feat"><div class="feat-dot"><svg width="7" height="7" viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Bilingual content</div>
+        </div>
+        <div class="plan-btn sec-btn">Talk to us</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.fonts.ready.then(() => {
+    setTimeout(() => window.print(), 500);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Colors" name="Brand Gradient" subtitle="5-stop gradient — horizontal, diagonal, vertical" viewport="700x220" -->
+<html><head><meta charset="utf-8">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Regular.woff2') format('woff2'), url('../fonts/Satoshi-Regular.woff') format('woff'); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Italic.woff2') format('woff2'), url('../fonts/Satoshi-Italic.woff') format('woff'); font-weight: 400; font-style: italic; font-display: swap; }
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Medium.woff2') format('woff2'), url('../fonts/Satoshi-Medium.woff') format('woff'); font-weight: 500; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Medium.woff2') format('woff2'), url('../fonts/Satoshi-Medium.woff') format('woff'); font-weight: 700; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Medium.woff2') format('woff2'), url('../fonts/Satoshi-Medium.woff') format('woff'); font-weight: 900; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Instrument Serif'; src: url('../fonts/InstrumentSerif-Regular.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
+</style>
+  <style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #10101A; font-family: 'Satoshi', sans-serif; padding: 24px; }
+  .bar {
+    height: 56px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #E8998A 0%, #C97BAF 30%, #9B70C0 55%, #7878C8 75%, #5E65B5 100%);
+    margin-bottom: 16px;
+  }
+  .stops { display: flex; gap: 8px; margin-bottom: 16px; }
+  .stop { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .swatch { width: 100%; height: 40px; border-radius: 8px; }
+  .hex { font-size: 10px; color: #B0B0C8; letter-spacing: 0.05em; font-weight: 500; }
+  .name { font-size: 10px; color: #6B6B85; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; }
+  .diag {
+    height: 32px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #E8998A 0%, #C97BAF 30%, #9B70C0 55%, #7878C8 75%, #5E65B5 100%);
+    margin-bottom: 8px;
+  }
+  .row { display: flex; gap: 8px; }
+  .half { flex: 1; }
+  .vert {
+    height: 32px;
+    border-radius: 8px;
+    background: linear-gradient(180deg, #E8998A 0%, #9B70C0 50%, #5E65B5 100%);
+  }
+  .tag { font-size: 9px; color: #6B6B85; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; font-weight: 500; }
+</style>
+</head><body>
+  <div class="bar"></div>
+  <div class="stops">
+    <div class="stop">
+      <div class="swatch" style="background:#E8998A"></div>
+      <div class="hex">#E8998A</div>
+      <div class="name">Peach</div>
+    </div>
+    <div class="stop">
+      <div class="swatch" style="background:#C97BAF"></div>
+      <div class="hex">#C97BAF</div>
+      <div class="name">Mauve</div>
+    </div>
+    <div class="stop">
+      <div class="swatch" style="background:#9B70C0"></div>
+      <div class="hex">#9B70C0</div>
+      <div class="name">Violet</div>
+    </div>
+    <div class="stop">
+      <div class="swatch" style="background:#7878C8"></div>
+      <div class="hex">#7878C8</div>
+      <div class="name">Peri</div>
+    </div>
+    <div class="stop">
+      <div class="swatch" style="background:#5E65B5"></div>
+      <div class="hex">#5E65B5</div>
+      <div class="name">Indigo</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="half">
+      <div class="tag">Diagonal</div>
+      <div class="diag"></div>
+    </div>
+    <div class="half">
+      <div class="tag">Vertical</div>
+      <div class="vert"></div>
+    </div>
+  </div>
+</body></html>

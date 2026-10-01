@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" name="Cards" subtitle="Dark + light — service, stat, pricing cards" viewport="700x270" -->
+<html><head><meta charset="utf-8">
+<style>
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Regular.woff2') format('woff2'); font-weight: 400; }
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Medium.woff2') format('woff2'); font-weight: 500; }
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Medium.woff2') format('woff2'); font-weight: 700; }
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Medium.woff2') format('woff2'); font-weight: 900; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Satoshi', sans-serif; display: flex; }
+  .panel { flex: 1; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+  .dark  { background: #10101A; }
+  .light { background: #F5F4FA; border-left: 1px solid rgba(16,16,26,0.08); }
+  .mode-tag { font-size: 9px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 2px; }
+  .dark  .mode-tag { color: #3A3A54; }
+  .light .mode-tag { color: #B0B0C8; }
+
+  /* Service card */
+  .svc-d { background: #1A1A28; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 16px; }
+  .svc-l { background: #fff; border: 1px solid rgba(16,16,26,0.07); border-radius: 14px; padding: 16px; box-shadow: 0 2px 12px rgba(16,16,26,0.07); }
+  .icon-pip { width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg,#E8998A,#9B70C0); display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+  .card-title-d { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .card-title-l { font-size: 14px; font-weight: 700; color: #10101A; margin-bottom: 4px; }
+  .card-body-d { font-size: 12px; color: #6B6B85; line-height: 1.6; }
+  .card-body-l { font-size: 12px; color: #6B6B85; line-height: 1.6; }
+
+  /* Stat card */
+  .stat-d { background: #1A1A28; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 16px; }
+  .stat-l { background: #fff; border: 1px solid rgba(16,16,26,0.07); border-radius: 14px; padding: 16px; box-shadow: 0 2px 12px rgba(16,16,26,0.07); }
+  .stat-num { font-size: 28px; font-weight: 900; letter-spacing: -0.02em; background: linear-gradient(90deg,#E8998A,#9B70C0,#5E65B5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .stat-lbl-d { font-size: 10px; color: #6B6B85; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; margin-top: 4px; }
+  .stat-lbl-l { font-size: 10px; color: #B0B0C8; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; margin-top: 4px; }
+
+  .row { display: flex; gap: 10px; }
+</style>
+</head><body>
+<div class="panel dark">
+  <div class="mode-tag">Dark</div>
+  <div class="row">
+    <div class="svc-d" style="flex:1.5">
+      <div class="icon-pip">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      </div>
+      <div class="card-title-d">Content Creation</div>
+      <div class="card-body-d">Scripts, shoots, editing — delivered weekly.</div>
+    </div>
+    <div class="stat-d" style="flex:1">
+      <div class="stat-num">340%</div>
+      <div class="stat-lbl-d">Avg. reach increase</div>
+    </div>
+  </div>
+  <!-- Pricing card -->
+  <div style="background:#1A1A28;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:16px;position:relative;overflow:hidden">
+    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#E8998A,#C97BAF,#9B70C0,#5E65B5)"></div>
+    <div style="font-size:10px;color:#6B6B85;text-transform:uppercase;letter-spacing:0.12em;font-weight:500;margin-bottom:6px">Growth Plan</div>
+    <div style="font-size:28px;font-weight:900;color:#fff;letter-spacing:-0.02em">$2,500<span style="font-size:12px;color:#6B6B85;font-weight:500">/mo</span></div>
+    <div style="display:flex;flex-direction:column;gap:5px;margin-top:10px">
+      <div style="display:flex;gap:7px;align-items:center"><div style="width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,#9B70C0,#5E65B5);flex-shrink:0"></div><span style="font-size:12px;color:#B0B0C8">12 posts/month</span></div>
+      <div style="display:flex;gap:7px;align-items:center"><div style="width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,#9B70C0,#5E65B5);flex-shrink:0"></div><span style="font-size:12px;color:#B0B0C8">UGC content</span></div>
+    </div>
+  </div>
+</div>
+<div class="panel light">
+  <div class="mode-tag">Light</div>
+  <div class="row">
+    <div class="svc-l" style="flex:1.5">
+      <div class="icon-pip">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      </div>
+      <div class="card-title-l">Content Creation</div>
+      <div class="card-body-l">Scripts, shoots, editing — delivered weekly.</div>
+    </div>
+    <div class="stat-l" style="flex:1">
+      <div class="stat-num">340%</div>
+      <div class="stat-lbl-l">Avg. reach increase</div>
+    </div>
+  </div>
+  <div style="background:#fff;border:1px solid rgba(16,16,26,0.07);border-radius:14px;padding:16px;position:relative;overflow:hidden;box-shadow:0 2px 12px rgba(16,16,26,0.07)">
+    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#E8998A,#C97BAF,#9B70C0,#5E65B5)"></div>
+    <div style="font-size:10px;color:#B0B0C8;text-transform:uppercase;letter-spacing:0.12em;font-weight:500;margin-bottom:6px">Growth Plan</div>
+    <div style="font-size:28px;font-weight:900;color:#10101A;letter-spacing:-0.02em">$2,500<span style="font-size:12px;color:#B0B0C8;font-weight:500">/mo</span></div>
+    <div style="display:flex;flex-direction:column;gap:5px;margin-top:10px">
+      <div style="display:flex;gap:7px;align-items:center"><div style="width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,#9B70C0,#5E65B5);flex-shrink:0"></div><span style="font-size:12px;color:#6B6B85">12 posts/month</span></div>
+      <div style="display:flex;gap:7px;align-items:center"><div style="width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,#9B70C0,#5E65B5);flex-shrink:0"></div><span style="font-size:12px;color:#6B6B85">UGC content</span></div>
+    </div>
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Type" name="Body & Label Type" subtitle="Dark + light — body, italic, label, caption" viewport="700x215" -->
+<html><head><meta charset="utf-8">
+<style>
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Regular.woff2') format('woff2'); font-weight: 400; }
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Italic.woff2') format('woff2'); font-weight: 400; font-style: italic; }
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Medium.woff2') format('woff2'); font-weight: 500; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Satoshi', sans-serif; display: flex; }
+  .panel { flex: 1; padding: 18px 22px; display: flex; flex-direction: column; }
+  .dark  { background: #10101A; }
+  .light { background: #F5F4FA; border-left: 1px solid rgba(16,16,26,0.08); }
+  .mode-tag { font-size: 9px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 10px; }
+  .dark  .mode-tag { color: #3A3A54; }
+  .light .mode-tag { color: #B0B0C8; }
+  .row { display: flex; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid; }
+  .dark  .row { border-color: rgba(255,255,255,0.06); }
+  .light .row { border-color: rgba(16,16,26,0.06); }
+  .row:last-child { border-bottom: none; }
+  .tag { font-size: 9px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; width: 64px; flex-shrink: 0; }
+  .dark  .tag { color: #6B6B85; }
+  .light .tag { color: #B0B0C8; }
+  .body-lg { font-size: 17px; font-weight: 400; line-height: 1.6; }
+  .body    { font-size: 15px; font-weight: 400; line-height: 1.7; }
+  .italic  { font-size: 15px; font-weight: 400; font-style: italic; line-height: 1.7; }
+  .label   { font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.12em; }
+  .caption { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; }
+  .dark  .body-lg, .dark  .body, .dark  .italic { color: #B0B0C8; }
+  .dark  .label   { color: #fff; }
+  .dark  .caption { color: #6B6B85; }
+  .light .body-lg, .light .body, .light .italic { color: #3A3A54; }
+  .light .label   { color: #10101A; }
+  .light .caption { color: #B0B0C8; }
+</style>
+</head><body>
+<div class="panel dark">
+  <div class="mode-tag">Dark</div>
+  <div class="row"><div class="tag">Body LG</div><div class="body-lg">Content that converts.</div></div>
+  <div class="row"><div class="tag">Body</div><div class="body">We handle strategy, creation, scheduling, and reporting.</div></div>
+  <div class="row"><div class="tag">Italic</div><div class="italic">Your audience is ready. Let's give them something worth watching.</div></div>
+  <div class="row"><div class="tag">Label</div><div class="label">Services · Pricing · About</div></div>
+  <div class="row"><div class="tag">Caption</div><div class="caption">Results updated monthly · All plans include analytics</div></div>
+</div>
+<div class="panel light">
+  <div class="mode-tag">Light</div>
+  <div class="row"><div class="tag">Body LG</div><div class="body-lg">Content that converts.</div></div>
+  <div class="row"><div class="tag">Body</div><div class="body">We handle strategy, creation, scheduling, and reporting.</div></div>
+  <div class="row"><div class="tag">Italic</div><div class="italic">Your audience is ready. Let's give them something worth watching.</div></div>
+  <div class="row"><div class="tag">Label</div><div class="label">Services · Pricing · About</div></div>
+  <div class="row"><div class="tag">Caption</div><div class="caption">Results updated monthly · All plans include analytics</div></div>
+</div>
+</body></html>

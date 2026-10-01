@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" name="Buttons" subtitle="Dark + light — gradient, secondary, ghost, SM, icon" viewport="700x270" -->
+<html><head><meta charset="utf-8">
+<style>
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; }
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Medium.woff2') format('woff2'); font-weight: 500; font-style: normal; }
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Medium.woff2') format('woff2'); font-weight: 700; font-style: normal; }
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Medium.woff2') format('woff2'); font-weight: 900; font-style: normal; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Satoshi', sans-serif; display: flex; height: 100%; }
+  .panel { flex: 1; padding: 22px 24px; display: flex; flex-direction: column; gap: 14px; }
+  .dark  { background: #10101A; }
+  .light { background: #F5F4FA; border-left: 1px solid rgba(16,16,26,0.08); }
+  .mode-tag { font-size: 9px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 2px; }
+  .dark  .mode-tag { color: #3A3A54; }
+  .light .mode-tag { color: #B0B0C8; }
+  .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .label { font-size: 9px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; }
+  .dark  .label { color: #6B6B85; }
+  .light .label { color: #B0B0C8; }
+  .btn { display: inline-flex; align-items: center; border: none; cursor: pointer; font-family: 'Satoshi', sans-serif; font-weight: 700; border-radius: 999px; transition: all 180ms; }
+  .btn-grad  { background: linear-gradient(90deg,#E8998A,#C97BAF,#9B70C0,#5E65B5); color: #fff; padding: 12px 24px; font-size: 14px; }
+  .btn-sec-d { background: #2A2A3C; color: #fff; padding: 12px 24px; font-size: 14px; }
+  .btn-sec-l { background: #EEEDF7; color: #10101A; padding: 12px 24px; font-size: 14px; }
+  .btn-ghost-d { background: transparent; color: #fff; padding: 11px 23px; font-size: 14px; border: 1px solid rgba(255,255,255,0.2); }
+  .btn-ghost-l { background: transparent; color: #10101A; padding: 11px 23px; font-size: 14px; border: 1px solid rgba(16,16,26,0.18); }
+  .btn-sm   { background: linear-gradient(90deg,#E8998A,#9B70C0,#5E65B5); color: #fff; padding: 8px 16px; font-size: 12px; }
+  .btn-icon-d { background: #2A2A3C; color: #fff; padding: 10px; font-size: 14px; width: 40px; height: 40px; justify-content: center; }
+  .btn-icon-l { background: #EEEDF7; color: #10101A; padding: 10px; font-size: 14px; width: 40px; height: 40px; justify-content: center; }
+  .divider-d { border: none; border-top: 1px solid rgba(255,255,255,0.07); }
+  .divider-l { border: none; border-top: 1px solid rgba(16,16,26,0.07); }
+</style>
+</head><body>
+<!-- DARK -->
+<div class="panel dark">
+  <div class="mode-tag">Dark</div>
+  <div class="label">Primary</div>
+  <div class="row">
+    <button class="btn btn-grad">Get started</button>
+    <button class="btn btn-grad" style="opacity:.5;cursor:not-allowed">Disabled</button>
+  </div>
+  <hr class="divider-d">
+  <div class="label">Secondary · Ghost</div>
+  <div class="row">
+    <button class="btn btn-sec-d">Learn more</button>
+    <button class="btn btn-ghost-d">View pricing</button>
+  </div>
+  <hr class="divider-d">
+  <div class="label">Small · Icon</div>
+  <div class="row">
+    <button class="btn btn-sm">Book a call</button>
+    <button class="btn btn-icon-d">↗</button>
+  </div>
+</div>
+<!-- LIGHT -->
+<div class="panel light">
+  <div class="mode-tag">Light</div>
+  <div class="label">Primary</div>
+  <div class="row">
+    <button class="btn btn-grad">Get started</button>
+    <button class="btn btn-grad" style="opacity:.5;cursor:not-allowed">Disabled</button>
+  </div>
+  <hr class="divider-l">
+  <div class="label">Secondary · Ghost</div>
+  <div class="row">
+    <button class="btn btn-sec-l">Learn more</button>
+    <button class="btn btn-ghost-l">View pricing</button>
+  </div>
+  <hr class="divider-l">
+  <div class="label">Small · Icon</div>
+  <div class="row">
+    <button class="btn btn-sm">Book a call</button>
+    <button class="btn btn-icon-l">↗</button>
+  </div>
+</div>
+</body></html>

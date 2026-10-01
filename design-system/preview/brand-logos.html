@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Brand" name="Logo Variants" subtitle="All 6 primary logo variants on correct backgrounds" viewport="700x240" -->
+<html><head><meta charset="utf-8">
+<style>
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Medium.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #10101A; font-family: 'Satoshi', sans-serif; padding: 16px 20px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .logo-card { border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px 16px 14px; gap: 12px; }
+  .dark-bg  { background: #10101A; border: 1px solid rgba(255,255,255,0.10); }
+  .mid-bg   { background: #1A1A28; border: 1px solid rgba(255,255,255,0.10); }
+  .light-bg { background: #F5F4FA; border: 1px solid rgba(16,16,26,0.08); }
+  img { max-width: 100%; max-height: 52px; object-fit: contain; display: block; }
+  .name       { font-size: 9px; color: #3A3A54; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; }
+  .name-light { font-size: 9px; color: #6B6B85; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; }
+</style>
+</head><body>
+  <div class="grid">
+    <!-- Row 1: wordmark only -->
+    <div class="logo-card dark-bg">
+      <img src="../assets/UpliftLogo_White.png" alt="White wordmark">
+      <div class="name-light">White — Dark BG</div>
+    </div>
+    <div class="logo-card mid-bg">
+      <img src="../assets/UpliftLogo_Gradient.png" alt="Gradient wordmark">
+      <div class="name-light">Gradient — Dark BG</div>
+    </div>
+    <div class="logo-card light-bg">
+      <img src="../assets/UpliftLogo_Black.png" alt="Black wordmark">
+      <div class="name">Black — Light BG</div>
+    </div>
+
+    <!-- Row 2: with tagline -->
+    <div class="logo-card dark-bg">
+      <img src="../assets/UpliftLogo_BlackText.svg" alt="White + tagline" style="filter: brightness(0) invert(1);">
+      <div class="name-light">White + Tagline</div>
+    </div>
+    <div class="logo-card mid-bg">
+      <img src="../assets/UpliftLogo_GradientText.png" alt="Gradient + tagline">
+      <div class="name-light">Gradient + Tagline</div>
+    </div>
+    <div class="logo-card light-bg">
+      <img src="../assets/UpliftLogo_BlackText.svg" alt="Black + tagline">
+      <div class="name">Black + Tagline</div>
+    </div>
+  </div>
+</body></html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Colors" name="Neutral & Semantic Colors" subtitle="Dark scale, light scale, semantic success/warning/error" viewport="700x180" -->
+<html><head><meta charset="utf-8">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Regular.woff2') format('woff2'), url('../fonts/Satoshi-Regular.woff') format('woff'); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Italic.woff2') format('woff2'), url('../fonts/Satoshi-Italic.woff') format('woff'); font-weight: 400; font-style: italic; font-display: swap; }
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Medium.woff2') format('woff2'), url('../fonts/Satoshi-Medium.woff') format('woff'); font-weight: 500; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Medium.woff2') format('woff2'), url('../fonts/Satoshi-Medium.woff') format('woff'); font-weight: 700; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Satoshi'; src: url('../fonts/Satoshi-Medium.woff2') format('woff2'), url('../fonts/Satoshi-Medium.woff') format('woff'); font-weight: 900; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Instrument Serif'; src: url('../fonts/InstrumentSerif-Regular.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
+</style>
+  <style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #10101A; font-family: 'Satoshi', sans-serif; padding: 24px; }
+  .row { display: flex; gap: 8px; margin-bottom: 16px; }
+  .swatch-block { flex: 1; }
+  .swatch { height: 36px; border-radius: 8px; margin-bottom: 5px; border: 1px solid rgba(255,255,255,0.06); }
+  .name { font-size: 10px; color: #6B6B85; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; }
+  .hex { font-size: 10px; color: #B0B0C8; font-weight: 500; }
+  .section-label { font-size: 9px; color: #6B6B85; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 500; margin-bottom: 8px; }
+  .light-row { display: flex; gap: 8px; }
+  .light-block { flex: 1; }
+  .light-swatch { height: 36px; border-radius: 8px; margin-bottom: 5px; border: 1px solid rgba(16,16,26,0.08); }
+</style>
+</head><body>
+  <div class="section-label">Dark Scale</div>
+  <div class="row">
+    <div class="swatch-block">
+      <div class="swatch" style="background:#0A0A12"></div>
+      <div class="name">Black</div><div class="hex">#0A0A12</div>
+    </div>
+    <div class="swatch-block">
+      <div class="swatch" style="background:#10101A"></div>
+      <div class="name">Dark 900</div><div class="hex">#10101A</div>
+    </div>
+    <div class="swatch-block">
+      <div class="swatch" style="background:#1A1A28"></div>
+      <div class="name">Dark 800</div><div class="hex">#1A1A28</div>
+    </div>
+    <div class="swatch-block">
+      <div class="swatch" style="background:#2A2A3C"></div>
+      <div class="name">Dark 700</div><div class="hex">#2A2A3C</div>
+    </div>
+    <div class="swatch-block">
+      <div class="swatch" style="background:#3A3A54"></div>
+      <div class="name">Dark 600</div><div class="hex">#3A3A54</div>
+    </div>
+    <div class="swatch-block">
+      <div class="swatch" style="background:#6B6B85"></div>
+      <div class="name">Muted</div><div class="hex">#6B6B85</div>
+    </div>
+    <div class="swatch-block">
+      <div class="swatch" style="background:#B0B0C8"></div>
+      <div class="name">Subtle</div><div class="hex">#B0B0C8</div>
+    </div>
+  </div>
+  <div class="section-label">Light Scale</div>
+  <div class="light-row">
+    <div class="light-block">
+      <div class="light-swatch" style="background:#F5F4FA"></div>
+      <div class="name" style="color:#3A3A54">Off-white</div><div class="hex" style="color:#6B6B85">#F5F4FA</div>
+    </div>
+    <div class="light-block">
+      <div class="light-swatch" style="background:#FFFFFF"></div>
+      <div class="name" style="color:#3A3A54">White</div><div class="hex" style="color:#6B6B85">#FFFFFF</div>
+    </div>
+    <div class="light-block">
+      <div class="light-swatch" style="background:#5BB585"></div>
+      <div class="name" style="color:#3A3A54">Success</div><div class="hex" style="color:#6B6B85">#5BB585</div>
+    </div>
+    <div class="light-block">
+      <div class="light-swatch" style="background:#E8C47A"></div>
+      <div class="name" style="color:#3A3A54">Warning</div><div class="hex" style="color:#6B6B85">#E8C47A</div>
+    </div>
+    <div class="light-block">
+      <div class="light-swatch" style="background:#E87A7A"></div>
+      <div class="name" style="color:#3A3A54">Error</div><div class="hex" style="color:#6B6B85">#E87A7A</div>
+    </div>
+  </div>
+</body></html>

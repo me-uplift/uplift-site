@@ -1,0 +1,318 @@
+/* ============================================================
+   Uplift Digital Studio — Design Tokens
+   colors_and_type.css
+   ============================================================ */
+
+/* ── Instrument Serif — Local Font File ──────────────────── */
+/* NOTE: Only the Regular upright weight was provided.            */
+/* Italic is synthesized by the browser. Supply                   */
+/* InstrumentSerif-Italic.ttf to replace synthetic italic.        */
+
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('fonts/InstrumentSerif-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Satoshi — Local Font Files ──────────────────────────── */
+/* NOTE: Bold (700) and Black (900) weights were NOT provided.     */
+/* Those weights fall back to the Medium (500) file via the        */
+/* browser's synthetic bold. Supply Satoshi-Bold + Satoshi-Black   */
+/* .woff2 files to replace synthetic rendering.                    */
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('fonts/Satoshi-Regular.woff2') format('woff2'),
+       url('fonts/Satoshi-Regular.woff')  format('woff'),
+       url('fonts/Satoshi-Regular.ttf')   format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('fonts/Satoshi-Italic.woff2') format('woff2'),
+       url('fonts/Satoshi-Italic.woff')  format('woff'),
+       url('fonts/Satoshi-Italic.ttf')   format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('fonts/Satoshi-Medium.woff2') format('woff2'),
+       url('fonts/Satoshi-Medium.woff')  format('woff'),
+       url('fonts/Satoshi-Medium.ttf')   format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Synthetic bold mapping — replace when real files are available */
+@font-face {
+  font-family: 'Satoshi';
+  src: url('fonts/Satoshi-Medium.woff2') format('woff2'),
+       url('fonts/Satoshi-Medium.woff')  format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('fonts/Satoshi-Medium.woff2') format('woff2'),
+       url('fonts/Satoshi-Medium.woff')  format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+
+  /* ── Brand Gradient ──────────────────────────────────── */
+  --gradient-full: linear-gradient(90deg,
+    #E8998A 0%,
+    #C97BAF 30%,
+    #9B70C0 55%,
+    #7878C8 75%,
+    #5E65B5 100%
+  ); /* @kind color */
+  --gradient-diagonal: linear-gradient(135deg,
+    #E8998A 0%,
+    #C97BAF 30%,
+    #9B70C0 55%,
+    #7878C8 75%,
+    #5E65B5 100%
+  ); /* @kind color */
+  --gradient-vertical: linear-gradient(180deg,
+    #E8998A 0%,
+    #C97BAF 30%,
+    #9B70C0 55%,
+    #7878C8 75%,
+    #5E65B5 100%
+  ); /* @kind color */
+
+  /* ── Brand Color Stops ───────────────────────────────── */
+  --color-peach:      #E8998A;
+  --color-mauve:      #C97BAF;
+  --color-violet:     #9B70C0;
+  --color-periwinkle: #7878C8;
+  --color-indigo:     #5E65B5;
+
+  /* ── Neutral Scale ───────────────────────────────────── */
+  --color-black:      #0A0A12;
+  --color-dark-900:   #10101A;   /* Near-black — primary dark bg */
+  --color-dark-800:   #1A1A28;   /* Dark surface — cards on dark */
+  --color-dark-700:   #2A2A3C;   /* Mid surface — nested cards */
+  --color-dark-600:   #3A3A54;   /* Subtle border on dark */
+  --color-muted:      #6B6B85;   /* Disabled text, muted icons */
+  --color-subtle:     #B0B0C8;   /* Secondary text on dark */
+  --color-off-white:  #F5F4FA;   /* Light bg / section bg */
+  --color-white:      #FFFFFF;
+
+  /* ── Semantic Colors ─────────────────────────────────── */
+  --color-success:    #5BB585;
+  --color-warning:    #E8C47A;
+  --color-error:      #E87A7A;
+
+  /* ── Foreground (semantic) ───────────────────────────── */
+  --fg-primary:       var(--color-white);
+  --fg-secondary:     var(--color-subtle);
+  --fg-muted:         var(--color-muted);
+  --fg-on-light:      var(--color-dark-900);
+  --fg-on-light-2:    #3A3A54;
+
+  /* ── Background (semantic) ───────────────────────────── */
+  --bg-base:          var(--color-dark-900);
+  --bg-surface:       var(--color-dark-800);
+  --bg-raised:        var(--color-dark-700);
+  --bg-light:         var(--color-off-white);
+  --bg-white:         var(--color-white);
+
+  /* ── Border ──────────────────────────────────────────── */
+  --border-subtle:    rgba(255,255,255,0.07);
+  --border-default:   rgba(255,255,255,0.12);
+  --border-strong:    rgba(255,255,255,0.22);
+  --border-light:     rgba(16,16,26,0.08);
+
+  /* ── Border Radius ───────────────────────────────────── */
+  --radius-sm:        8px;
+  --radius-md:        12px;
+  --radius-lg:        16px;
+  --radius-xl:        24px;
+  --radius-pill:      999px;
+
+  /* ── Shadow ──────────────────────────────────────────── */
+  --shadow-sm:        0 2px 8px rgba(0,0,0,0.12);
+  --shadow-md:        0 4px 24px rgba(0,0,0,0.18);
+  --shadow-lg:        0 8px 48px rgba(0,0,0,0.28);
+  --shadow-glow:      0 0 40px rgba(155,112,192,0.25);
+  --shadow-light-sm:  0 2px 8px rgba(16,16,26,0.06);
+  --shadow-light-md:  0 4px 24px rgba(16,16,26,0.10);
+
+  /* ── Spacing ─────────────────────────────────────────── */
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:   12px;
+  --space-4:   16px;
+  --space-5:   24px;
+  --space-6:   32px;
+  --space-7:   48px;
+  --space-8:   64px;
+  --space-9:   80px;
+  --space-10:  96px;
+  --space-11:  128px;
+  --space-12:  160px;
+
+  /* ── Layout ──────────────────────────────────────────── */
+  --container-max:    1200px;
+  --container-pad:    clamp(24px, 5vw, 64px);
+  --section-pad-v:    clamp(64px, 8vw, 128px);
+
+  /* ── Transition ──────────────────────────────────────── */
+  --ease:             cubic-bezier(0.4, 0, 0.2, 1); /* @kind other */
+  --duration-fast:    150ms; /* @kind other */
+  --duration-base:    250ms; /* @kind other */
+  --duration-slow:    400ms; /* @kind other */
+
+  /* ── Typography — Families ───────────────────────────── */
+  /* Satoshi is the sole type family — weight carries the    */
+  /* hierarchy (Black 900 → Regular 400). --font-serif is    */
+  /* legacy/optional and now aliases Satoshi so nothing      */
+  /* falls back to a serif default.                          */
+  --font-sans:     'Satoshi', 'DM Sans', system-ui, sans-serif;
+  --font-serif:    var(--font-sans);
+
+  /* ── Typography — Weights ────────────────────────────── */
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-bold:    700;
+  --weight-black:   900;
+
+  /* ── Typography — Scale ──────────────────────────────── */
+  --text-xs:    11px;
+  --text-sm:    13px;
+  --text-base:  16px;
+  --text-md:    18px;
+  --text-lg:    20px;
+  --text-xl:    24px;
+  --text-2xl:   32px;
+  --text-3xl:   40px;
+  --text-4xl:   56px;
+  --text-5xl:   72px;
+  --text-6xl:   96px;
+
+  /* ── Typography — Letter Spacing ─────────────────────── */
+  --tracking-tight:  -0.02em;
+  --tracking-snug:   -0.01em;
+  --tracking-normal:  0em;
+  --tracking-wide:    0.05em;
+  --tracking-wider:   0.1em;
+  --tracking-widest:  0.15em;
+
+  /* ── Typography — Line Height ────────────────────────── */
+  --leading-tight:  1.1;
+  --leading-snug:   1.3;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.7;
+}
+
+/* ── Semantic Type Roles ──────────────────────────────────── */
+
+.display,
+h1.display {
+  font-family: var(--font-sans);
+  font-size: var(--text-5xl);
+  font-weight: var(--weight-black);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+h1, .h1 {
+  font-family: var(--font-sans);
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-black);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+h2, .h2 {
+  font-family: var(--font-sans);
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-snug);
+}
+
+h3, .h3 {
+  font-family: var(--font-sans);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-snug);
+}
+
+h4, .h4 {
+  font-family: var(--font-sans);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-normal);
+}
+
+p, .body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-relaxed);
+  color: var(--fg-secondary);
+}
+
+.body-lg {
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-relaxed);
+}
+
+.label {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+}
+
+.caption {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wider);
+  color: var(--fg-muted);
+}
+
+/* ── Gradient Text Utility ───────────────────────────────── */
+.gradient-text {
+  background: var(--gradient-full);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Gradient BG Utility ─────────────────────────────────── */
+.gradient-bg {
+  background: var(--gradient-full);
+}
+
+/* ── Base Reset (optional, import when needed) ───────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  background: var(--bg-base);
+  color: var(--fg-primary);
+  -webkit-font-smoothing: antialiased;
+}
