@@ -119,18 +119,33 @@ const description = 'Marketing insights for small brands that want consistency w
     });
   });
 
-  // TODO: connect the newsletter form to an email service once one is chosen.
-  // Until then nothing is sent or stored; the form only validates the address.
+  // Newsletter sign-ups go to the "Blog Newsletter" form in Kit.
+  const KIT_FORM_URL = 'https://app.kit.com/forms/9994579/subscriptions';
   const form = document.getElementById('newsletter-form') as HTMLFormElement | null;
   const status = document.getElementById('newsletter-status');
-  form?.addEventListener('submit', (e) => {
+  form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!status) return;
     const input = form.querySelector('input');
-    if (input && !input.checkValidity()) {
+    const button = form.querySelector('button');
+    if (!input || !input.checkValidity()) {
       status.textContent = 'Please enter a valid email address.';
       return;
     }
-    status.textContent = "Sign-ups aren't open yet. Email hello@upliftdigital.studio to join the list.";
+    if (button) button.disabled = true;
+    status.textContent = 'Subscribing…';
+    try {
+      const body = new FormData();
+      body.append('email_address', input.value.trim());
+      const res = await fetch(KIT_FORM_URL, { method: 'POST', headers: { Accept: 'application/json' }, body });
+      const data = await res.json();
+      if (data.status !== 'success') throw new Error(data.status);
+      form.reset();
+      status.textContent = "You're in! Check your inbox to confirm your subscription.";
+    } catch {
+      status.textContent = 'Something went wrong. Please try again, or email hello@upliftdigital.studio.';
+    } finally {
+      if (button) button.disabled = false;
+    }
   });
 </script>
