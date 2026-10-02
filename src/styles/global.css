@@ -1465,6 +1465,7 @@ a.cat:hover { filter: brightness(0.95); }
 }
 .newsletter-sub { font-size: var(--text-base); line-height: var(--leading-normal); color: var(--fg-on-light-2); }
 .newsletter-form { display: flex; flex-direction: column; gap: var(--space-2); }
+.newsletter-form[hidden] { display: none; }
 .newsletter-form label {
   font-size: var(--text-sm);
   font-weight: var(--weight-medium);
@@ -1486,6 +1487,116 @@ a.cat:hover { filter: brightness(0.95); }
 .newsletter-row input::placeholder { color: var(--color-muted); }
 .newsletter-row input:focus-visible { outline: 3px solid var(--color-indigo); outline-offset: 1px; }
 .newsletter-status { font-size: 14px; color: var(--fg-on-light-2); min-height: 1.4em; }
+
+/* Success state: gradient bar sweeps across the card, then the icon pops and the copy rises in. */
+.newsletter { position: relative; overflow: hidden; }
+.newsletter::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 5px;
+  background: var(--gradient-full);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.newsletter.is-subscribed { animation: nl-glow 1.6s var(--ease) both; }
+.newsletter.is-subscribed::after { animation: nl-sweep 0.8s var(--ease) forwards; }
+
+.newsletter-success:not([hidden]) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+.newsletter-success-icon {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--gradient-full);
+  color: var(--color-white);
+  display: grid;
+  place-items: center;
+  margin-bottom: var(--space-2);
+  animation: nl-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s both;
+}
+.newsletter-success-icon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--accent-b);
+  animation: nl-ring 1.2s var(--ease) 0.5s both;
+}
+.icon-mail { width: 34px; height: 34px; animation: nl-bob 0.9s var(--ease) 0.75s 2; }
+.newsletter-success-badge {
+  position: absolute;
+  right: -4px;
+  bottom: -4px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--bg-white);
+  color: var(--color-indigo);
+  box-shadow: var(--shadow-light-md);
+  display: grid;
+  place-items: center;
+  animation: nl-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 0.55s both;
+}
+.newsletter-success-badge svg { width: 18px; height: 18px; }
+.check-path { stroke-dasharray: 20; stroke-dashoffset: 20; animation: nl-draw 0.4s var(--ease) 0.85s forwards; }
+.newsletter-success-title {
+  font-family: var(--font-sans);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  color: var(--fg-on-light);
+  outline: none;
+  animation: nl-rise 0.5s var(--ease) 0.35s both;
+}
+.newsletter-success-text {
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--fg-on-light-2);
+  animation: nl-rise 0.5s var(--ease) 0.5s both;
+}
+.newsletter-success-text strong {
+  color: var(--fg-on-light);
+  background: linear-gradient(transparent 60%, rgba(201,123,175,0.3) 60%);
+}
+.newsletter-reset {
+  background: none;
+  border: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--color-indigo);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  animation: nl-rise 0.5s var(--ease) 0.65s both;
+}
+.newsletter-reset:focus-visible { outline: 3px solid var(--color-indigo); outline-offset: 2px; }
+
+@keyframes nl-sweep { to { transform: scaleX(1); } }
+@keyframes nl-glow {
+  0%   { box-shadow: var(--shadow-light-md), 0 0 0 0 rgba(155,112,192,0.45); }
+  60%  { box-shadow: var(--shadow-light-md), 0 0 0 14px rgba(155,112,192,0); }
+  100% { box-shadow: var(--shadow-light-md), 0 0 0 0 rgba(155,112,192,0); }
+}
+@keyframes nl-pop { from { opacity: 0; transform: scale(0.3) rotate(-12deg); } to { opacity: 1; transform: none; } }
+@keyframes nl-ring { from { opacity: 0.8; transform: scale(1); } to { opacity: 0; transform: scale(1.7); } }
+@keyframes nl-bob { 0%, 100% { transform: none; } 30% { transform: translateY(-4px) rotate(-6deg); } 60% { transform: translateY(0) rotate(4deg); } }
+@keyframes nl-draw { to { stroke-dashoffset: 0; } }
+@keyframes nl-rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .newsletter.is-subscribed,
+  .newsletter-success *,
+  .newsletter-success *::before { animation: none !important; }
+  .newsletter.is-subscribed::after { animation: none; transform: scaleX(1); }
+  .check-path { stroke-dashoffset: 0; }
+}
 
 /* ── CTA band (soft gradient tint: brand stops at 25% over white) ── */
 .cta-band, .post-body .mid-cta {

@@ -87,6 +87,20 @@ const description = 'Marketing insights for small brands that want consistency w
           </div>
           <p class="newsletter-status" id="newsletter-status" role="status"></p>
         </form>
+        <div class="newsletter-success" id="newsletter-success" hidden>
+          <div class="newsletter-success-icon" aria-hidden="true">
+            <svg class="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="5" width="18" height="14" rx="2.5"/>
+              <path d="m4 7 8 6 8-6"/>
+            </svg>
+            <span class="newsletter-success-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path class="check-path" d="m6 12.5 4 4 8-9"/></svg>
+            </span>
+          </div>
+          <h3 class="newsletter-success-title" id="newsletter-success-title" tabindex="-1">Thank you for subscribing!</h3>
+          <p class="newsletter-success-text"><strong>One more step:</strong> check your inbox and click the confirmation link to start getting Marketing Notes.</p>
+          <button type="button" class="newsletter-reset" id="newsletter-reset">Used the wrong email? Try again</button>
+        </div>
       </section>
 
       <section class="cta-band" aria-labelledby="cta-title">
@@ -123,6 +137,26 @@ const description = 'Marketing insights for small brands that want consistency w
   const KIT_FORM_URL = 'https://app.kit.com/forms/9994579/subscriptions';
   const form = document.getElementById('newsletter-form') as HTMLFormElement | null;
   const status = document.getElementById('newsletter-status');
+  const banner = document.querySelector<HTMLElement>('.newsletter');
+  const success = document.getElementById('newsletter-success');
+
+  // Swap the form for the animated thank-you panel, moving focus so screen readers announce it.
+  function showSuccess() {
+    if (!form || !success) return;
+    form.hidden = true;
+    success.hidden = false;
+    banner?.classList.add('is-subscribed');
+    document.getElementById('newsletter-success-title')?.focus({ preventScroll: true });
+  }
+
+  document.getElementById('newsletter-reset')?.addEventListener('click', () => {
+    if (!form || !success) return;
+    success.hidden = true;
+    form.hidden = false;
+    banner?.classList.remove('is-subscribed');
+    form.querySelector('input')?.focus();
+  });
+
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!status) return;
@@ -141,7 +175,8 @@ const description = 'Marketing insights for small brands that want consistency w
       const data = await res.json();
       if (data.status !== 'success') throw new Error(data.status);
       form.reset();
-      status.textContent = "You're in! Check your inbox to confirm your subscription.";
+      status.textContent = '';
+      showSuccess();
     } catch {
       status.textContent = 'Something went wrong. Please try again, or email hello@upliftdigital.studio.';
     } finally {
