@@ -6,6 +6,9 @@ const description = "Uplift Digital Studio is a bilingual social media managemen
 ---
 <BaseLayout title={title} description={description} canonicalPath="/" ogImage="/assets/og-image.png" transparentNav={false}>
   <Fragment slot="head">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap">
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
@@ -46,67 +49,88 @@ const description = "Uplift Digital Studio is a bilingual social media managemen
     </div>
   </section>
 
+  <!-- VALUE -->
+  <section id="what" data-screen-label="Value">
+    <div class="wrap">
+      <div class="what-header reveal">
+        <h2 class="what-headline">Content with a plan behind it.</h2>
+        <p class="what-sub">You work directly with the senior team behind your content. We learn your brand inside out, then plan, create, and manage everything around your goals.</p>
+      </div>
+      <div class="what-grid">
+        <div class="what-item reveal">
+          <div class="what-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg></div>
+          <h3 class="what-title">Be seen</h3>
+          <p class="what-desc">Social and SEO that put you in front of the right people.</p>
+        </div>
+        <div class="what-item reveal reveal-d1">
+          <div class="what-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></div>
+          <h3 class="what-title">Be understood</h3>
+          <p class="what-desc">Strategy and copy in your audience's own language.</p>
+        </div>
+        <div class="what-item reveal reveal-d2">
+          <div class="what-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+          <h3 class="what-title">Be chosen</h3>
+          <p class="what-desc">Websites and email built to convert.</p>
+        </div>
+        <div class="what-item reveal reveal-d3">
+          <div class="what-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></div>
+          <h3 class="what-title">Be remembered</h3>
+          <p class="what-desc">UGC and community that build loyalty.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- PLANS -->
   <section id="plans" data-screen-label="Plans">
     <div class="wrap">
       <div class="plans-header reveal">
         <h2 class="plans-headline">Social media plans.</h2>
-        <p class="plans-sub">Best for social media only. Every plan includes strategy, content, and consistent publishing, with an email bundle add-on available.</p>
+        <p class="plans-sub">Best for social media only. Every plan includes strategy, content, consistent publishing, and a monthly performance report.</p>
       </div>
-      <div class="plans-dots" id="plans-dots" aria-hidden="true"></div>
       <div class="plans-grid">
-
         <div class="plan-card reveal">
           <div class="plan-label">Essentials</div>
           <div class="plan-price">$600</div>
           <div class="plan-price-sub">per month</div>
-          <div class="plan-divider"></div>
-          <p class="plan-desc">Consistent, strategic social presence on one platform, done for you.</p>
-          <div class="plan-features">
-            <div class="plan-feature">9 posts and 9 stories</div>
-            <div class="plan-feature">1 platform</div>
-            <div class="plan-feature">Caption writing</div>
-            <div class="plan-feature">Content calendar and scheduling</div>
-            <div class="plan-feature">Monthly strategy check-in</div>
-            <div class="plan-feature">Monthly performance report</div>
-          </div>
-          <p class="plan-addons-note">Add-ons: Email bundle $250</p>
-          <a href="mailto:hello@upliftdigital.studio" class="btn-outline">Get started</a>
+          <ul class="plan-features">
+            <li>9 posts and 9 stories</li>
+            <li>1 platform</li>
+            <li>Caption writing</li>
+          </ul>
         </div>
-
         <div class="plan-card featured reveal reveal-d1">
-          <div class="plan-label">Growth <span class="plan-badge">Most popular</span></div>
+          <div class="plan-label">Growth</div>
           <div class="plan-price">$800</div>
           <div class="plan-price-sub">per month</div>
-          <div class="plan-divider"></div>
-          <p class="plan-desc">Expanded presence across two platforms with engagement management included.</p>
-          <div class="plan-features">
-            <div class="plan-feature">Everything in Essentials</div>
-            <div class="plan-feature">16 posts and 16 stories</div>
-            <div class="plan-feature">2 platforms</div>
-            <div class="plan-feature">Comment-triggered DM automation (Instagram/Facebook)</div>
-          </div>
-          <p class="plan-addons-note">Add-ons: Email bundle $250</p>
-          <a href="mailto:hello@upliftdigital.studio" class="btn-outline">Get started</a>
+          <ul class="plan-features">
+            <li>16 posts and 16 stories</li>
+            <li>2 platforms</li>
+            <li>Comment-triggered DM automation</li>
+          </ul>
         </div>
-
         <div class="plan-card reveal reveal-d2">
           <div class="plan-label">Full Digital</div>
           <div class="plan-price">$1,100</div>
           <div class="plan-price-sub">per month</div>
-          <div class="plan-divider"></div>
-          <p class="plan-desc">Full-service social management with proactive community growth, built for scale.</p>
-          <div class="plan-features">
-            <div class="plan-feature">Everything in Growth</div>
-            <div class="plan-feature">20 posts and 20 stories</div>
-            <div class="plan-feature">Live engagement management for DMs and comments</div>
-            <div class="plan-feature">Monthly Growth Guide: curated accounts, hashtags, and outreach talking points for visibility</div>
-            <div class="plan-feature">Priority communication</div>
-          </div>
-          <p class="plan-addons-note">Add-ons: Email bundle $250</p>
-          <a href="mailto:hello@upliftdigital.studio" class="btn-outline">Get started</a>
+          <ul class="plan-features">
+            <li>20 posts and 20 stories</li>
+            <li>Live engagement management</li>
+            <li>Priority communication</li>
+          </ul>
         </div>
-
+      </div>
+      <div class="plan-addon reveal">
+        <div class="plan-addon-info">
+          <div class="plan-label">Add-on</div>
+          <div class="plan-addon-name">Email bundle</div>
+          <p class="plan-addon-desc">Add email campaigns to any plan.</p>
+        </div>
+        <div class="plan-addon-price">
+          <div class="plan-price-from">Starting at</div>
+          <div class="plan-price">$250</div>
+          <div class="plan-price-sub">per month</div>
+        </div>
       </div>
     </div>
   </section>
