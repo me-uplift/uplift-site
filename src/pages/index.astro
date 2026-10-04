@@ -3,12 +3,33 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const title = 'Uplift Digital Studio — Premium Social Media Management';
 const description = "Uplift Digital Studio is a bilingual social media management and UGC agency for premium brands. Done-for-you content strategy, community management, and creator-led content in English and Spanish.";
+
+// Hero collage: placeholder copy for the four deliverable cards. Edit here.
+const heroCards = {
+  brand: 'futureyou',
+  landing: { url: 'futureyou.com', heading: 'Meet the brand people remember.', cta: 'Get started' },
+  post: { image: 'Made to be noticed.', caption: 'Fall launch, week 1.' },
+  email: { subject: 'Your October newsletter', time: '9:02 AM', cta: 'Shop the drop' },
+  analytics: { label: 'Reach · last 30 days', value: '+42%', spark: [30, 26, 28, 20, 23, 16, 18, 9, 12, 4] },
+};
+const sparkPoints = heroCards.analytics.spark
+  .map((y, i, a) => `${(i / (a.length - 1)) * 120},${y}`)
+  .join(' ');
+
+// Service words on the arch
+const archWords = [
+  { label: 'Strategy & Ops', href: '#studio' },
+  { label: 'Social', href: '#plans' },
+  { label: 'Email', href: '#plans' },
+  { label: 'Web & SEO', href: '#studio' },
+  { label: 'UGC', href: '#studio' },
+];
 ---
-<BaseLayout title={title} description={description} canonicalPath="/" ogImage="/assets/og-image.png" transparentNav={false}>
+<BaseLayout title={title} description={description} canonicalPath="/" ogImage="/assets/og-image.png" transparentNav={true}>
   <Fragment slot="head">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Space+Grotesk:wght@500&display=swap">
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
@@ -28,25 +49,97 @@ const description = "Uplift Digital Studio is a bilingual social media managemen
 
   <!-- HERO -->
   <section id="hero" data-screen-label="Hero">
-    <div class="hero-copy">
-      <h1 class="hero-headline reveal reveal-d1">Premium content for brands that refuse to blend in.</h1>
-      <p class="hero-sub reveal reveal-d2">Strategy, content, and publishing from one senior team, on a flat monthly rate with no long-term contract.</p>
-      <div class="hero-actions reveal reveal-d3">
-        <a href="#plans" class="btn-grad">See plans</a>
-        <a href="#pass" class="btn-outline hero-btn-outline">Apply for the Studio Pass</a>
+    <div class="hero-stage">
+      <div class="wrap hero-inner">
+        <div class="hero-frame">
+        <div class="hero-copy">
+          <h1 class="hero-headline reveal reveal-d1">Premium content for brands that refuse to blend in.</h1>
+          <p class="hero-sub reveal reveal-d2">Strategy, content, and publishing from one senior team, on a flat monthly rate with no long-term contract.</p>
+          <div class="hero-actions reveal reveal-d3">
+            <a href="#plans" class="hero-btn-plans">See plans</a>
+            <a href="#pass" class="hero-link-pass">Apply for the Studio Pass</a>
+          </div>
+        </div>
+
+        <div class="hero-collage" aria-hidden="true">
+          <div class="hc hc-landing" style="--i:0">
+            <div class="hc-browser"><i></i><i></i><i></i><span class="hc-url">{heroCards.landing.url}</span></div>
+            <div class="hc-landing-body">
+              <div class="hc-landing-nav"><span class="hc-logo"></span><span class="hc-links"><i></i><i></i></span></div>
+              <p class="hc-landing-h">{heroCards.landing.heading}</p>
+              <span class="hc-bar hc-bar-wide"></span>
+              <span class="hc-pill">{heroCards.landing.cta}</span>
+              <div class="hc-landing-block"></div>
+            </div>
+          </div>
+
+          <div class="hc hc-email" style="--i:1">
+            <p class="hc-email-subject">{heroCards.email.subject}</p>
+            <p class="hc-email-from">From {heroCards.brand} · {heroCards.email.time}</p>
+            <div class="hc-email-banner"></div>
+            <span class="hc-bar"></span>
+            <span class="hc-bar"></span>
+            <span class="hc-bar hc-bar-short"></span>
+            <span class="hc-pill">{heroCards.email.cta}</span>
+          </div>
+
+          <div class="hc hc-post" style="--i:2">
+            <div class="hc-post-head"><span class="hc-avatar"></span>{heroCards.brand}</div>
+            <div class="hc-post-img"><span>{heroCards.post.image}</span></div>
+            <div class="hc-post-icons">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+            </div>
+            <p class="hc-post-caption"><b>{heroCards.brand}</b> {heroCards.post.caption}</p>
+          </div>
+
+          <div class="hc hc-stats" style="--i:3">
+            <p class="hc-stats-label">{heroCards.analytics.label}</p>
+            <p class="hc-stats-value">{heroCards.analytics.value}</p>
+            <svg class="hc-spark" viewBox="-2 0 124 34" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="hc-spark-grad" x1="0" x2="1" y1="0" y2="0">
+                  <stop offset="0" stop-color="#e9967a" />
+                  <stop offset="1" stop-color="#6f6bc2" />
+                </linearGradient>
+              </defs>
+              <polyline points={sparkPoints} fill="none" stroke="url(#hc-spark-grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" />
+            </svg>
+          </div>
+        </div>
+        </div>
       </div>
+
+      <svg class="hero-arch" viewBox="0 0 1440 160" preserveAspectRatio="none" role="group" aria-label="Services">
+        <defs>
+          <filter id="arch-shadow" x="-5%" y="-100%" width="110%" height="250%">
+            <feDropShadow id="arch-shadow-drop" dx="0" dy="-4" stdDeviation="14" flood-color="#1e103c" flood-opacity="0" />
+          </filter>
+          <path id="hero-arch-text" d="M0 192 Q 720 -22 1440 192" />
+        </defs>
+        <path id="arch-fill" class="hero-arch-fill" filter="url(#arch-shadow)" d="M0 150 Q 720 -60 1440 150 L1440 160 L0 160 Z" />
+        <path id="arch-line" class="hero-arch-line" d="M0 150 Q 720 -60 1440 150" />
+        <text class="hero-arch-words" text-anchor="middle">
+          <textPath href="#hero-arch-text" startOffset="50%">
+            {archWords.map((w, i) => (
+              <Fragment>
+                {i > 0 && <tspan class="arch-sep" aria-hidden="true"> · </tspan>}
+                <a href={w.href} class="arch-link"><tspan class="arch-word" style={`--w:${i}`}>{w.label}</tspan></a>
+              </Fragment>
+            ))}
+          </textPath>
+        </text>
+      </svg>
     </div>
-    <div class="hero-panel">
-      <div class="hero-panel-bg" aria-hidden="true"></div>
-      <ul class="hero-words reveal reveal-d2">
-        <li>Social media</li>
-        <li>Email</li>
-        <li>Websites</li>
-        <li>SEO</li>
-        <li>UGC</li>
-      </ul>
-      <p class="hero-panel-caption reveal reveal-d3">Start with a social media plan or get a fractional digital team with the Studio Pass.</p>
-    </div>
+
+    <ul class="hero-words-m" aria-label="Services">
+      {archWords.map((w, i) => (
+        <li>
+          {i > 0 && <span class="arch-sep" aria-hidden="true">·</span>}
+          <a href={w.href} class="arch-word" style={`--w:${i}`}>{w.label}</a>
+        </li>
+      ))}
+    </ul>
   </section>
 
   <!-- VALUE -->
@@ -136,6 +229,7 @@ const description = "Uplift Digital Studio is a bilingual social media managemen
   </section>
 
   <!-- STUDIO PASS -->
+  <div id="studio" class="anchor-alias" aria-hidden="true"></div>
   <section id="pass" data-screen-label="Studio Pass">
     <div class="pass-bg"></div>
     <div class="wrap pass-content">
@@ -200,4 +294,72 @@ const description = "Uplift Digital Studio is a bilingual social media managemen
       </div>
     </div>
   </section>
+
+  <script>
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Hero arch flattens as the hero scrolls away; the words' path straightens with it
+    (function () {
+      const stage = document.querySelector('.hero-stage');
+      const fill = document.getElementById('arch-fill');
+      const line = document.getElementById('arch-line');
+      const text = document.getElementById('hero-arch-text');
+      if (!stage || !fill || !line || !text || reduceMotion) return;
+
+      const shadow = document.getElementById('arch-shadow-drop');
+      // End state: a straight line at y=118 with the words' baseline straight at y=148,
+      // which keeps the words below the line and inside the hero edge throughout
+      const LINE_END = 118;
+      const TEXT_END = 148;
+      let lastE = 0;
+      let ticking = false;
+
+      function update() {
+        ticking = false;
+        const p = Math.min(Math.max(window.scrollY / (stage.offsetHeight * 0.6), 0), 1);
+        const e = Math.round(p * p * (3 - 2 * p) * 1000) / 1000;
+        if (e === lastE) return;
+        lastE = e;
+        const y = 150 + (LINE_END - 150) * e;   // arch ends
+        const c = -60 + (LINE_END + 60) * e;    // arch control point
+        const ty = 192 + (TEXT_END - 192) * e;  // text path ends
+        const t = -22 + (TEXT_END + 22) * e;    // text path control point
+        fill.setAttribute('d', `M0 ${y} Q 720 ${c} 1440 ${y} L1440 160 L0 160 Z`);
+        line.setAttribute('d', `M0 ${y} Q 720 ${c} 1440 ${y}`);
+        text.setAttribute('d', `M0 ${ty} Q 720 ${t} 1440 ${ty}`);
+        // Shadow fades in late, so the white band reads as lifted above the hero
+        if (shadow) shadow.setAttribute('flood-opacity', (0.2 * e * e).toFixed(3));
+      }
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+      }, { passive: true });
+      update();
+    })();
+
+    // Studio Pass steps light up in order as they cross the middle of the viewport
+    (function () {
+      const section = document.getElementById('pass');
+      const wrap = section && section.querySelector('.pass-steps');
+      if (!wrap) return;
+      const steps = Array.from(wrap.querySelectorAll('.pass-step'));
+      wrap.classList.add('is-armed');
+      if (reduceMotion) { steps.forEach(s => s.classList.add('is-lit')); return; }
+
+      const stepObs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('is-lit'); });
+      }, { rootMargin: '-40% 0px -40% 0px' });
+      steps.forEach(s => stepObs.observe(s));
+
+      // Scrolled back above the section: reset
+      const sectionObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (!e.isIntersecting && e.boundingClientRect.top > 0) {
+            steps.forEach(s => s.classList.remove('is-lit'));
+          }
+        });
+      });
+      sectionObs.observe(section);
+    })();
+  </script>
 </BaseLayout>
