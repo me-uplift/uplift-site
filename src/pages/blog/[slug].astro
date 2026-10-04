@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getPublishedPosts, getPostBlocks, getRelatedPosts, renderBlocks, formatDate, slugify } from '../../lib/notion.js';
+import TableOfContents from '../../components/TableOfContents.astro';
+import NewsletterSignup from '../../components/NewsletterSignup.astro';
+import { getPublishedPosts, getPostBlocks, getRelatedPosts, renderBlocks, annotateHeadings, formatDate, slugify } from '../../lib/notion.js';
 import { categorySlug, categoryStyle } from '../../lib/categories.js';
 
 export async function getStaticPaths() {
@@ -11,7 +13,11 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const blocks = await getPostBlocks(post.id);
 
-// Mid-article CTA goes at the end of the first H2 section, i.e. right before
+// Ids already on this page, so a heading can't take one (e.g. "Post" -> "post-2")
+const PAGE_IDS = ['nav', 'nav-logo-link', 'nav-logo-img', 'nav-toggle', 'footer', 'post', 'toc-title', 'read-progress', 'post-newsletter-title', 'post-newsletter-email', 'cta-title', 'related-title'];
+const headings = annotateHeadings(blocks, PAGE_IDS);
+
+// Mid-article newsletter sign-up goes at the end of the first H2 section, i.e. right before
 // the next H1/H2. Skipped when the post has fewer than two sections.
 const isSectionHeading = (b) => b.type === 'heading_1' || b.type === 'heading_2';
 const firstH2 = blocks.findIndex((b) => b.type === 'heading_2');
@@ -62,6 +68,8 @@ const jsonLd = {
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </Fragment>
 
+  <div class="read-progress" id="read-progress" aria-hidden="true"></div>
+
   <article id="post" data-screen-label="Post">
     <header class="post-header">
       <a href="/blog/" class="post-back">
@@ -99,13 +107,15 @@ const jsonLd = {
     )}
 
     <div class="post-body">
+      <TableOfContents headings={headings} />
       <Fragment set:html={bodyBefore} />
       {bodyAfter && (
-        <aside class="mid-cta" aria-label="Book a call">
-          <p class="mid-cta-title">Not Sure Which of These Your Account Is Making?</p>
-          <p class="mid-cta-sub">Book a call and we'll look at your account and tell you what to fix first.</p>
-          <a href="/#contact" class="btn-gradient">Book a call</a>
-        </aside>
+        <NewsletterSignup
+          id="post-newsletter"
+          variant="inline"
+          title="Get more ideas like this in your inbox"
+          sub="Practical marketing ideas for small brands, sent when we publish. Unsubscribe any time."
+        />
       )}
       <Fragment set:html={bodyAfter} />
 
@@ -151,4 +161,36 @@ const jsonLd = {
       </section>
     )}
   </div>
+
+  <script>
+    // Reading progress: 0 when the article body reaches the nav, 100 when its end reaches the bottom of the screen
+    (function () {
+      const bar = document.getElementById('read-progress');
+      const body = document.querySelector('.post-body');
+      if (!bar || !body) return;
+      const NAV_H = 64;
+      let start = 0;
+      let end = 1;
+      let ticking = false;
+
+      function measure() {
+        const r = body.getBoundingClientRect();
+        start = r.top + window.scrollY - NAV_H;
+        end = r.bottom + window.scrollY - window.innerHeight;
+        paint();
+      }
+      function paint() {
+        ticking = false;
+        const p = end > start ? (window.scrollY - start) / (end - start) : 1;
+        bar.style.setProperty('--progress', String(Math.min(Math.max(p, 0), 1)));
+      }
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) { ticking = true; requestAnimationFrame(paint); }
+      }, { passive: true });
+      window.addEventListener('resize', measure);
+      window.addEventListener('load', measure); // images change the article height
+      measure();
+    })();
+  </script>
 </BaseLayout>

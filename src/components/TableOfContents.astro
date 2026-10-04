@@ -1,0 +1,40 @@
+---
+interface Heading {
+  id: string;
+  text: string;
+  level: number;
+}
+interface Props {
+  headings: Heading[];
+}
+
+const { headings } = Astro.props;
+
+// Nest each Heading 3 under the Heading 2 before it. A Heading 3 with no
+// Heading 2 above it stays at the top level.
+const items: (Heading & { children: Heading[] })[] = [];
+for (const h of headings) {
+  const parent = items[items.length - 1];
+  if (h.level === 3 && parent?.level === 2) parent.children.push(h);
+  else items.push({ ...h, children: [] });
+}
+---
+{headings.length >= 2 && (
+  <nav class="toc" aria-labelledby="toc-title">
+    <p class="toc-title" id="toc-title">On this page</p>
+    <ul class="toc-list">
+      {items.map((item) => (
+        <li>
+          <a href={`#${item.id}`}>{item.text}</a>
+          {item.children.length > 0 && (
+            <ul class="toc-sublist">
+              {item.children.map((c) => (
+                <li><a href={`#${c.id}`}>{c.text}</a></li>
+              ))}
+            </ul>
+          )}
+        </li>
+      ))}
+    </ul>
+  </nav>
+)}

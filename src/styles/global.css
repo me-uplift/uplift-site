@@ -1755,7 +1755,7 @@ a.cat:hover { filter: brightness(0.95); }
 }
 
 /* ── CTA band (soft gradient tint: brand stops at 25% over white) ── */
-.cta-band, .post-body .mid-cta {
+.cta-band, .post-body .newsletter--inline {
   background:
     linear-gradient(90deg,
       rgba(232,153,138,0.25) 0%,
@@ -1918,26 +1918,115 @@ a.cat:hover { filter: brightness(0.95); }
 .post-body .post-tag { color: var(--fg-on-light-2); text-decoration: none; }
 .post-body .post-tag:hover { color: var(--fg-on-light); opacity: 1; }
 
-/* Mid-article CTA */
-.post-body .mid-cta {
-  padding: var(--space-6);
-  margin: var(--space-7) 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-3);
+/* Headings: stop below the fixed nav and progress bar when jumped to */
+.post-body h3[id], .post-body h4[id] { scroll-margin-top: calc(64px + var(--space-5)); }
+
+/* Table of contents */
+.post-body .toc {
+  position: relative;
+  overflow: hidden;
+  margin: 0 0 var(--space-7);
+  padding: var(--space-5) var(--space-6);
+  background: var(--bg-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-light-md);
 }
-.post-body .mid-cta-title {
-  font-family: var(--font-sans);
-  font-size: var(--text-xl);
-  font-weight: var(--weight-bold);
+.post-body .toc::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--gradient-full);
+}
+.post-body .toc-title {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin: 0 0 var(--space-3);
+}
+.post-body .toc-list,
+.post-body .toc-sublist { list-style: none; margin: 0; padding: 0; }
+.post-body .toc li { margin: 0; }
+.post-body .toc a {
+  position: relative;
+  display: block;
+  padding: 6px 0;
+  font-size: var(--text-base);
   line-height: var(--leading-snug);
-  color: var(--fg-on-light);
-  margin: 0;
+  color: var(--fg-on-light-2);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease), transform 200ms var(--ease);
 }
-.post-body .mid-cta-sub { font-size: var(--text-base); line-height: var(--leading-normal); color: var(--fg-on-light-2); margin: 0 0 var(--space-1); }
-.post-body .mid-cta .btn-gradient { color: var(--color-white); text-decoration: none; }
-.post-body .mid-cta .btn-gradient:hover { opacity: 0.92; }
+/* Hover/focus: a gradient bar draws down the left edge and the text nudges right.
+   The bar sits 22px left of the link so that, after the 6px nudge, it lands 16px
+   out: in the card's padding for top-level links, on the indent rule for nested ones. */
+.post-body .toc a::before {
+  content: '';
+  position: absolute;
+  top: 6px; bottom: 6px;
+  left: -22px;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--gradient-vertical);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 200ms var(--ease);
+}
+.post-body .toc a:hover,
+.post-body .toc a:focus-visible {
+  color: var(--fg-on-light);
+  opacity: 1;
+  transform: translateX(6px);
+}
+.post-body .toc a:hover::before,
+.post-body .toc a:focus-visible::before { transform: scaleY(1); }
+@media (prefers-reduced-motion: reduce) {
+  .post-body .toc a,
+  .post-body .toc a::before { transition: none; }
+  .post-body .toc a:hover,
+  .post-body .toc a:focus-visible { transform: none; }
+  .post-body .toc a::before { left: -16px; } /* no nudge, so place the bar directly */
+}
+.post-body .toc a:focus-visible {
+  outline: 3px solid var(--color-indigo);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+.post-body .toc-sublist {
+  margin: 2px 0 6px;
+  padding-left: var(--space-4);
+  border-left: 1px solid var(--border-light);
+}
+.post-body .toc-sublist a { color: var(--color-muted); }
+
+/* Reading progress bar, pinned under the nav. Clipping (rather than scaling)
+   keeps the gradient fixed across the width, so it fills in left to right. */
+.read-progress {
+  position: fixed;
+  top: 64px; left: 0; right: 0;
+  z-index: 99;
+  height: 3px;
+  background: var(--gradient-full);
+  clip-path: inset(0 calc((1 - var(--progress, 0)) * 100%) 0 0);
+  pointer-events: none;
+}
+
+/* Mid-article newsletter sign-up: stacked, on the brand-tint background */
+.post-body .newsletter--inline {
+  margin: var(--space-7) 0;
+  padding: var(--space-6);
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+.post-body .newsletter--inline p { margin: 0; }
+.post-body .newsletter--inline .newsletter-title {
+  font-size: var(--text-xl);
+  line-height: var(--leading-snug);
+  margin-bottom: var(--space-2);
+}
+.post-body .newsletter--inline .newsletter-success-title { margin: 0; font-size: var(--text-xl); }
 
 /* After the article */
 .post-after { padding-bottom: var(--space-10); }

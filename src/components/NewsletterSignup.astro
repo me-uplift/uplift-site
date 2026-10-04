@@ -1,0 +1,97 @@
+---
+// Kit "Blog Newsletter" sign-up with the animated thank-you state.
+// variant "banner": the two-column card on the blog index.
+// variant "inline": the stacked card inside a post body.
+interface Props {
+  id?: string;
+  title: string;
+  sub: string;
+  variant?: 'banner' | 'inline';
+}
+
+const { id = 'newsletter', title, sub, variant = 'banner' } = Astro.props;
+const Wrapper = variant === 'inline' ? 'aside' : 'section';
+// Inside a post an <h2> would break the article's heading outline, so the inline title is a <p>
+const Title = variant === 'inline' ? 'p' : 'h2';
+---
+<Wrapper class:list={['newsletter', { 'newsletter--inline': variant === 'inline' }]} aria-labelledby={`${id}-title`} data-newsletter>
+  <div class="newsletter-copy">
+    <Title id={`${id}-title`} class="newsletter-title">{title}</Title>
+    <p class="newsletter-sub">{sub}</p>
+  </div>
+  <form class="newsletter-form" novalidate>
+    <label for={`${id}-email`}>Email address</label>
+    <div class="newsletter-row">
+      <input id={`${id}-email`} name="email" type="email" autocomplete="email" placeholder="you@yourbrand.com" required>
+      <button type="submit" class="btn-gradient">Subscribe</button>
+    </div>
+    <p class="newsletter-status" role="status"></p>
+  </form>
+  <div class="newsletter-success" hidden>
+    <div class="newsletter-success-icon" aria-hidden="true">
+      <svg class="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="5" width="18" height="14" rx="2.5"/>
+        <path d="m4 7 8 6 8-6"/>
+      </svg>
+      <span class="newsletter-success-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path class="check-path" d="m6 12.5 4 4 8-9"/></svg>
+      </span>
+    </div>
+    <h3 class="newsletter-success-title" tabindex="-1">Thank you for subscribing!</h3>
+    <p class="newsletter-success-text"><strong>One more step:</strong> check your inbox and click the confirmation link to start getting Marketing Notes.</p>
+    <button type="button" class="newsletter-reset">Edit email</button>
+  </div>
+</Wrapper>
+
+<script>
+  // Newsletter sign-ups go to the "Blog Newsletter" form in Kit.
+  const KIT_FORM_URL = 'https://app.kit.com/forms/9994579/subscriptions';
+
+  document.querySelectorAll<HTMLElement>('[data-newsletter]').forEach((banner) => {
+    const form = banner.querySelector<HTMLFormElement>('.newsletter-form');
+    const status = banner.querySelector<HTMLElement>('.newsletter-status');
+    const success = banner.querySelector<HTMLElement>('.newsletter-success');
+    if (!form || !status || !success) return;
+
+    // Swap the form for the animated thank-you panel, moving focus so screen readers announce it.
+    function showSuccess() {
+      form!.hidden = true;
+      success!.hidden = false;
+      banner.classList.add('is-subscribed');
+      banner.querySelector<HTMLElement>('.newsletter-success-title')?.focus({ preventScroll: true });
+    }
+
+    banner.querySelector('.newsletter-reset')?.addEventListener('click', () => {
+      success.hidden = true;
+      form.hidden = false;
+      banner.classList.remove('is-subscribed');
+      form.querySelector('input')?.focus();
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const input = form.querySelector('input');
+      const button = form.querySelector('button');
+      if (!input || !input.checkValidity()) {
+        status.textContent = 'Please enter a valid email address.';
+        return;
+      }
+      if (button) button.disabled = true;
+      status.textContent = 'Subscribing…';
+      try {
+        const body = new FormData();
+        body.append('email_address', input.value.trim());
+        const res = await fetch(KIT_FORM_URL, { method: 'POST', headers: { Accept: 'application/json' }, body });
+        const data = await res.json();
+        if (data.status !== 'success') throw new Error(data.status);
+        form.reset();
+        status.textContent = '';
+        showSuccess();
+      } catch {
+        status.textContent = 'Something went wrong. Please try again, or email hello@upliftdigital.studio.';
+      } finally {
+        if (button) button.disabled = false;
+      }
+    });
+  });
+</script>

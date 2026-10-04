@@ -264,6 +264,41 @@ export async function getPostBlocks(pageId) {
   return fetchBlockChildren(pageId);
 }
 
+// Notion heading blocks that get anchors and appear in the table of contents
+const TOC_LEVELS = { heading_2: 2, heading_3: 3 };
+
+/** URL-friendly id for a heading: accents stripped (so "Cómo" -> "como"), then slugified. */
+function headingSlug(text) {
+  const base = slugify(text.normalize('NFD').replace(/[\u0300-\u036f]/g, ''));
+  return base || 'section';
+}
+
+/**
+ * Gives every Heading 2/3 block a unique `anchorId` (used as the rendered id)
+ * and returns them in order for the table of contents. Run it on the whole
+ * post before rendering, so ids stay unique even when the body is rendered in
+ * parts. `reservedIds` are ids already used elsewhere on the page.
+ */
+export function annotateHeadings(blocks, reservedIds = []) {
+  const used = new Set(reservedIds);
+  const headings = [];
+  for (const block of blocks) {
+    const level = TOC_LEVELS[block.type];
+    if (!level) continue;
+    const text = plainText(block[block.type].rich_text).trim();
+    if (!text) continue;
+    const base = headingSlug(text);
+    let id = base;
+    for (let n = 2; used.has(id); n++) id = `${base}-${n}`;
+    used.add(id);
+    block.anchorId = id;
+    headings.push({ id, text, level });
+  }
+  return headings;
+}
+
+const idAttr = (block) => (block.anchorId ? ` id="${block.anchorId}"` : '');
+
 function renderRichText(richText = []) {
   return richText
     .map((rt) => {
@@ -287,9 +322,9 @@ function renderBlock(block) {
     case 'heading_1':
       return `<h2>${renderRichText(block.heading_1.rich_text)}</h2>`;
     case 'heading_2':
-      return `<h3>${renderRichText(block.heading_2.rich_text)}</h3>`;
+      return `<h3${idAttr(block)}>${renderRichText(block.heading_2.rich_text)}</h3>`;
     case 'heading_3':
-      return `<h4>${renderRichText(block.heading_3.rich_text)}</h4>`;
+      return `<h4${idAttr(block)}>${renderRichText(block.heading_3.rich_text)}</h4>`;
     case 'quote':
       return `<blockquote>${renderRichText(block.quote.rich_text)}</blockquote>`;
     case 'code':
