@@ -56,8 +56,8 @@ const archWords = [
           <h1 class="hero-headline reveal reveal-d1">Premium content for brands that refuse to blend in.</h1>
           <p class="hero-sub reveal reveal-d2">Strategy, content, and publishing from one senior team, on a flat monthly rate with no long-term contract.</p>
           <div class="hero-actions reveal reveal-d3">
-            <a href="#plans" class="hero-btn-plans">See plans</a>
-            <a href="#pass" class="hero-link-pass">Apply for the Studio Pass</a>
+            <a href="#pass" class="hero-btn-primary">Apply for the Studio Pass</a>
+            <a href="#plans" class="hero-link-secondary">See plans</a>
           </div>
         </div>
 
@@ -116,6 +116,11 @@ const archWords = [
             <feDropShadow id="arch-shadow-drop" dx="0" dy="-4" stdDeviation="14" flood-color="#1e103c" flood-opacity="0" />
           </filter>
           <path id="hero-arch-text" d="M0 192 Q 720 -22 1440 192" />
+          <!-- hover/focus fill; x1/x2 are fitted to the active word by script -->
+          <linearGradient id="arch-word-grad" gradientUnits="userSpaceOnUse" x1="360" y1="0" x2="1080" y2="0">
+            <stop offset="0" stop-color="#b0546a" />
+            <stop offset="1" stop-color="#7a4fb0" />
+          </linearGradient>
         </defs>
         <path id="arch-fill" class="hero-arch-fill" filter="url(#arch-shadow)" d="M0 150 Q 720 -60 1440 150 L1440 160 L0 160 Z" />
         <path id="arch-line" class="hero-arch-line" d="M0 150 Q 720 -60 1440 150" />
@@ -129,6 +134,7 @@ const archWords = [
             ))}
           </textPath>
         </text>
+        <rect id="arch-focus-ring" class="arch-ring" rx="12" />
       </svg>
     </div>
 
@@ -335,6 +341,49 @@ const archWords = [
         if (!ticking) { ticking = true; requestAnimationFrame(update); }
       }, { passive: true });
       update();
+    })();
+
+    // Arch words: fit the hover gradient to the active word, and draw a focus ring
+    // around it for keyboard users (SVG text inside a link gets no native outline)
+    (function () {
+      const grad = document.getElementById('arch-word-grad');
+      const ring = document.getElementById('arch-focus-ring');
+      if (!grad || !ring) return;
+      let focused = null;
+
+      function fit(word) {
+        const b = word.getBBox();
+        grad.setAttribute('x1', b.x);
+        grad.setAttribute('x2', b.x + b.width);
+        return b;
+      }
+      function placeRing() {
+        if (!focused) return;
+        const b = fit(focused);
+        ring.setAttribute('x', b.x - 7);
+        ring.setAttribute('y', b.y - 2);
+        ring.setAttribute('width', b.width + 14);
+        ring.setAttribute('height', b.height + 4);
+      }
+
+      document.querySelectorAll('.hero-arch .arch-link').forEach(a => {
+        const word = a.querySelector('.arch-word');
+        a.addEventListener('pointerenter', () => fit(word));
+        a.addEventListener('focus', () => {
+          if (!a.matches(':focus-visible')) return;
+          focused = word;
+          placeRing();
+          ring.classList.add('is-on');
+        });
+        a.addEventListener('blur', () => {
+          focused = null;
+          ring.classList.remove('is-on');
+        });
+      });
+      // The words move as the arch flattens, so keep the ring on its word
+      window.addEventListener('scroll', () => {
+        if (focused) requestAnimationFrame(placeRing);
+      }, { passive: true });
     })();
 
     // Studio Pass steps light up in order as they cross the middle of the viewport
