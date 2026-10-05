@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
 import NewsletterSignup from '../../components/NewsletterSignup.astro';
+import ContactSection from '../../components/ContactSection.astro';
 import { getPublishedPosts, getPostBlocks, getRelatedPosts, renderBlocks, annotateHeadings, topHeadingLevel, formatDate, slugify } from '../../lib/notion.js';
 import { categorySlug, categoryStyle } from '../../lib/categories.js';
 
@@ -14,7 +15,7 @@ const { post } = Astro.props;
 const blocks = await getPostBlocks(post.id);
 
 // Ids already on this page, so a heading can't take one (e.g. "Post" -> "post-2")
-const PAGE_IDS = ['main', 'nav-menu', 'nav', 'nav-logo-link', 'nav-logo-img', 'nav-toggle', 'footer', 'post', 'toc-title', 'read-progress', 'post-newsletter-title', 'post-newsletter-email', 'cta-title', 'related-title'];
+const PAGE_IDS = ['main', 'nav-menu', 'nav', 'nav-logo-link', 'nav-logo-img', 'nav-toggle', 'footer', 'post', 'toc-title', 'read-progress', 'post-newsletter-title', 'post-newsletter-email', 'related-title', 'contact'];
 const headings = annotateHeadings(blocks, PAGE_IDS);
 
 // Mid-article newsletter sign-up goes at the end of the first H2 section, i.e. right before
@@ -129,16 +130,8 @@ const jsonLd = {
     </div>
   </article>
 
-  <div class="wrap blog-wrap post-after">
-    <section class="cta-band" aria-labelledby="cta-title">
-      <div>
-        <h2 id="cta-title" class="cta-title">Want This for Your Brand?</h2>
-        <p class="cta-sub">Book a call and we'll tell you what to fix first.</p>
-      </div>
-      <a href="/#contact" class="btn-gradient">Book a call</a>
-    </section>
-
-    {related.length > 0 && (
+  {related.length > 0 && (
+    <div class="wrap blog-wrap post-after">
       <section class="related" aria-labelledby="related-title">
         <h2 id="related-title" class="related-title">Keep Reading</h2>
         <div class="post-grid">
@@ -153,7 +146,6 @@ const jsonLd = {
                 {r.categories[0] && <span class="badge cat" style={categoryStyle(r.categories[0])}>{r.categories[0]}</span>}
                 <h3 class="post-card-title">{r.title}</h3>
                 <p class="card-meta">
-                  {r.date && <time datetime={r.date}>{formatDate(r.date)}</time>}
                   {r.readingTime && <span>{r.readingTime} min read</span>}
                 </p>
               </div>
@@ -161,8 +153,10 @@ const jsonLd = {
           ))}
         </div>
       </section>
-    )}
-  </div>
+    </div>
+  )}
+
+  <ContactSection />
 
   <script>
     // Reading progress: 0 when the article body reaches the nav, 100 when its end reaches the bottom of the screen

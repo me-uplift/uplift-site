@@ -1,13 +1,17 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import NewsletterSignup from '../../components/NewsletterSignup.astro';
-import { getPublishedPosts, getFeaturedPosts, formatDate } from '../../lib/notion.js';
+import ContactSection from '../../components/ContactSection.astro';
+import { getPublishedPosts, getFeaturedPosts } from '../../lib/notion.js';
 import { CATEGORIES, categorySlug, categoryStyle } from '../../lib/categories.js';
 
+// Magazine top: one lead post plus a short list beside it.
+const SIDE_COUNT = 3;
 const posts = await getPublishedPosts();
-// Posts are already sorted newest first, so the first featured one is the newest.
-const featured = (await getFeaturedPosts())[0];
-const gridPosts = posts.filter((p) => p !== featured);
+// Posts are already sorted newest first. Checked "Featured" posts go first (the newest
+// one is the lead); any open spots are filled with the most recent remaining posts.
+const checked = (await getFeaturedPosts()).slice(0, SIDE_COUNT + 1);
+const [lead, ...side] = [...checked, ...posts.filter((p) => !checked.includes(p))].slice(0, SIDE_COUNT + 1);
 
 const title = 'Insights | Uplift Digital Studio';
 const description = 'Marketing insights for small brands that want consistency without a full team, from Uplift Digital Studio.';
@@ -17,44 +21,69 @@ const description = 'Marketing insights for small brands that want consistency w
     <div class="wrap blog-wrap">
       <header class="blog-index-header reveal">
         <p class="blog-eyebrow">Insights</p>
-        <h1 class="blog-index-headline">Marketing insights for small brands that want <span class="gradient-text">consistency without a full team.</span></h1>
+        <h1 class="blog-index-headline">Marketing insights for small brands that want <span class="gradient-text">consistency.</span></h1>
       </header>
 
-      {featured && (
-        <article class="featured-card reveal">
-          <a class="featured-media" href={`/blog/${featured.slug}/`} tabindex="-1" aria-hidden="true">
-            {featured.cover
-              ? <img src={featured.cover} alt="" loading="lazy">
-              : <span class="cover-fallback" style={categoryStyle(featured.categories[0])}></span>}
-          </a>
-          <div class="featured-body">
-            <div class="featured-tags">
-              <span class="badge badge-featured">Featured</span>
-              {featured.categories[0] && <span class="badge cat" style={categoryStyle(featured.categories[0])}>{featured.categories[0]}</span>}
+      {lead && (
+        <div class="magazine">
+          <a class="mag-lead reveal" href={`/blog/${lead.slug}/`}>
+            <div class="mag-lead-media">
+              {lead.cover
+                ? <img src={lead.cover} alt="" loading="lazy">
+                : <span class="cover-fallback" style={categoryStyle(lead.categories[0])}></span>}
             </div>
-            <h2 class="featured-title"><a href={`/blog/${featured.slug}/`}>{featured.title}</a></h2>
-            {featured.excerpt && <p class="featured-excerpt">{featured.excerpt}</p>}
-            <p class="card-meta">
-              {featured.date && <time datetime={featured.date}>{formatDate(featured.date)}</time>}
-              {featured.readingTime && <span>{featured.readingTime} min read</span>}
-            </p>
-            <a class="read-link" href={`/blog/${featured.slug}/`}>
-              Read the post
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-          </div>
-        </article>
+            <div class="mag-lead-body">
+              <div class="featured-tags">
+                {lead.featured && <span class="badge badge-featured">Featured</span>}
+                {lead.categories[0] && <span class="badge cat" style={categoryStyle(lead.categories[0])}>{lead.categories[0]}</span>}
+              </div>
+              <h2 class="mag-lead-title">{lead.title}</h2>
+              {lead.excerpt && <p class="mag-lead-excerpt">{lead.excerpt}</p>}
+              <p class="card-meta">
+                {lead.readingTime && <span>{lead.readingTime} min read</span>}
+              </p>
+            </div>
+          </a>
+          {side.length > 0 && (
+            <ul class="mag-side reveal reveal-d1">
+              {side.map((post) => (
+                <li>
+                  <a class="mag-item" href={`/blog/${post.slug}/`}>
+                    <div class="mag-item-text">
+                      <h3 class="mag-item-title">{post.title}</h3>
+                      {post.excerpt && <p class="mag-item-excerpt">{post.excerpt}</p>}
+                      <p class="card-meta">
+                        {post.readingTime && <span>{post.readingTime} min read</span>}
+                      </p>
+                    </div>
+                    <div class="mag-item-thumb">
+                      {post.cover
+                        ? <img src={post.cover} alt="" loading="lazy">
+                        : <span class="cover-fallback" style={categoryStyle(post.categories[0])}></span>}
+                    </div>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       )}
+
+      <NewsletterSignup
+        variant="strip"
+        title="Marketing Notes for Small Brands"
+        sub="Subscribe to our newsletter."
+      />
 
       <div class="filter-bar" role="group" aria-label="Filter posts by category">
         <button type="button" class="filter-chip" data-filter="all" aria-pressed="true">All</button>
         {CATEGORIES.map((c) => (
-          <button type="button" class="filter-chip" data-filter={c.slug} aria-pressed="false">{c.name}</button>
+          <button type="button" class="filter-chip filter-chip--cat" style={categoryStyle(c.name)} data-filter={c.slug} aria-pressed="false">{c.name}</button>
         ))}
       </div>
 
       <div class="post-grid" id="post-grid">
-        {gridPosts.map((post) => (
+        {posts.map((post) => (
           <a class="post-card" href={`/blog/${post.slug}/`} data-categories={post.categories.map(categorySlug).join(' ')}>
             <div class="post-card-media">
               {post.cover
@@ -66,33 +95,22 @@ const description = 'Marketing insights for small brands that want consistency w
               <h3 class="post-card-title">{post.title}</h3>
               {post.excerpt && <p class="post-card-desc">{post.excerpt}</p>}
               <p class="card-meta">
-                {post.date && <time datetime={post.date}>{formatDate(post.date)}</time>}
                 {post.readingTime && <span>{post.readingTime} min read</span>}
               </p>
             </div>
           </a>
         ))}
       </div>
-      <p class="blog-empty" id="blog-empty" role="status" hidden={gridPosts.length > 0}>No posts here yet</p>
-
-      <NewsletterSignup
-        title="Marketing Notes for Small Brands"
-        sub="New posts and practical ideas from the studio, straight to your inbox. Unsubscribe any time."
-      />
-
-      <section class="cta-band" aria-labelledby="cta-title">
-        <div>
-          <h2 id="cta-title" class="cta-title">Want This for Your Brand?</h2>
-          <p class="cta-sub">Book a call and we'll tell you what to fix first.</p>
-        </div>
-        <a href="/#contact" class="btn-gradient">Book a call</a>
-      </section>
+      <p class="blog-empty" id="blog-empty" role="status" hidden={posts.length > 0}>No posts here yet</p>
     </div>
   </section>
+
+  <ContactSection />
 </BaseLayout>
 
 <script>
   // Category filter: a card matches when any of its categories is the selected one.
+  // "All" always lists every post, including the ones shown in the magazine top.
   const chips = Array.from(document.querySelectorAll<HTMLButtonElement>('.filter-chip'));
   const cards = Array.from(document.querySelectorAll<HTMLElement>('#post-grid .post-card'));
   const empty = document.getElementById('blog-empty');

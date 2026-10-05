@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import { getPublishedPosts, getCategories, formatDate } from '../../../lib/notion.js';
+import { getPublishedPosts, getCategories } from '../../../lib/notion.js';
 import { categoryStyle } from '../../../lib/categories.js';
 
 export async function getStaticPaths() {
@@ -44,7 +44,6 @@ const description = `Posts filed under ${categoryName} on Uplift Digital Studio 
               <h2 class="post-card-title">{post.title}</h2>
               {post.excerpt && <p class="post-card-desc">{post.excerpt}</p>}
               <p class="card-meta">
-                {post.date && <time datetime={post.date}>{formatDate(post.date)}</time>}
                 {post.readingTime && <span>{post.readingTime} min read</span>}
               </p>
             </div>
