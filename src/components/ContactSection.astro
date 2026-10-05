@@ -1,0 +1,32 @@
+---
+import { BLOOM_FORM_URL } from '../lib/links.js';
+
+const details = [
+  { label: 'Response time', value: 'Within 48 hours' },
+  { label: 'Languages', value: 'English + Spanish' },
+  { label: 'Markets served', value: 'USA, Latin America & beyond' },
+  { label: 'Email us', value: 'hello@upliftdigital.studio', href: 'mailto:hello@upliftdigital.studio' },
+];
+---
+<section id="contact" data-screen-label="Contact">
+  <div class="wrap">
+    <div class="contact-inner">
+      <h2 class="contact-headline reveal">Ready to grow?</h2>
+      <p class="contact-sub reveal reveal-d1">Tell us about your brand and let's make it happen!</p>
+      <div class="contact-action reveal reveal-d2">
+        <a href={BLOOM_FORM_URL} target="_blank" rel="noopener noreferrer" class="contact-cta">
+          Start your inquiry<span class="sr-only"> (opens in a new tab)</span>
+          <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+      <dl class="contact-details reveal reveal-d3">
+        {details.map((d) => (
+          <div class="contact-detail">
+            <dt>{d.label}</dt>
+            <dd>{d.href ? <a href={d.href}>{d.value}</a> : d.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </div>
+</section>

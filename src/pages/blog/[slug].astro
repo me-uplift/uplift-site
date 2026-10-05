@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
 import NewsletterSignup from '../../components/NewsletterSignup.astro';
-import { getPublishedPosts, getPostBlocks, getRelatedPosts, renderBlocks, annotateHeadings, formatDate, slugify } from '../../lib/notion.js';
+import { getPublishedPosts, getPostBlocks, getRelatedPosts, renderBlocks, annotateHeadings, topHeadingLevel, formatDate, slugify } from '../../lib/notion.js';
 import { categorySlug, categoryStyle } from '../../lib/categories.js';
 
 export async function getStaticPaths() {
@@ -14,7 +14,7 @@ const { post } = Astro.props;
 const blocks = await getPostBlocks(post.id);
 
 // Ids already on this page, so a heading can't take one (e.g. "Post" -> "post-2")
-const PAGE_IDS = ['nav', 'nav-logo-link', 'nav-logo-img', 'nav-toggle', 'footer', 'post', 'toc-title', 'read-progress', 'post-newsletter-title', 'post-newsletter-email', 'cta-title', 'related-title'];
+const PAGE_IDS = ['main', 'nav-menu', 'nav', 'nav-logo-link', 'nav-logo-img', 'nav-toggle', 'footer', 'post', 'toc-title', 'read-progress', 'post-newsletter-title', 'post-newsletter-email', 'cta-title', 'related-title'];
 const headings = annotateHeadings(blocks, PAGE_IDS);
 
 // Mid-article newsletter sign-up goes at the end of the first H2 section, i.e. right before
@@ -22,8 +22,10 @@ const headings = annotateHeadings(blocks, PAGE_IDS);
 const isSectionHeading = (b) => b.type === 'heading_1' || b.type === 'heading_2';
 const firstH2 = blocks.findIndex((b) => b.type === 'heading_2');
 const ctaAt = firstH2 === -1 ? -1 : blocks.findIndex((b, i) => i > firstH2 && isSectionHeading(b));
-const bodyBefore = renderBlocks(ctaAt === -1 ? blocks : blocks.slice(0, ctaAt));
-const bodyAfter = ctaAt === -1 ? '' : renderBlocks(blocks.slice(ctaAt));
+// Both halves share the whole post's top heading level so the outline stays consistent
+const topLevel = topHeadingLevel(blocks);
+const bodyBefore = renderBlocks(ctaAt === -1 ? blocks : blocks.slice(0, ctaAt), topLevel);
+const bodyAfter = ctaAt === -1 ? '' : renderBlocks(blocks.slice(ctaAt), topLevel);
 
 const related = await getRelatedPosts(post, 3);
 const initials = (post.author || '').split(/\s+/).filter(Boolean).map((w) => w[0]).slice(0, 2).join('').toUpperCase();

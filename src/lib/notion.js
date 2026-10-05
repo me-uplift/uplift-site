@@ -315,16 +315,27 @@ function renderRichText(richText = []) {
     .join('');
 }
 
-function renderBlock(block) {
+/**
+ * Heading level of the post's highest Notion heading (1, 2 or 3). Rendering uses it so the
+ * top heading in the body becomes an <h2> under the page's <h1>, with no skipped levels.
+ */
+export function topHeadingLevel(blocks) {
+  for (const n of [1, 2, 3]) if (blocks.some((b) => b.type === `heading_${n}`)) return n;
+  return 2;
+}
+
+function renderBlock(block, topLevel) {
   switch (block.type) {
     case 'paragraph':
       return block.paragraph.rich_text.length ? `<p>${renderRichText(block.paragraph.rich_text)}</p>` : '';
     case 'heading_1':
-      return `<h2>${renderRichText(block.heading_1.rich_text)}</h2>`;
     case 'heading_2':
-      return `<h3${idAttr(block)}>${renderRichText(block.heading_2.rich_text)}</h3>`;
-    case 'heading_3':
-      return `<h4${idAttr(block)}>${renderRichText(block.heading_3.rich_text)}</h4>`;
+    case 'heading_3': {
+      // The class keeps each Notion heading's look; the tag follows the document outline
+      const n = Number(block.type.slice(-1));
+      const tag = `h${Math.min(6, n - topLevel + 2)}`;
+      return `<${tag} class="post-h${n}"${idAttr(block)}>${renderRichText(block[block.type].rich_text)}</${tag}>`;
+    }
     case 'quote':
       return `<blockquote>${renderRichText(block.quote.rich_text)}</blockquote>`;
     case 'code':
@@ -350,7 +361,7 @@ function renderBlock(block) {
 }
 
 /** Renders a block tree to HTML, grouping consecutive list items into <ul>/<ol>. */
-export function renderBlocks(blocks) {
+export function renderBlocks(blocks, topLevel = topHeadingLevel(blocks)) {
   let html = '';
   let i = 0;
   while (i < blocks.length) {
@@ -359,7 +370,7 @@ export function renderBlocks(blocks) {
       let items = '';
       while (i < blocks.length && blocks[i].type === 'bulleted_list_item') {
         const b = blocks[i];
-        items += `<li>${renderRichText(b.bulleted_list_item.rich_text)}${b.children ? renderBlocks(b.children) : ''}</li>`;
+        items += `<li>${renderRichText(b.bulleted_list_item.rich_text)}${b.children ? renderBlocks(b.children, topLevel) : ''}</li>`;
         i++;
       }
       html += `<ul>${items}</ul>`;
@@ -369,13 +380,13 @@ export function renderBlocks(blocks) {
       let items = '';
       while (i < blocks.length && blocks[i].type === 'numbered_list_item') {
         const b = blocks[i];
-        items += `<li>${renderRichText(b.numbered_list_item.rich_text)}${b.children ? renderBlocks(b.children) : ''}</li>`;
+        items += `<li>${renderRichText(b.numbered_list_item.rich_text)}${b.children ? renderBlocks(b.children, topLevel) : ''}</li>`;
         i++;
       }
       html += `<ol>${items}</ol>`;
       continue;
     }
-    html += renderBlock(block);
+    html += renderBlock(block, topLevel);
     i++;
   }
   return html;

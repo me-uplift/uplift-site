@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactSection from '../components/ContactSection.astro';
+import { BLOOM_FORM_URL } from '../lib/links.js';
 
 const title = 'Uplift Digital Studio — Premium Social Media Management';
 const description = "Uplift Digital Studio is a bilingual social media management and UGC agency for premium brands. Done-for-you content strategy, community management, and creator-led content in English and Spanish.";
@@ -287,7 +289,7 @@ const archWords = [
             <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path d="m9 11 3 3L22 4"></path></svg>Operations and project management as needed</li>
             <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path d="m9 11 3 3L22 4"></path></svg>No long-term contracts, cancel anytime</li>
           </ul>
-          <a href="mailto:hello@upliftdigital.studio" class="btn-grad full">Apply for the Studio Pass</a>
+          <a href={BLOOM_FORM_URL} target="_blank" rel="noopener noreferrer" class="btn-grad full">Apply for the Studio Pass<span class="sr-only"> (opens in a new tab)</span></a>
         </div>
       </div>
       </div>
@@ -299,7 +301,7 @@ const archWords = [
     <div class="wrap">
       <div class="team-header reveal">
         <h2 class="team-headline">About us.</h2>
-        <p class="team-sub">Uplift Digital Studio is built on a simple idea: premium content should feel personal. That's why you work with us directly, from first idea to final delivery.</p>
+        <p class="team-sub">Uplift Digital Studio is built on a simple idea: premium content should feel personal. That's why we're with you from first idea to launch day and beyond.</p>
       </div>
       <div class="team-grid">
         {team.map((member, i) => (
@@ -312,21 +314,12 @@ const archWords = [
           </article>
         ))}
       </div>
-      <p class="team-join reveal">Join our team. Say hello at <a href="mailto:hello@upliftdigital.studio">hello@upliftdigital.studio</a>.</p>
+      <p class="team-join reveal">Join our team. Send your resume to <a href="mailto:hello@upliftdigital.studio">hello@upliftdigital.studio</a>.</p>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" data-screen-label="Contact">
-    <div class="wrap">
-      <div class="contact-close">
-        <h2 class="contact-headline reveal reveal-d1">Ready to grow?</h2>
-        <p class="contact-sub reveal reveal-d2">Tell us about your brand and we'll be in touch soon.</p>
-        <a href="mailto:hello@upliftdigital.studio" class="contact-email reveal reveal-d3">hello@upliftdigital.studio</a>
-        <p class="contact-meta reveal reveal-d3">Thanks for your business · English + Spanish · USA, Latin America &amp; beyond</p>
-      </div>
-    </div>
-  </section>
+  <ContactSection />
 
   <script>
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

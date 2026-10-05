@@ -67,16 +67,18 @@ const ogImageURL = new URL(ogImage, Astro.site);
 </head>
 <body>
 
+<a href="#main" class="skip-link">Skip to content</a>
+
 <!-- NAV -->
 <nav id="nav" data-static-nav={transparentNav ? 'false' : 'true'} class:list={[{ scrolled: !transparentNav }]}>
-  <a href="/" class="nav-logo" id="nav-logo-link">
-    <img src={transparentNav ? '/assets/UpliftLogo_White.svg' : '/assets/UpliftLogo_GradientFixed.svg'} alt="Uplift Digital Studio" id="nav-logo-img">
-    <span class="nav-logo-text">Uplift Digital Studio</span>
+  <a href="/" class="nav-logo" id="nav-logo-link" aria-label="Uplift Digital Studio home">
+    <img src={transparentNav ? '/assets/UpliftLogo_White.svg' : '/assets/UpliftLogo_GradientFixed.svg'} alt="" id="nav-logo-img">
+    <span class="nav-logo-text" aria-hidden="true">Uplift Digital Studio</span>
   </a>
-  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+  <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
     <span></span><span></span><span></span>
   </button>
-  <div class="nav-right">
+  <div class="nav-right" id="nav-menu">
     <div class="nav-links">
       <a href="/#plans">Plans</a>
       <a href="/#pass">Studio Pass</a>
@@ -86,26 +88,27 @@ const ogImageURL = new URL(ogImage, Astro.site);
   </div>
 </nav>
 
+<main id="main" tabindex="-1">
 <slot />
+</main>
 
 <!-- FOOTER -->
 <footer id="footer">
   <div class="footer-inner">
     <div class="footer-top">
-      <div class="footer-logo"><img src="/assets/UpliftLogo_GradientTextFixed.svg" alt="Uplift Digital Studio"></div>
-      <nav class="footer-nav">
+      <a href="/" class="footer-logo"><img src="/assets/UpliftLogo_GradientTextFixed.svg" alt="Uplift Digital Studio home"></a>
+      <nav class="footer-nav" aria-label="Footer">
         <a href="/#plans">Plans</a>
         <a href="/#pass">Studio Pass</a>
         <a href="/blog/">Insights</a>
         <a href="/#contact">Contact</a>
-        <a href="https://myaeliza.com" target="_blank" rel="noopener">Creator portfolio</a>
-        <a href="mailto:hello@upliftdigital.studio">hello@upliftdigital.studio</a>
+        <a href="https://myaeliza.com" target="_blank" rel="noopener">Creator Portfolio<span class="sr-only"> (opens in a new tab)</span></a>
       </nav>
     </div>
     <div class="footer-bottom">
-      <span class="footer-copy">© 2026 Uplift Digital Studio by MyaEliza LLC. All rights reserved.</span>
+      <p class="footer-copy">© 2026 Uplift Digital Studio by MyaEliza LLC. All rights reserved.</p>
       <div class="footer-social">
-        <a href="https://www.linkedin.com/company/uplift-digital-studio/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.linkedin.com/company/uplift-digital-studio/" target="_blank" rel="noopener">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a>
       </div>
     </div>
   </div>
@@ -195,7 +198,10 @@ const ogImageURL = new URL(ogImage, Astro.site);
     }
     function paintDots() {
       const a = activeIndex();
-      dots.forEach((d, i) => d.classList.toggle('active', i === a));
+      dots.forEach((d, i) => {
+        d.classList.toggle('active', i === a);
+        if (i === a) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current');
+      });
     }
 
     let raf;
