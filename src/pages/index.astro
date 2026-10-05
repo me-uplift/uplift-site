@@ -12,6 +12,11 @@ const heroCards = {
   email: { subject: 'Your October newsletter', time: '9:02 AM', cta: 'Shop the drop' },
   analytics: { label: 'Reach · last 30 days', value: '+42%', spark: [30, 26, 28, 20, 23, 16, 18, 9, 12, 4] },
 };
+// About section portraits. If a photo is missing, the lavender placeholder shows instead.
+const team = [
+  { name: 'Mya Williams', role: 'Founder & Creative Strategist', photo: '/assets/mya-williams.webp' },
+  { name: 'Jesús Valenzuela', role: 'Bilingual SEO & Content Lead', photo: '/assets/jesus-valenzuela.webp' },
+];
 const sparkPoints = heroCards.analytics.spark
   .map((y, i, a) => `${(i / (a.length - 1)) * 120},${y}`)
   .join(' ');
@@ -286,6 +291,28 @@ const archWords = [
         </div>
       </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="team" data-screen-label="About">
+    <div class="wrap">
+      <div class="team-header reveal">
+        <h2 class="team-headline">About us.</h2>
+        <p class="team-sub">Uplift Digital Studio is built on a simple idea: premium content should feel personal. That's why you work with us directly, from first idea to final delivery.</p>
+      </div>
+      <div class="team-grid">
+        {team.map((member, i) => (
+          <article class={`team-member reveal${i ? ` reveal-d${i}` : ''}`}>
+            <div class="team-photo">
+              <img src={member.photo} alt={`Portrait of ${member.name}`} width="640" height="800" loading="lazy" decoding="async" onerror="this.remove()">
+            </div>
+            <h3 class="team-name">{member.name}</h3>
+            <p class="team-role">{member.role}</p>
+          </article>
+        ))}
+      </div>
+      <p class="team-join reveal">Join our team. Say hello at <a href="mailto:hello@upliftdigital.studio">hello@upliftdigital.studio</a>.</p>
     </div>
   </section>
 
