@@ -14,8 +14,8 @@ const details = [
       <h2 class="contact-headline reveal">Ready to grow?</h2>
       <p class="contact-sub reveal reveal-d1">Tell us about your brand and let's make it happen!</p>
       <div class="contact-action reveal reveal-d2">
-        <a href={BLOOM_FORM_URL} target="_blank" rel="noopener noreferrer" class="contact-cta">
-          Start your inquiry<span class="sr-only"> (opens in a new tab)</span>
+        <a href={BLOOM_FORM_URL} target="_blank" rel="noopener noreferrer" class="contact-cta" aria-haspopup="dialog" data-inquiry-open>
+          Start your inquiry
           <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </a>
       </div>
@@ -30,3 +30,49 @@ const details = [
     </div>
   </div>
 </section>
+
+<dialog class="inquiry-modal" aria-label="Start your inquiry">
+  <button type="button" class="inquiry-close" aria-label="Close" data-inquiry-close>
+    <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+  </button>
+  <div class="inquiry-body">
+    <div data-bloom-form-id="2kldyrox29pjv" style="width:100%"></div>
+  </div>
+</dialog>
+
+<script>
+  // Open the Bloom form in a popup instead of a new tab. The link still works if JS fails.
+  (function () {
+    const trigger = document.querySelector<HTMLAnchorElement>('[data-inquiry-open]');
+    const modal = document.querySelector<HTMLDialogElement>('.inquiry-modal');
+    if (!trigger || !modal || typeof modal.showModal !== 'function') return;
+    let bloomLoaded = false;
+
+    // Bloom's embed code, run on first open so the form only loads when someone asks for it
+    function loadBloom() {
+      if (bloomLoaded) return;
+      bloomLoaded = true;
+      (window as any).bloomSettings = { userId: 'pv5d6gkew7w48', profileId: 'pk09836vrdw6z' };
+      fetch('https://code.bloom.io/version?t=' + Date.now())
+        .then((r) => r.text())
+        .then((v) => {
+          const script = document.createElement('script');
+          script.async = true;
+          script.src = 'https://code.bloom.io/widget.js?v=' + v;
+          document.head.appendChild(script);
+        });
+    }
+
+    trigger.addEventListener('click', (e) => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey) return; // let modified clicks open a tab
+      e.preventDefault();
+      modal.showModal();
+      loadBloom();
+      document.documentElement.style.overflow = 'hidden';
+    });
+    modal.querySelector('[data-inquiry-close]')!.addEventListener('click', () => modal.close());
+    // Clicking the backdrop closes it
+    modal.addEventListener('click', (e) => { if (e.target === modal) modal.close(); });
+    modal.addEventListener('close', () => { document.documentElement.style.overflow = ''; });
+  })();
+</script>
