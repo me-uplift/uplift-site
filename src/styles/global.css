@@ -798,16 +798,21 @@ a.arch-word:focus-visible {
   border-width: 5px 0 5px 7px;
   border-color: transparent transparent transparent #9A58A6;
 }
-.oa-tag {
-  left: 64%; top: 24px;
-  width: 64px; height: 30px;
-  display: grid;
-  place-items: center;
+/* Creator profile chip: avatar, two name lines, and a check */
+.oa-chip {
+  left: 62%; top: 58px;
+  width: 76px; height: 42px;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
   rotate: -2deg;
-  font-size: 9px;
-  font-weight: 700;
-  color: var(--ink);
 }
+.oa-avatar { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(135deg, #F0A08A, #B07CD6); }
+.oa-chip-lines { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+.oa-chip-lines .oa-bar { height: 5px; border-radius: 3px; background: #E6E1F2; }
+.oa-chip-lines .oa-bar + .oa-bar { width: 60%; }
+.oa-chip svg { flex-shrink: 0; width: 12px; height: 12px; color: var(--purple); }
 /* Web & SEO */
 .oa-browser { left: 8%; top: 20px; width: 130px; height: 100px; padding: 10px; rotate: -2deg; }
 .oa-browser .oa-bar { margin-bottom: 6px; }
