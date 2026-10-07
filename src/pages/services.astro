@@ -72,12 +72,14 @@ const faqCols = [faqs.slice(0, 5), faqs.slice(5)];
       <header class="blog-index-header reveal">
         <h1 class="blog-index-headline">Flat monthly rates for <span class="gradient-text">premium content.</span></h1>
       </header>
-      <p class="svc-sub reveal reveal-d1">Choose a social media management plan, add what you need, start a creator campaign, or bring in the full team with the Studio Pass.</p>
-      <nav class="svc-fit reveal reveal-d2" aria-label="Find your fit">
+      <nav class="svc-fit reveal reveal-d1" aria-label="Find your fit">
         {fit.map((f) => (
           <a href={f.href} class="svc-fit-link">
-            <span class="svc-fit-label">{f.label}</span>
-            <span class="svc-fit-line">{f.line}<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+            <span class="svc-fit-text">
+              <span class="svc-fit-label">{f.label}</span>
+              <span class="svc-fit-line">{f.line}</span>
+            </span>
+            <span class="svc-fit-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
           </a>
         ))}
       </nav>
