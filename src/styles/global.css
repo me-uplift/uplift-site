@@ -1570,14 +1570,6 @@ a.arch-word:focus-visible {
   padding: calc(64px + var(--space-9)) 0 var(--space-10);
   min-height: 60vh;
 }
-.blog-eyebrow {
-  font-size: var(--text-sm);
-  font-weight: var(--weight-medium);
-  letter-spacing: var(--tracking-wider);
-  text-transform: uppercase;
-  color: var(--color-muted);
-  margin-bottom: var(--space-4);
-}
 .blog-index-header { max-width: 880px; margin-bottom: var(--space-7); }
 .blog-index-header .post-back { margin-bottom: var(--space-4); }
 .blog-index-headline {
