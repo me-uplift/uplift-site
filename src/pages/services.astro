@@ -64,15 +64,17 @@ const faqs = [
 ];
 const faqCols = [faqs.slice(0, 5), faqs.slice(5)];
 ---
-<BaseLayout title={title} description={description} canonicalPath="/services/" transparentNav={true} currentPage="services">
+<BaseLayout title={title} description={description} canonicalPath="/services/" currentPage="services">
 
   <!-- HEADER -->
   <section id="services-top" class="svc-hero" data-screen-label="Services">
     <div class="sec-inner">
-      <p class="svc-eyebrow reveal">Services</p>
-      <h1 class="svc-h1 reveal reveal-d1">Flat monthly rates for premium content.</h1>
-      <p class="svc-sub reveal reveal-d2">Choose a social media management plan, add what you need, start a creator campaign, or bring in the full team with the Studio Pass.</p>
-      <nav class="svc-fit reveal reveal-d3" aria-label="Find your fit">
+      <header class="blog-index-header reveal">
+        <p class="blog-eyebrow">Services</p>
+        <h1 class="blog-index-headline">Flat monthly rates for <span class="gradient-text">premium content.</span></h1>
+      </header>
+      <p class="svc-sub reveal reveal-d1">Choose a social media management plan, add what you need, start a creator campaign, or bring in the full team with the Studio Pass.</p>
+      <nav class="svc-fit reveal reveal-d2" aria-label="Find your fit">
         {fit.map((f) => (
           <a href={f.href} class="svc-fit-link">
             <span class="svc-fit-label">{f.label}</span>
@@ -81,9 +83,6 @@ const faqCols = [faqs.slice(0, 5), faqs.slice(5)];
         ))}
       </nav>
     </div>
-    <svg class="svc-arch" viewBox="0 0 1440 160" preserveAspectRatio="none" aria-hidden="true">
-      <path class="hero-arch-fill" d="M0 150 Q 720 -60 1440 150 L1440 160 L0 160 Z" />
-    </svg>
   </section>
 
   <!-- STUDIO PASS -->
