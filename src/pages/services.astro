@@ -165,38 +165,34 @@ const faqCols = [faqs.slice(0, 5), faqs.slice(5)];
   </section>
 
   <!-- UGC CREATORS -->
-  <!-- Secondary offer: same two-column shape as Web and SEO -->
   <section id="campaigns" class="sec svc-ugc" data-screen-label="UGC creators">
     <div class="sec-inner svc-ugc-cols">
       <div class="svc-ugc-intro reveal">
         <h2 class="sec-h2">UGC creators for your next campaign.</h2>
         <p class="sec-intro">UGC means user-generated content: short videos from real creators who show your product the way a customer would. It gives your business relatable, one-of-a-kind ads.</p>
-        <ol class="svc-steps">
-          {ugcSteps.map((s, i) => (
-            <li class="svc-step">
-              <span class="svc-step-num">{String(i + 1).padStart(2, '0')}</span>
-              <p class="svc-step-desc"><strong>{s.title}.</strong> {s.desc}</p>
-            </li>
-          ))}
-        </ol>
+
+        <div class="svc-ugc-price">
+          <div>
+            <p class="svc-ugc-amount">From <span class="svc-ugc-num">$750</span> per campaign</p>
+            <p class="svc-ugc-scope">3 creators, up to 9 videos</p>
+          </div>
+          <a href={BLOOM_FORM_URL} target="_blank" rel="noopener noreferrer" class="btn-grad">Plan a campaign<span class="sr-only"> (opens in a new tab)</span></a>
+        </div>
+        <dl class="svc-ugc-terms">
+          <div><dt>Creator payments</dt><dd>Billed at cost, separate from our fee.</dd></div>
+          <div><dt>Larger campaigns</dt><dd>5 creators from $1,200.</dd></div>
+        </dl>
       </div>
 
-      <div class="svc-ugc-card reveal reveal-d1">
-        <p class="svc-label">Campaign pricing</p>
-        <p class="svc-ugc-price">From <span class="svc-ugc-num">$750</span> per campaign</p>
-        <p class="svc-ugc-scope">3 creators, up to 9 videos</p>
-        <dl class="svc-ugc-terms">
-          <div>
-            <dt>Creator payments</dt>
-            <dd>Billed at cost, separate from our fee.</dd>
-          </div>
-          <div>
-            <dt>Larger campaigns</dt>
-            <dd>5 creators from $1,200.</dd>
-          </div>
-        </dl>
-        <a href={BLOOM_FORM_URL} target="_blank" rel="noopener noreferrer" class="btn-grad svc-ugc-cta">Plan a campaign<span class="sr-only"> (opens in a new tab)</span></a>
-      </div>
+      <ol class="svc-steps reveal reveal-d1">
+        {ugcSteps.map((s, i) => (
+          <li class="svc-step">
+            <span class="svc-step-num">{i + 1}</span>
+            <h3 class="svc-step-title">{s.title}</h3>
+            <p class="svc-step-desc">{s.desc}</p>
+          </li>
+        ))}
+      </ol>
     </div>
   </section>
 
