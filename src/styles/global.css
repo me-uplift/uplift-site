@@ -595,364 +595,199 @@ a.arch-word:focus-visible {
   color: var(--muted);
 }
 
-/* ════════════════════════ PLANS ════════════════════════ */
-#plans {
-  padding: 80px 0;
-  border-bottom: 1px solid var(--rule);
-  background: #f3effa;
+/* ════════════════════════ OFFERS (shared by home + services) ════════════════════════ */
+/* Palette for the pricing and offer sections. The gradient's first stop is
+   deepened from #B5624F to #AF5E4C so white text clears 4.5:1 at the coral corner. */
+:root {
+  --offer-gradient: linear-gradient(135deg, #AF5E4C 0%, #9A58A6 45%, #6F68BE 100%);
+  --lavender: #F1EDF9;
+  --card-light: #F7F5FC;
+  --peach: #FBEFEA;
+  --navy: #15122E;
+  --ink: #14122B;
+  --ink-muted: #4A4663;
+  --accent-rose: #B0405F;
+  --purple: #6F68BE;
+  --line-lavender: #E3DEF1;
 }
-.plans-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: 48px;
-  gap: 40px;
-}
-.plans-headline {
+.sec { padding: clamp(72px, 10vw, 112px) clamp(20px, 4vw, 48px); }
+.sec-inner { max-width: 1104px; margin: 0 auto; }
+.sec-h2 {
   font-family: 'Satoshi', sans-serif;
-  font-size: clamp(40px, 4.6vw, 72px);
+  font-size: clamp(40px, 6vw, 56px);
   font-weight: 500;
-  line-height: 1.02;
+  line-height: 1.05;
   letter-spacing: -0.03em;
-  color: var(--fg);
-  max-width: 640px;
+  color: var(--ink);
 }
-.plans-sub {
-  font-size: 16px;
-  line-height: 1.7;
-  color: var(--muted);
-  max-width: 320px;
-  text-align: right;
+.sec-intro {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink-muted);
+  max-width: 620px;
+  margin-top: 20px;
 }
-.plans-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-.plan-card,
-.plan-addon {
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 4px 24px rgba(61,30,110,0.07);
-}
-.plan-card {
-  padding: 32px 30px;
-  position: relative;
-  overflow: hidden;
-}
-.plan-card.featured::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent-b), var(--accent-c));
-}
-.plan-label {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 12px;
+.tag-pill {
+  display: inline-block;
+  border: 1px solid rgba(255,255,255,0.8);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 18px;
+  color: #fff;
 }
-.plan-price {
-  font-family: 'Satoshi', sans-serif;
-  font-size: 48px;
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: -0.03em;
-  color: var(--fg);
-  margin-bottom: 6px;
-}
-.plan-card.featured .plan-price { color: #c0587a; }
-.plan-price-sub {
+.btn-white,
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 32px;
+  border-radius: 999px;
   font-size: 13px;
-  color: var(--muted);
-  margin-bottom: 22px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  transition: transform 200ms, box-shadow 200ms, background 200ms, color 200ms;
 }
-.plan-features {
+.btn-white { background: #fff; color: var(--ink); }
+.btn-white:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(30,16,60,.2); }
+.btn-white:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+.btn-outline { border: 1.5px solid var(--ink); color: var(--ink); background: transparent; }
+.btn-outline:hover { background: var(--ink); color: #fff; }
+.check-icon { flex-shrink: 0; width: 18px; height: 18px; }
+
+/* ── Studio Pass (home: #studio-pass, full-bleed gradient) ── */
+.sp { background: var(--offer-gradient); color: #fff; }
+.sp-cols {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 56px;
+}
+.sp-left { flex: 1 1 400px; min-width: 0; }
+.sp-right { flex: 1 1 440px; min-width: 0; }
+.sp .sec-h2 { color: #fff; margin-top: 24px; }
+.sp-tagline { font-size: 20px; font-weight: 500; margin-top: 12px; }
+.sp-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px; margin-top: 28px; }
+.sp-price-num {
+  font-size: clamp(64px, 18vw, 96px);
+  font-weight: 300; /* no Satoshi Light file, so this renders at Regular */
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+.sp-price-mo { font-size: 18px; }
+.sp-sub { font-size: 17px; line-height: 1.6; max-width: 460px; margin-top: 20px; }
+.sp-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; margin-top: 32px; }
+.sp-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.sp-link:hover { text-decoration-thickness: 2px; }
+.sp-link:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+.sp-note { font-size: 14px; margin-top: 16px; }
+.sp-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.sp-tiles {
   list-style: none;
-  font-size: var(--text-base);
-  line-height: 1.9;
-  color: var(--muted);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
 }
-/* Full-width add-on bubble under the cards */
-.plan-addon {
-  margin-top: 20px;
-  padding: 24px 30px;
+/* Dark tint and a light border keep white text above 4.5:1 across the whole gradient */
+.sp-tiles li {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-}
-.plan-addon .plan-label { margin-bottom: 8px; }
-.plan-addon-name {
-  font-size: 20px;
+  gap: 10px;
+  min-height: 56px;
+  padding: 14px 16px;
+  background: rgba(20,18,43,0.22);
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 16px;
+  font-size: 15px;
   font-weight: 500;
-  color: var(--fg);
-  margin-bottom: 4px;
+  line-height: 1.3;
 }
-.plan-addon-desc {
-  font-size: var(--text-base);
-  line-height: 1.6;
-  color: var(--muted);
-}
-.plan-addon-price { text-align: right; flex-shrink: 0; }
-.plan-addon-price .plan-price { font-size: 36px; }
-.plan-price-from {
-  font-size: 13px;
-  color: var(--muted);
-  margin-bottom: 6px;
-}
-.plan-addon-price .plan-price-sub { margin-bottom: 0; }
-/* Hover: lift with a soft purple shadow, and draw the gradient bar across the top
-   (the featured card keeps its bar). Uses `translate` so it doesn't fight .reveal's transform. */
-.plan-addon { position: relative; overflow: hidden; }
-.plan-card:not(.featured)::before,
-.plan-addon::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent-b), var(--accent-c));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.6s ease-out;
-}
-.plan-card,
-.plan-addon {
-  transition-property: opacity, transform, translate, box-shadow;
-  transition-duration: 0.6s, 0.6s, 250ms, 250ms;
-  transition-timing-function: ease, ease, var(--ease), var(--ease);
-  transition-delay: 0s; /* hover responds immediately; reveal delays below */
-}
-.plan-card.reveal-d1 { transition-delay: 0.08s, 0.08s, 0s, 0s; }
-.plan-card.reveal-d2 { transition-delay: 0.16s, 0.16s, 0s, 0s; }
-@media (hover: hover) {
-  .plan-card:hover,
-  .plan-addon:hover {
-    translate: 0 -4px;
-    box-shadow: 0 18px 44px rgba(61,30,110,0.14);
-  }
-  .plan-card:hover::before,
-  .plan-addon:hover::before { transform: scaleX(1); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .plan-card:hover,
-  .plan-addon:hover { translate: none; }
-  .plan-card::before,
-  .plan-addon::before { transition: none; }
+.sp-how { font-size: 15px; line-height: 1.6; margin-top: 20px; }
+@media (max-width: 420px) {
+  .sp-tiles { grid-template-columns: 1fr; }
 }
 
-/* ════════════════════════ STUDIO PASS ════════════════════════ */
-#pass {
-  border-bottom: 1px solid var(--rule);
-  position: relative;
-  z-index: 0;
-  /* Clip the fixed .pass-bg layer to this section so it reads as a frozen backdrop */
-  clip-path: inset(0);
-}
-.pass-bg {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  background-image: linear-gradient(135deg, var(--gradient-deep-stops));
-  pointer-events: none;
-}
-.pass-content {
-  position: relative;
-  z-index: 1;
-  padding: clamp(64px, 7vw, 104px) 0;
-}
-.pass-header {
-  margin-bottom: clamp(28px, 3vw, 40px);
-}
-.pass-label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #fff;
-  margin-bottom: 18px;
-}
-.pass-headline {
-  font-family: 'Satoshi', sans-serif;
-  font-size: clamp(40px, 4.6vw, 72px);
-  font-weight: 500;
-  line-height: 1.02;
-  letter-spacing: -0.03em;
-  color: #fff;
-  margin-bottom: 14px;
-}
-.pass-tagline {
-  font-family: 'Satoshi', sans-serif;
-  font-size: clamp(20px, 2vw, 26px);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: #fff;
-  margin-bottom: 14px;
-}
-.pass-more {
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1.6;
-  color: #fff;
-  margin-bottom: 14px;
-}
-.pass-sub {
-  font-size: 16px;
-  line-height: 1.65;
-  color: #fff;
-}
-/* Two columns: intro + steps on the left, price card on the right */
-.pass-layout {
-  display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  gap: clamp(40px, 5vw, 80px);
-  max-width: 1120px;
-  margin: 0 auto;
-  align-items: center;
-}
-.pass-steps {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(24px, 4vw, 56px);
-  max-width: 1040px;
-  margin: 0 auto clamp(48px, 6vw, 72px);
-}
-.pass-layout .pass-steps {
-  grid-template-columns: 1fr;
-  gap: 0;
-  max-width: none;
-  margin: 0;
-}
-/* Compact step rows: number beside title + description */
-.pass-step {
-  display: grid;
-  grid-template-columns: 40px 1fr;
-  column-gap: 12px;
-  border-top: 1px solid rgba(255,255,255,0.3);
-  padding: 16px 0;
-}
-.pass-step-num {
-  grid-row: span 2;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  color: #fff;
-  padding-top: 5px;
-}
-.pass-step-title {
-  font-family: 'Satoshi', sans-serif;
-  font-size: var(--text-lg);
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  color: #fff;
-  margin-bottom: 4px;
-}
-.pass-step-desc {
-  font-size: var(--text-base);
-  line-height: 1.6;
-  color: #fff;
-}
-/* Step highlight (scroll-driven; .is-armed is added by JS, .is-lit as each step passes mid-screen) */
-.pass-steps.is-armed .pass-step {
-  position: relative;
-  border-top-color: rgba(255,255,255,.28);
-}
-.pass-steps.is-armed .pass-step.visible {
-  /* Text stays at full contrast; the bar and filled number mark the active step */
-  transition: opacity 120ms ease, color 120ms ease, transform 0.6s ease;
-}
-.pass-steps.is-armed .pass-step.is-lit { opacity: 1; }
-.pass-steps.is-armed .pass-step::before {
-  content: '';
-  position: absolute;
-  top: -1px; left: 0; right: 0;
-  height: 1px;
-  background: #fff;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.6s ease-out;
-}
-.pass-steps.is-armed .pass-step.is-lit::before { transform: scaleX(1); }
-.pass-steps.is-armed .pass-step-num {
-  width: 34px;
-  height: 34px;
-  padding: 0;
-  display: grid;
-  place-items: center;
-  border: 1.5px solid rgba(255,255,255,.7);
-  border-radius: 50%;
-  font-family: 'Outfit', 'Satoshi', sans-serif; /* Satoshi has no true bold file here */
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  color: #fff;
-  transition: background-color 120ms ease, color 120ms ease, border-color 120ms ease;
-}
-.pass-steps.is-armed .pass-step.is-lit .pass-step-num {
-  background: #fff;
-  border-color: #fff;
-  color: var(--color-indigo);
-}
-@media (prefers-reduced-motion: reduce) {
-  .pass-steps.is-armed .pass-step,
-  .pass-steps.is-armed .pass-step::before,
-  .pass-steps.is-armed .pass-step-num { transition: none; }
-}
-/* Card */
-.pass-card {
-  display: grid;
-  grid-template-columns: 1fr;
-  background: rgba(255,255,255,0.94);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255,255,255,0.6);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 16px 60px rgba(16,16,26,0.22);
-}
-.pass-benefits {
-  padding: clamp(30px, 3vw, 44px);
-}
-.pass-price-block {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  margin-bottom: 24px;
-}
-.pass-price {
-  font-family: 'Satoshi', sans-serif;
-  font-size: clamp(44px, 4.5vw, 64px);
-  font-weight: 500;
-  letter-spacing: -0.035em;
-  line-height: 1;
-  color: var(--fg);
-}
-.pass-price-mo {
-  font-size: 16px;
-  color: var(--muted);
-}
-.pass-list {
-  list-style: none;
+/* ── More ways to work with us (home: #offers) ── */
+.offers { background: var(--lavender); }
+.offers-head { margin-bottom: 48px; }
+.offers-grid { display: flex; flex-wrap: wrap; gap: 24px; }
+.offer-card {
+  flex: 1 1 300px;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 28px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px;
 }
-.pass-list li {
+.offer-label {
   display: flex;
   align-items: center;
-  gap: 14px;
-  font-size: var(--text-base);
-  color: var(--fg);
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 14px;
 }
-.pass-list svg {
-  flex-shrink: 0;
-  color: var(--accent-b);
+.offer-new {
+  border-radius: 999px;
+  padding: 3px 9px;
+  background: var(--accent-rose);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
 }
+.offer-title {
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.offer-desc { font-size: 15px; line-height: 1.6; color: var(--ink-muted); margin-bottom: 20px; }
+.offer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  margin-top: auto;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--accent-rose);
+  text-decoration: none;
+}
+.offer-link svg { transition: transform var(--duration-base) var(--ease); }
+.offer-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+.offer-link:hover svg { transform: translateX(3px); }
+.offers-cta { display: flex; justify-content: center; margin-top: 48px; }
+
+/* ── Shared gradient pill button ── */
 .btn-grad {
   display: inline-flex;
   align-items: center;
@@ -971,113 +806,12 @@ a.arch-word:focus-visible {
 }
 /* Darken (not fade) on hover so the white label keeps its contrast */
 .btn-grad:hover { filter: brightness(0.92); transform: translateY(-1px); }
-.btn-grad.full { display: flex; }
-.pass-book {
-  padding: clamp(36px, 4vw, 56px);
-  border-left: 1px solid var(--rule);
-  background: rgba(16,16,26,0.025);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.pass-book-icon {
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 12px;
-  background: linear-gradient(135deg, var(--accent-a), var(--accent-b));
-  color: #fff;
-  margin-bottom: 24px;
-}
-.pass-book h3 {
-  font-family: 'Satoshi', sans-serif;
-  font-size: clamp(26px, 3vw, 36px);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--fg);
-  margin-bottom: 14px;
-}
-.pass-book p {
-  font-size: 16px;
-  line-height: 1.7;
-  color: var(--muted);
-  margin-bottom: 24px;
-}
-.pass-book-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: var(--fg);
-  text-decoration: none;
-  border-bottom: 1.5px solid var(--accent-b);
-  padding-bottom: 3px;
-  width: fit-content;
-  transition: gap 200ms, opacity 200ms;
-}
-.pass-book-link:hover { gap: 12px; }
-@media (max-width: 900px) {
-  .pass-layout { grid-template-columns: 1fr; gap: clamp(32px, 5vw, 48px); max-width: 640px; }
-  .pass-header { text-align: center; }
-}
-@media (max-width: 820px) {
-  .pass-card { grid-template-columns: 1fr; }
-  .pass-book { border-left: none; border-top: 1px solid var(--rule); }
-}
-
-/* ════════════════════════ UGC ════════════════════════ */
-#ugc {
-  padding: clamp(80px, 10vw, 160px) 0;
-  border-bottom: 1px solid var(--rule);
-  background: #fff;
-}
-.ugc-eyebrow { margin-bottom: 48px; letter-spacing: 0.16em; }
-.ugc-row {
-  display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: clamp(40px, 8vw, 120px);
-  align-items: baseline;
-  padding: clamp(36px, 5vw, 56px) 0;
-  border-top: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
-}
-.ugc-row-left { display: flex; align-items: baseline; gap: 28px; }
-.ugc-row-num {
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  color: var(--dim);
-}
-.ugc-row-label {
-  font-family: 'Satoshi', sans-serif;
-  font-size: clamp(34px, 4vw, 56px);
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: -0.025em;
-  color: var(--fg);
-}
-.ugc-row-desc {
-  font-size: 18px;
-  line-height: 1.85;
-  color: var(--muted);
-  text-align: right;
-}
-.ugc-row-desc a { color: var(--accent-b); text-decoration: none; border-bottom: 1px solid rgba(155,112,192,0.4); }
-.ugc-row-desc a:hover { border-bottom-color: currentColor; }
-@media (max-width: 760px) {
-  .ugc-row { grid-template-columns: 1fr; gap: 24px; }
-  .ugc-row-desc { text-align: left; }
-}
 
 /* ════════════════════════ ABOUT ════════════════════════ */
 #team {
   padding: var(--space-10) 0;
   border-bottom: 1px solid var(--rule);
-  background: var(--bg-light);
+  background: #fff;
 }
 .team-header {
   display: flex;
@@ -1086,7 +820,6 @@ a.arch-word:focus-visible {
   gap: 40px;
   margin-bottom: 56px;
 }
-/* Matches .plans-headline */
 .team-headline {
   font-family: 'Satoshi', sans-serif;
   font-size: clamp(40px, 4.6vw, 72px);
@@ -1402,13 +1135,10 @@ a.arch-word:focus-visible {
 /* Tablet */
 @media (max-width: 1024px) {
   .what-grid { grid-template-columns: 1fr 1fr; row-gap: clamp(40px, 6vw, 56px); }
-  /* Studio Pass: 5% side padding (tablet + mobile) */
-  .pass-content { padding-left: 5%; padding-right: 5%; }
 }
 
 /* Mobile nav breakpoint */
 @media (max-width: 760px) {
-  .plans-grid { grid-template-columns: 1fr; }
   .nav-toggle { display: flex; }
   .nav-right {
     position: fixed;
@@ -1449,17 +1179,6 @@ a.arch-word:focus-visible {
   /* Logo wordmark: visible at top, hides on scroll */
   .nav-logo-text { display: block; }
   #nav.scrolled .nav-logo-text { display: none; }
-  .plans-header { flex-direction: column; gap: 20px; }
-  .plans-sub { text-align: left !important; max-width: none; }
-
-  /* Plans: stacked cards and add-on */
-  #plans { padding: 64px 0; }
-  .plans-header { margin-bottom: 32px; }
-  .plans-grid { grid-template-columns: 1fr; gap: 16px; }
-  .plan-card { padding: 26px 24px; }
-  .plan-addon { flex-direction: column; align-items: flex-start; gap: 16px; padding: 24px; margin-top: 16px; }
-  .plan-addon-price { text-align: left; }
-
 
   /* Value: stacked header and single-column items */
   .what-header { flex-direction: column; gap: 20px; margin-bottom: 48px; }
@@ -1467,21 +1186,6 @@ a.arch-word:focus-visible {
   .what-grid { grid-template-columns: 1fr; row-gap: 36px; }
   .what-icon { width: 48px; height: 48px; border-radius: 14px; margin-bottom: 16px; }
   .what-icon svg { width: 22px; height: 22px; }
-
-  /* Studio Pass: clean, centered single column */
-  .pass-content { padding-top: clamp(52px, 13vw, 76px); padding-bottom: clamp(52px, 13vw, 76px); }
-  .pass-header { text-align: center; margin-bottom: 30px; }
-  .pass-headline { margin-bottom: 14px; }
-  .pass-tagline { font-size: clamp(19px, 5.5vw, 24px); margin-bottom: 14px; }
-  .pass-sub { line-height: 1.7; }
-  .pass-layout { gap: 28px; }
-  .pass-step { padding: 18px 0; }
-  .pass-card { border-radius: 18px; }
-  .pass-benefits { padding: 30px 24px; }
-  .pass-price { font-size: clamp(44px, 12vw, 60px); }
-  .pass-list { gap: 13px; margin-bottom: 28px; }
-  .btn-grad.full { padding: 0 24px; }
-
 }
 
 /* ════════════════════════ BLOG (INSIGHTS) ════════════════════════ */

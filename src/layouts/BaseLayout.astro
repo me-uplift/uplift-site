@@ -172,64 +172,6 @@ const ogImageURL = new URL(ogImage, Astro.site);
       else { obs.observe(el); }
     });
   })();
-
-  // Plans carousel (mobile): dots indicator + start on the Growth tier
-  (function () {
-    const grid = document.querySelector('#plans .plans-grid');
-    const dotsWrap = document.getElementById('plans-dots');
-    if (!grid || !dotsWrap) return;
-    const cards = Array.from(grid.querySelectorAll('.plan-card'));
-    if (!cards.length) return;
-    const centerOf = (c) => c.offsetLeft + c.offsetWidth / 2;
-    const target = (c) => centerOf(c) - grid.clientWidth / 2;
-
-    const dots = cards.map((_, i) => {
-      const d = document.createElement('button');
-      d.type = 'button';
-      d.setAttribute('aria-label', 'View plan ' + (i + 1));
-      d.addEventListener('click', () => grid.scrollTo({ left: target(cards[i]), behavior: 'smooth' }));
-      dotsWrap.appendChild(d);
-      return d;
-    });
-
-    function activeIndex() {
-      const mid = grid.scrollLeft + grid.clientWidth / 2;
-      let best = 0, bestDist = Infinity;
-      cards.forEach((c, i) => {
-        const dist = Math.abs(centerOf(c) - mid);
-        if (dist < bestDist) { bestDist = dist; best = i; }
-      });
-      return best;
-    }
-    function paintDots() {
-      const a = activeIndex();
-      dots.forEach((d, i) => {
-        d.classList.toggle('active', i === a);
-        if (i === a) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current');
-      });
-    }
-
-    let raf;
-    grid.addEventListener('scroll', () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(paintDots);
-    }, { passive: true });
-
-    const featured = grid.querySelector('.plan-card.featured') || cards[Math.floor(cards.length / 2)];
-    const isMobile = () => window.matchMedia('(max-width: 1024px)').matches;
-    function reset() {
-      if (isMobile() && featured) {
-        grid.scrollLeft = target(featured);
-      } else {
-        grid.scrollLeft = 0;
-      }
-      paintDots();
-    }
-    reset();
-    window.addEventListener('load', reset);
-    let rt;
-    window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(reset, 150); });
-  })();
 </script>
 
 </body>

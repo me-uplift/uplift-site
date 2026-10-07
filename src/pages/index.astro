@@ -25,11 +25,39 @@ const sparkPoints = heroCards.analytics.spark
 
 // Service words on the arch
 const archWords = [
-  { label: 'Strategy & Ops', href: '#studio' },
-  { label: 'Social', href: '#plans' },
-  { label: 'Email', href: '#plans' },
-  { label: 'Web & SEO', href: '#studio' },
-  { label: 'UGC', href: '#studio' },
+  { label: 'Strategy & Ops', href: '#studio-pass' },
+  { label: 'Social', href: '/services/#social' },
+  { label: 'Email', href: '/services/#addons' },
+  { label: 'Web & SEO', href: '/services/#web' },
+  { label: 'UGC Creators', href: '/services/#campaigns' },
+];
+
+// Studio Pass request list
+const passRequests = [
+  'Social media content', 'Email campaigns', 'Landing pages', 'SEO',
+  'UGC creators', 'Copywriting', 'Campaign planning', 'Project management',
+];
+
+// More ways to work with us
+const offers = [
+  {
+    label: 'Social media management',
+    title: 'Strategy, content, and publishing for your channels.',
+    desc: 'Consistent posting and a monthly performance report, handled by one team.',
+    link: 'See plans', href: '/services/#social',
+  },
+  {
+    label: 'Creator sourcing', isNew: true,
+    title: 'UGC creators for your campaigns.',
+    desc: 'Vetted creators, briefed and managed by us. You receive ready-to-post content.',
+    link: 'See campaigns', href: '/services/#campaigns',
+  },
+  {
+    label: 'Web & SEO',
+    title: 'Websites and search that bring buyers to you.',
+    desc: 'Websites built to convert and SEO content that gets found, in English and Spanish.',
+    link: 'See web and SEO', href: '/services/#web',
+  },
 ];
 ---
 <BaseLayout title={title} description={description} canonicalPath="/" ogImage="/assets/og-image.png" transparentNav={true}>
@@ -63,8 +91,8 @@ const archWords = [
           <h1 class="hero-headline reveal reveal-d1">Premium content for brands that refuse to blend in.</h1>
           <p class="hero-sub reveal reveal-d2">Strategy, content, and publishing from one senior team, on a flat monthly rate with no long-term commitment.</p>
           <div class="hero-actions reveal reveal-d3">
-            <a href="#pass" class="hero-btn-primary">Apply for the Studio Pass</a>
-            <a href="#plans" class="hero-link-secondary">See plans</a>
+            <a href="#studio-pass" class="hero-btn-primary">Apply for the Studio Pass</a>
+            <a href="/services/" class="hero-link-secondary">See plans</a>
           </div>
         </div>
 
@@ -187,111 +215,57 @@ const archWords = [
     </div>
   </section>
 
-  <!-- PLANS -->
-  <section id="plans" data-screen-label="Plans">
-    <div class="wrap">
-      <div class="plans-header reveal">
-        <h2 class="plans-headline">Social media plans.</h2>
-        <p class="plans-sub">Best for social media only. Every plan includes strategy, content, consistent publishing, and a monthly performance report.</p>
+  <!-- STUDIO PASS -->
+  <!-- Older links pointed to #pass and #studio -->
+  <div id="pass" class="anchor-alias" aria-hidden="true"></div>
+  <div id="studio" class="anchor-alias" aria-hidden="true"></div>
+  <section id="studio-pass" class="sec sp" data-screen-label="Studio Pass">
+    <div class="sec-inner sp-cols">
+      <div class="sp-left reveal">
+        <span class="tag-pill">Our flagship offer</span>
+        <h2 class="sec-h2">The Studio Pass</h2>
+        <p class="sp-tagline">Your fractional digital team.</p>
+        <p class="sp-price"><span class="sp-price-num">$1,900</span><span class="sp-price-mo">/month</span></p>
+        <p class="sp-sub">An on-demand digital strategist with the value of a senior hire and none of the commitment.</p>
+        <div class="sp-actions">
+          <a href={BLOOM_FORM_URL} target="_blank" rel="noopener noreferrer" class="btn-white">Apply for the Studio Pass<span class="sr-only"> (opens in a new tab)</span></a>
+          <a href="/services/#pass" class="sp-link">See pricing</a>
+        </div>
+        <p class="sp-note">No long-term commitment, cancel with 30 days' notice.</p>
       </div>
-      <div class="plans-grid">
-        <div class="plan-card reveal">
-          <div class="plan-label">Essentials</div>
-          <div class="plan-price">$600</div>
-          <div class="plan-price-sub">per month</div>
-          <ul class="plan-features">
-            <li>9 posts and 9 stories</li>
-            <li>1 platform</li>
-            <li>Caption writing</li>
-          </ul>
-        </div>
-        <div class="plan-card featured reveal reveal-d1">
-          <div class="plan-label">Growth</div>
-          <div class="plan-price">$800</div>
-          <div class="plan-price-sub">per month</div>
-          <ul class="plan-features">
-            <li>16 posts and 16 stories</li>
-            <li>2 platforms</li>
-            <li>Comment-triggered DM automation</li>
-          </ul>
-        </div>
-        <div class="plan-card reveal reveal-d2">
-          <div class="plan-label">Full Digital</div>
-          <div class="plan-price">$1,100</div>
-          <div class="plan-price-sub">per month</div>
-          <ul class="plan-features">
-            <li>20 posts and 20 stories</li>
-            <li>Live engagement management</li>
-            <li>Priority communication</li>
-          </ul>
-        </div>
-      </div>
-      <div class="plan-addon reveal">
-        <div class="plan-addon-info">
-          <div class="plan-label">Add-on</div>
-          <div class="plan-addon-name">Email bundle</div>
-          <p class="plan-addon-desc">Add email campaigns to any plan.</p>
-        </div>
-        <div class="plan-addon-price">
-          <div class="plan-price-from">Starting at</div>
-          <div class="plan-price">$250</div>
-          <div class="plan-price-sub">per month</div>
-        </div>
+      <div class="sp-right reveal reveal-d1">
+        <p class="sp-label">Send us anything from this list</p>
+        <ul class="sp-tiles">
+          {passRequests.map((r) => (
+            <li><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>{r}</li>
+          ))}
+        </ul>
+        <p class="sp-how">Subscribe, add requests, and receive your work in 1-2 business days. We work through requests one at a time, in priority order, with revisions included.</p>
       </div>
     </div>
   </section>
 
-  <!-- STUDIO PASS -->
-  <div id="studio" class="anchor-alias" aria-hidden="true"></div>
-  <section id="pass" data-screen-label="Studio Pass">
-    <div class="pass-bg"></div>
-    <div class="wrap pass-content">
-      <div class="pass-layout">
-      <div class="pass-intro">
-      <div class="pass-header">
-        <h2 class="pass-headline reveal reveal-d1">The Studio Pass</h2>
-        <p class="pass-tagline reveal reveal-d2">Your fractional digital team.</p>
-        <p class="pass-more reveal reveal-d2">Need more than social media? Send us any request.</p>
-        <p class="pass-sub reveal reveal-d2">An on-demand digital strategist for everything your brand needs built, with the value of a senior hire and none of the commitment.</p>
+  <!-- MORE WAYS TO WORK WITH US -->
+  <!-- Older links pointed to #plans -->
+  <div id="plans" class="anchor-alias" aria-hidden="true"></div>
+  <section id="offers" class="sec offers" data-screen-label="Offers">
+    <div class="sec-inner">
+      <div class="offers-head reveal">
+        <h2 class="sec-h2">More ways to work with us.</h2>
+        <p class="sec-intro">Add social media management, creator sourcing, or web and SEO, on their own or alongside the Studio Pass.</p>
       </div>
-
-      <div class="pass-steps">
-        <div class="pass-step reveal">
-          <div class="pass-step-num">01</div>
-          <h3 class="pass-step-title">Subscribe</h3>
-          <p class="pass-step-desc">Subscribe to the Studio Pass and request as many projects as you'd like.</p>
-        </div>
-        <div class="pass-step reveal reveal-d1">
-          <div class="pass-step-num">02</div>
-          <h3 class="pass-step-title">Add requests</h3>
-          <p class="pass-step-desc">We work through your requests one at a time, in priority order.</p>
-        </div>
-        <div class="pass-step reveal reveal-d2">
-          <div class="pass-step-num">03</div>
-          <h3 class="pass-step-title">Receive your work</h3>
-          <p class="pass-step-desc">Most requests delivered in 1-2 business days with revisions included.</p>
-        </div>
+      <div class="offers-grid">
+        {offers.map((o, i) => (
+          <article class={`offer-card reveal${i ? ` reveal-d${i}` : ''}`}>
+            <h3 class="offer-label">{o.label}{o.isNew && <span class="offer-new">New</span>}</h3>
+            <p class="offer-title">{o.title}</p>
+            <p class="offer-desc">{o.desc}</p>
+            <a href={o.href} class="offer-link">{o.link}<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          </article>
+        ))}
       </div>
-      </div>
-
-      <div class="pass-card reveal reveal-d2">
-        <div class="pass-benefits">
-
-          <div class="pass-price-block">
-            <div class="pass-price">$1,900</div>
-            <div class="pass-price-mo">/month</div>
-          </div>
-          <ul class="pass-list">
-            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path d="m9 11 3 3L22 4"></path></svg>Unlimited requests</li>
-            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path d="m9 11 3 3L22 4"></path></svg>1-2 day average turnaround</li>
-            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path d="m9 11 3 3L22 4"></path></svg>Social, email, web, SEO, and UGC</li>
-            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path d="m9 11 3 3L22 4"></path></svg>Strategy, copywriting, and campaign planning</li>
-            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path d="m9 11 3 3L22 4"></path></svg>Operations and project management as needed</li>
-            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path d="m9 11 3 3L22 4"></path></svg>No long-term commitment, cancel anytime</li>
-          </ul>
-          <a href={BLOOM_FORM_URL} target="_blank" rel="noopener noreferrer" class="btn-grad full">Apply for the Studio Pass<span class="sr-only"> (opens in a new tab)</span></a>
-        </div>
-      </div>
+      <div class="offers-cta reveal">
+        <a href="/services/" class="btn-outline">See full pricing</a>
       </div>
     </div>
   </section>
@@ -404,31 +378,6 @@ const archWords = [
       window.addEventListener('scroll', () => {
         if (focused) requestAnimationFrame(placeRing);
       }, { passive: true });
-    })();
-
-    // Studio Pass steps light up in order as they cross the middle of the viewport
-    (function () {
-      const section = document.getElementById('pass');
-      const wrap = section && section.querySelector('.pass-steps');
-      if (!wrap) return;
-      const steps = Array.from(wrap.querySelectorAll('.pass-step'));
-      wrap.classList.add('is-armed');
-      if (reduceMotion) { steps.forEach(s => s.classList.add('is-lit')); return; }
-
-      const stepObs = new IntersectionObserver(entries => {
-        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('is-lit'); });
-      }, { rootMargin: '-40% 0px -40% 0px' });
-      steps.forEach(s => stepObs.observe(s));
-
-      // Scrolled back above the section: reset
-      const sectionObs = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if (!e.isIntersecting && e.boundingClientRect.top > 0) {
-            steps.forEach(s => s.classList.remove('is-lit'));
-          }
-        });
-      });
-      sectionObs.observe(section);
     })();
   </script>
 </BaseLayout>
