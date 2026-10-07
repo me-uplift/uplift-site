@@ -85,21 +85,16 @@ const faqCols = [faqs.slice(0, 5), faqs.slice(5)];
   </section>
 
   <!-- STUDIO PASS -->
-  <section id="pass" class="svc-pass" data-screen-label="Studio Pass">
-    <div class="sp-panel reveal">
-      <div class="sp-left">
+  <!-- Full-bleed gradient: intro and requests graphic on the gradient, the offer in a white card -->
+  <section id="pass" class="sec sp" data-screen-label="Studio Pass">
+    <div class="sec-inner sp-cols">
+      <div class="sp-left reveal">
         <span class="tag-pill">Our flagship offer</span>
         <h2 class="sec-h2">The Studio Pass</h2>
         <p class="sp-tagline">Your fractional digital team.</p>
-        <p class="sp-price"><span class="sp-price-num">$1,900</span><span class="sp-price-mo">/month</span></p>
         <p class="sp-sub">An on-demand digital strategist with the value of a senior hire and none of the commitment.</p>
-        <div class="sp-actions">
-          <a href={BLOOM_FORM_URL} target="_blank" rel="noopener noreferrer" class="btn-white">Apply for the Studio Pass<span class="sr-only"> (opens in a new tab)</span></a>
-        </div>
-      </div>
 
-      <div class="sp-visual">
-        <div class="portal" aria-hidden="true">
+        <div class="portal sp-portal" aria-hidden="true">
           <div class="portal-window">
             <div class="portal-head">
               <span class="portal-dots"><i></i><i></i><i></i></span>
@@ -119,13 +114,15 @@ const faqCols = [faqs.slice(0, 5), faqs.slice(5)];
         </div>
       </div>
 
-      <div class="sp-included">
+      <div class="sp-card reveal reveal-d1">
+        <p class="sp-price"><span class="sp-price-num">$1,900</span><span class="sp-price-mo">/month</span></p>
         <p class="sp-label">What is included</p>
         <ul class="sp-checklist">
           {passIncludes.map((item) => (
             <li><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>{item}</li>
           ))}
         </ul>
+        <a href={BLOOM_FORM_URL} target="_blank" rel="noopener noreferrer" class="btn-grad sp-card-cta">Apply for the Studio Pass<span class="sr-only"> (opens in a new tab)</span></a>
       </div>
     </div>
   </section>

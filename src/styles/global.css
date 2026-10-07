@@ -671,8 +671,7 @@ a.arch-word:focus-visible {
 }
 .sp-left { flex: 1 1 400px; min-width: 0; }
 .sp-right { flex: 1 1 440px; min-width: 0; }
-.sp .sec-h2,
-.sp-panel .sec-h2 { color: #fff; margin-top: 24px; }
+.sp .sec-h2 { color: #fff; margin-top: 24px; }
 .sp-tagline { font-size: 20px; font-weight: 500; margin-top: 12px; }
 .sp-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px; margin-top: 28px; }
 .sp-price-num {
@@ -918,40 +917,34 @@ a.arch-word:focus-visible {
 .svc-fit-link:hover svg { transform: translateX(3px); }
 .svc-fit-link:focus-visible { outline: 2px solid var(--color-indigo); outline-offset: 4px; }
 
-/* ── Studio Pass panel ── */
-.svc-pass { background: #fff; padding: clamp(40px, 7vw, 72px) clamp(20px, 4vw, 48px) clamp(72px, 10vw, 112px); }
-.sp-panel {
-  max-width: 1104px;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 56px;
-  padding: 64px 56px;
-  border-radius: 32px;
-  background: var(--offer-gradient);
-  color: #fff;
+/* ── Studio Pass ── */
+/* Services: the offer in a white card on the full-bleed gradient */
+.sp-card {
+  flex: 1 1 420px;
+  min-width: 0;
+  padding: 40px;
+  border-radius: 24px;
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 0 24px 60px rgba(20,18,43,0.25);
 }
-.sp-panel .sp-price-num { font-size: clamp(64px, 18vw, 88px); }
-/* The requests graphic sits right on the gradient; the checklist runs full width below */
-.sp-visual { flex: 1 1 400px; min-width: 0; }
-.sp-visual .portal { margin-bottom: 0; }
-.sp-included { flex: 1 1 100%; }
-.sp-checklist {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
-  column-gap: 48px;
-}
+.sp-card .sp-price { margin-top: 0; }
+.sp-card .sp-price-num { font-size: clamp(64px, 18vw, 88px); }
+.sp-card .sp-price-mo { color: var(--ink-muted); }
+.sp-card .sp-label { color: var(--ink-muted); margin: 28px 0 4px; }
+.sp-checklist { list-style: none; }
 .sp-checklist li {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 12px 0;
-  border-top: 1px solid rgba(255,255,255,0.3);
+  border-top: 1px solid var(--line-lavender);
   font-size: 15px;
   line-height: 1.4;
 }
+.sp-checklist .check-icon { color: var(--purple); }
+.sp-card-cta { display: flex; width: 100%; margin-top: 28px; }
+.portal.sp-portal { margin: 40px 0 0; }
 
 /* Decorative requests portal */
 .portal {
@@ -1146,7 +1139,7 @@ a.arch-word:focus-visible {
 .contact-meta a:hover { text-decoration-color: currentColor; }
 
 @media (max-width: 600px) {
-  .sp-panel { padding: 40px 24px; gap: 40px; border-radius: 24px; }
+  .sp-card { padding: 28px 20px; }
   /* The window drops below the speed card and joins the flow, so wrapped rows never overflow */
   .portal { height: auto; padding-top: 64px; }
   .portal-window { position: relative; top: auto; }
