@@ -894,13 +894,13 @@ a.arch-word:focus-visible {
 /* "Find your fit" choices: white cards that read as buttons */
 .svc-fit { display: flex; flex-wrap: wrap; gap: 16px; }
 .svc-fit-link {
-  flex: 1 1 220px;
+  flex: 1 1 260px; /* wide enough that every label and answer fits on one line */
   min-width: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 20px 20px 20px 24px;
+  gap: 12px;
+  padding: 18px 16px 18px 20px;
   border: 1px solid var(--line-lavender);
   border-radius: 16px;
   background: #fff;
@@ -915,8 +915,8 @@ a.arch-word:focus-visible {
   flex-shrink: 0;
   display: grid;
   place-items: center;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: var(--lavender);
   color: var(--accent-rose);
