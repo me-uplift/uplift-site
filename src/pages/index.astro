@@ -39,24 +39,25 @@ const passRequests = [
 ];
 
 // More ways to work with us
+const reportBars = [14, 22, 18, 30, 40];
 const offers = [
   {
     label: 'Social media management',
     title: 'Strategy, content, and publishing for your channels.',
     desc: 'Consistent posting and a monthly performance report, handled by one team.',
-    link: 'See plans', href: '/services/#social',
+    link: 'See plans', href: '/services/#social', art: 'social',
   },
   {
     label: 'Creator sourcing', isNew: true,
     title: 'UGC creators for your campaigns.',
     desc: 'Vetted creators, briefed and managed by us. You receive ready-to-post content.',
-    link: 'See campaigns', href: '/services/#campaigns',
+    link: 'See campaigns', href: '/services/#campaigns', art: 'creators',
   },
   {
     label: 'Web & SEO',
     title: 'Websites and search that bring buyers to you.',
     desc: 'Websites built to convert and SEO content that gets found, in English and Spanish.',
-    link: 'See web and SEO', href: '/services/#web',
+    link: 'See web and SEO', href: '/services/#web', art: 'web',
   },
 ];
 ---
@@ -257,6 +258,48 @@ const offers = [
       <div class="offers-grid">
         {offers.map((o, i) => (
           <article class={`offer-card reveal${i ? ` reveal-d${i}` : ''}`}>
+            <div class={`oa oa-${o.art}`} aria-hidden="true">
+              {o.art === 'social' && (
+                <Fragment>
+                  <div class="oa-card oa-post">
+                    <div class="oa-post-img"></div>
+                    <span class="oa-bar oa-w70"></span>
+                    <svg class="oa-heart" viewBox="0 0 24 24" fill="currentColor"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                    <span class="oa-bar oa-w50"></span>
+                  </div>
+                  <div class="oa-card oa-report">
+                    <span class="oa-report-label">Monthly report</span>
+                    <div class="oa-chart">{reportBars.map((h) => <i style={`height:${h}px`}></i>)}</div>
+                  </div>
+                </Fragment>
+              )}
+              {o.art === 'creators' && (
+                <Fragment>
+                  <div class="oa-card oa-thumb oa-thumb-1"><span class="oa-play"></span></div>
+                  <div class="oa-card oa-thumb oa-thumb-2"><span class="oa-play"></span></div>
+                  <div class="oa-card oa-tag">Briefed</div>
+                </Fragment>
+              )}
+              {o.art === 'web' && (
+                <Fragment>
+                  <div class="oa-card oa-browser">
+                    <span class="oa-dots"><i></i><i></i><i></i></span>
+                    <span class="oa-bar oa-bar-dark"></span>
+                    <span class="oa-bar oa-w90"></span>
+                    <span class="oa-bar oa-w60"></span>
+                    <span class="oa-pill"></span>
+                  </div>
+                  <div class="oa-card oa-search">
+                    <span class="oa-field">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                      <span class="oa-bar"></span>
+                    </span>
+                    <span class="oa-bar oa-bar-purple"></span>
+                    <span class="oa-bar oa-w92"></span>
+                  </div>
+                </Fragment>
+              )}
+            </div>
             <h3 class="offer-label">{o.label}{o.isNew && <span class="offer-new">New</span>}</h3>
             <p class="offer-title">{o.title}</p>
             <p class="offer-desc">{o.desc}</p>

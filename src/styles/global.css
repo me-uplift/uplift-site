@@ -741,6 +741,84 @@ a.arch-word:focus-visible {
   border-radius: 20px;
   padding: 28px;
 }
+/* Offer card illustrations: decorative mini cards in the style of the hero collage.
+   Positions are percentages so the cards stay inside the panel at narrow widths. */
+.oa {
+  position: relative;
+  height: 150px;
+  margin-bottom: 28px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--card-light);
+}
+.oa-card {
+  position: absolute;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 10px 24px rgba(20,18,43,0.14);
+}
+.oa-bar { display: block; height: 5px; border-radius: 3px; background: #EBE8F2; }
+.oa-w50 { width: 50%; }
+.oa-w60 { width: 60%; }
+.oa-w70 { width: 70%; }
+.oa-w90 { width: 90%; }
+.oa-w92 { width: 92%; }
+/* Social media management */
+.oa-post { left: 8%; top: 20px; width: 96px; height: 118px; padding: 6px; rotate: -4deg; }
+.oa-post-img { height: 66px; border-radius: 6px; background: linear-gradient(160deg, #F0A08A, #B07CD6); margin-bottom: 7px; }
+.oa-heart { display: block; width: 10px; height: 10px; color: var(--accent-rose); margin: 6px 0; }
+.oa-report { left: 52%; top: 34px; width: 100px; height: 84px; padding: 10px; rotate: 3deg; display: flex; flex-direction: column; justify-content: space-between; }
+.oa-report-label { font-size: 6.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); }
+.oa-chart { display: flex; align-items: flex-end; gap: 6px; border-bottom: 1px solid var(--line-lavender); }
+.oa-chart i { width: 10px; border-radius: 2px 2px 0 0; background: #D9C6EE; }
+.oa-chart i:nth-child(4) { background: #B07CD6; }
+.oa-chart i:nth-child(5) { background: var(--accent-rose); }
+/* Creator sourcing */
+.oa-thumb { width: 70px; display: grid; place-items: center; }
+.oa-thumb-1 { left: 12%; top: 16px; height: 120px; rotate: -6deg; background: linear-gradient(160deg, #E9967A, #9A58A6); }
+.oa-thumb-2 { left: 38%; top: 26px; height: 114px; rotate: 4deg; background: linear-gradient(160deg, #B07CD6, #6F68BE); }
+.oa-play { position: relative; width: 22px; height: 22px; border-radius: 50%; background: #fff; }
+.oa-play::after {
+  content: '';
+  position: absolute;
+  left: 9px; top: 6px;
+  border-style: solid;
+  border-width: 5px 0 5px 7px;
+  border-color: transparent transparent transparent #9A58A6;
+}
+.oa-tag {
+  left: 64%; top: 24px;
+  width: 64px; height: 30px;
+  display: grid;
+  place-items: center;
+  rotate: -2deg;
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--ink);
+}
+/* Web & SEO */
+.oa-browser { left: 8%; top: 20px; width: 130px; height: 100px; padding: 10px; rotate: -2deg; }
+.oa-browser .oa-bar { margin-bottom: 6px; }
+.oa-dots { display: flex; gap: 4px; margin-bottom: 12px; }
+.oa-dots i { width: 5px; height: 5px; border-radius: 50%; background: #DCD6EA; }
+.oa-browser .oa-bar-dark { width: 72%; height: 7px; background: var(--ink); margin-bottom: 9px; }
+.oa-pill { display: block; width: 34px; height: 10px; border-radius: 999px; background: var(--accent-rose); margin-top: 10px; }
+.oa-search { left: 48%; top: 70px; width: 110px; height: 56px; padding: 8px; rotate: 3deg; }
+.oa-field {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 16px;
+  padding: 0 6px;
+  border: 1px solid var(--line-lavender);
+  border-radius: 999px;
+  margin-bottom: 7px;
+  color: var(--ink-muted);
+}
+.oa-field svg { width: 8px; height: 8px; flex-shrink: 0; }
+.oa-field .oa-bar { flex: 1; height: 4px; }
+.oa-bar-purple { width: 70%; height: 4px; background: var(--purple); margin-bottom: 5px; }
+
 .offer-label {
   display: flex;
   align-items: center;
