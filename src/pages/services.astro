@@ -45,10 +45,17 @@ const ugcSteps = [
 ];
 
 const webRows = [
-  { title: 'SEO', desc: 'Keyword strategy, SEO blog posts, and on-page optimization.', tag: 'Included in the Studio Pass' },
-  { title: 'Landing pages', desc: 'Single pages built to convert for campaigns and launches.', tag: 'Included in the Studio Pass' },
-  { title: 'Website builds', desc: 'Full websites from strategy and copy to design and launch.', tag: 'Custom quote', dark: true },
+  { title: 'SEO', desc: 'Keyword strategy, SEO blog posts, and on-page optimization.', tag: 'Included in the Studio Pass', icon: 'search' },
+  { title: 'Landing pages', desc: 'Single pages built to convert for campaigns and launches.', tag: 'Included in the Studio Pass', icon: 'layout' },
+  { title: 'Website builds', desc: 'Full websites from strategy and copy to design and launch.', tag: 'Custom quote', dark: true, icon: 'globe' },
 ];
+
+// Icon paths for the Web and SEO rows
+const webIcons = {
+  search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
+  layout: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/>',
+  globe: '<circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
+};
 
 const faqs = [
   { q: 'What does the Studio Pass cover?', a: 'Social, email, web, SEO, UGC, strategy, copywriting, and operations. Typical usage is about 6 hours per week. Heavier usage is reviewed with you at renewal.' },
@@ -202,11 +209,12 @@ const faqCols = [faqs.slice(0, 5), faqs.slice(5)];
       <div class="svc-web-intro reveal">
         <h2 class="sec-h2">Web and SEO.</h2>
         <p class="sec-intro">Websites built to convert and SEO content that gets found, in English and Spanish.</p>
-        <a href={BLOOM_FORM_URL} target="_blank" rel="noopener noreferrer" class="btn-outline">Request a quote<span class="sr-only"> (opens in a new tab)</span></a>
+        <a href={BLOOM_FORM_URL} target="_blank" rel="noopener noreferrer" class="btn-grad">Request a quote<span class="sr-only"> (opens in a new tab)</span></a>
       </div>
       <div class="svc-web-panel reveal reveal-d1">
         {webRows.map((r) => (
           <div class="svc-web-row">
+            <span class="svc-web-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={webIcons[r.icon]} /></span>
             <div class="svc-web-text">
               <h3 class="svc-web-title">{r.title}</h3>
               <p class="svc-web-desc">{r.desc}</p>
