@@ -1118,17 +1118,22 @@ a.arch-word:focus-visible {
 .svc-ugc-terms > div { flex: 1 1 200px; }
 .svc-ugc-terms dt { font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; }
 .svc-ugc-terms dd { font-size: 15px; line-height: 1.5; margin-top: 4px; }
-/* Steps: a 2x2 grid of peach cards */
-.svc-steps {
-  flex: 1.1 1 420px;
-  min-width: 0;
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
-  gap: 16px;
+/* Steps: a vertical timeline, numbered dots joined by a line */
+.svc-steps { flex: 1 1 380px; min-width: 0; list-style: none; }
+.svc-step { position: relative; padding: 0 0 32px 56px; }
+.svc-step:last-child { padding-bottom: 0; }
+.svc-step::before {
+  content: '';
+  position: absolute;
+  left: 15px; top: 36px; bottom: 4px;
+  width: 2px;
+  border-radius: 1px;
+  background: var(--line-lavender);
 }
-.svc-step { padding: 24px; border-radius: 16px; background: var(--peach); }
+.svc-step:last-child::before { display: none; }
 .svc-step-num {
+  position: absolute;
+  left: 0; top: 0;
   display: grid;
   place-items: center;
   width: 32px;
@@ -1139,8 +1144,8 @@ a.arch-word:focus-visible {
   font-size: 14px;
   font-weight: 700;
 }
-.svc-step-title { font-size: 20px; font-weight: 500; margin: 16px 0 6px; }
-.svc-step-desc { font-size: 15px; line-height: 1.55; }
+.svc-step-title { font-size: 20px; font-weight: 500; line-height: 32px; margin-bottom: 4px; }
+.svc-step-desc { font-size: 15px; line-height: 1.55; max-width: 420px; }
 
 /* ── Web and SEO ── */
 .svc-web { background: var(--lavender); }
