@@ -13,6 +13,7 @@ interface Props {
   noindex?: boolean;
   publishedTime?: string;
   modifiedTime?: string;
+  currentPage?: 'services';
 }
 
 const {
@@ -26,7 +27,11 @@ const {
   noindex = false,
   publishedTime,
   modifiedTime,
+  currentPage,
 } = Astro.props;
+
+// The services page has its own inquiry band, so contact links stay on the page
+const contactHref = currentPage === 'services' ? '#contact' : '/#contact';
 
 const pageURL = new URL(canonicalPath, Astro.site);
 const resolvedCanonical = canonicalURL || pageURL.toString();
@@ -80,11 +85,11 @@ const ogImageURL = new URL(ogImage, Astro.site);
   </button>
   <div class="nav-right" id="nav-menu">
     <div class="nav-links">
-      <a href="/#plans">Plans</a>
-      <a href="/#pass">Studio Pass</a>
+      <a href="/services/" aria-current={currentPage === 'services' ? 'page' : undefined}>Services</a>
+      <a href="/#studio-pass">Studio Pass</a>
       <a href="/blog/">Insights</a>
     </div>
-    <a href="/#contact" class="nav-cta">Work with us</a>
+    <a href={contactHref} class="nav-cta">Work with us</a>
   </div>
 </nav>
 
@@ -98,10 +103,10 @@ const ogImageURL = new URL(ogImage, Astro.site);
     <div class="footer-top">
       <a href="/" class="footer-logo"><img src="/assets/UpliftLogo_GradientTextFixed.svg" alt="Uplift Digital Studio home"></a>
       <nav class="footer-nav" aria-label="Footer">
-        <a href="/#plans">Plans</a>
-        <a href="/#pass">Studio Pass</a>
+        <a href="/services/">Services</a>
+        <a href="/#studio-pass">Studio Pass</a>
         <a href="/blog/">Insights</a>
-        <a href="/#contact">Contact</a>
+        <a href={contactHref}>Contact</a>
         <a href="https://myaeliza.com" target="_blank" rel="noopener">Creator Portfolio<span class="sr-only"> (opens in a new tab)</span></a>
       </nav>
     </div>

@@ -132,7 +132,8 @@ main:focus { outline: none; } /* focused by the skip link; not interactive itsel
   text-decoration: none;
   transition: color 200ms;
 }
-.nav-links a:hover { text-decoration: underline; text-underline-offset: 6px; }
+.nav-links a:hover,
+.nav-links a[aria-current="page"] { text-decoration: underline; text-underline-offset: 6px; }
 .nav-cta {
   color: var(--nav-color) !important;
   border: 1px solid currentColor !important;
