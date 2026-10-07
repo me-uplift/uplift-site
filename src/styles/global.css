@@ -933,15 +933,16 @@ a.arch-word:focus-visible {
   color: #fff;
 }
 .sp-panel .sp-price-num { font-size: clamp(64px, 18vw, 88px); }
-.sp-box {
-  flex: 1 1 460px;
-  min-width: 0;
-  padding: 36px;
-  border-radius: 24px;
-  background: rgba(20,18,43,0.22);
-  border: 1px solid rgba(255,255,255,0.4);
+/* The requests graphic sits right on the gradient; the checklist runs full width below */
+.sp-visual { flex: 1 1 400px; min-width: 0; }
+.sp-visual .portal { margin-bottom: 0; }
+.sp-included { flex: 1 1 100%; }
+.sp-checklist {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  column-gap: 48px;
 }
-.sp-checklist { list-style: none; }
 .sp-checklist li {
   display: flex;
   align-items: center;
@@ -1146,7 +1147,6 @@ a.arch-word:focus-visible {
 
 @media (max-width: 600px) {
   .sp-panel { padding: 40px 24px; gap: 40px; border-radius: 24px; }
-  .sp-box { padding: 24px 20px; }
   /* The window drops below the speed card and joins the flow, so wrapped rows never overflow */
   .portal { height: auto; padding-top: 64px; }
   .portal-window { position: relative; top: auto; }
