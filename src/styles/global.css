@@ -134,23 +134,21 @@ main:focus { outline: none; } /* focused by the skip link; not interactive itsel
 }
 .nav-links a:hover,
 .nav-links a[aria-current="page"] { text-decoration: underline; text-underline-offset: 6px; }
-.nav-cta {
-  color: var(--nav-color) !important;
-  border: 1px solid currentColor !important;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: 9px 20px;
-  transition: background 200ms, color 200ms, opacity 200ms;
+/* Nav button: a compact .btn. Light over the transparent hero, dark once the nav or menu turns white */
+.btn.nav-cta { min-height: 40px; padding: 0 20px; font-size: 12px; letter-spacing: 0.1em; }
+:is(#nav.scrolled, #nav.menu-open) .nav-cta { background-color: var(--ink); color: #fff; }
+:is(#nav.scrolled, #nav.menu-open) .nav-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--btn-gradient);
+  opacity: 0;
+  transition: opacity 200ms var(--ease);
 }
-.nav-cta:hover { opacity: 1; background: var(--nav-color); color: var(--bg) !important; }
-/* Transparent nav (top of the hero): the hover fill is white, so the label goes dark */
-@media (min-width: 761px) {
-  #nav:not(.scrolled) .nav-cta:hover { color: var(--fg-on-light) !important; }
-}
+:is(#nav.scrolled, #nav.menu-open) .nav-cta:hover { background-color: var(--ink); box-shadow: 0 10px 24px rgba(111,104,190,0.3); }
+:is(#nav.scrolled, #nav.menu-open) .nav-cta:hover::before { opacity: 1; }
+:is(#nav.scrolled, #nav.menu-open) .nav-cta:focus-visible { outline-color: var(--color-indigo); }
 
 /* ════════════════════════ HERO ════════════════════════ */
 /* Gradient hero: copy on the left, deliverables collage on the right,
@@ -208,22 +206,6 @@ main:focus { outline: none; } /* focused by the skip link; not interactive itsel
   margin-bottom: 36px;
 }
 .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 28px; }
-.hero-btn-primary {
-  display: inline-flex;
-  align-items: center;
-  min-height: 52px;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: var(--hero-ink);
-  background: #fff;
-  padding: 0 32px;
-  border-radius: 999px;
-  transition: transform 200ms, box-shadow 200ms;
-}
-.hero-btn-primary:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(30,16,60,.2); }
 .hero-link-secondary {
   /* 44px-tall tap area without changing how the link looks */
   display: inline-flex;
@@ -237,7 +219,7 @@ main:focus { outline: none; } /* focused by the skip link; not interactive itsel
   transition: opacity 200ms;
 }
 .hero-link-secondary:hover { text-decoration-thickness: 2px; }
-.hero-btn-primary:focus-visible, .hero-link-secondary:focus-visible {
+.hero-link-secondary:focus-visible {
   outline: 2px solid #fff;
   outline-offset: 4px;
 }
@@ -434,7 +416,7 @@ a.arch-word:focus-visible {
   .hero-headline { font-size: clamp(38px, 5vw, 50px); max-width: 400px; margin-bottom: 20px; }
   .hero-sub { max-width: 360px; margin-bottom: 28px; }
   .hero-actions { gap: 20px; }
-  .hero-btn-primary { padding: 0 26px; }
+  .hero-actions .btn { padding: 0 26px; }
   /* scale first, then pull up by half the (unscaled) height to center it */
   .hero-collage { top: 50%; transform: scale(0.66) translateY(-50%); }
 }
@@ -485,7 +467,7 @@ a.arch-word:focus-visible {
   .hero-copy { padding: 104px 0 36px; }
   .hero-sub { margin-bottom: 28px; }
   .hero-actions { gap: 16px; }
-  .hero-btn-primary { padding: 0 22px; }
+  .hero-actions .btn { padding: 0 22px; }
   .hero-collage { gap: 10px; }
   .hc-landing { flex-basis: 60%; }
   .hc-post { flex-basis: 40%; padding: 7px; border-radius: 12px; }
@@ -627,27 +609,58 @@ a.arch-word:focus-visible {
   max-width: 620px;
   margin-top: 20px;
 }
-.btn-white,
-.btn-outline {
+/* ── Buttons: one for light backgrounds, one for dark ──
+   Same pill shape, type, and lift on hover; each is built for contrast on its background.
+   .btn-dark  sits on white, lavender, and peach. Hover fades in the brand gradient.
+   .btn-light sits on the gradient and navy. Hover tints it lavender. */
+.btn {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 10px;
   min-height: 52px;
   padding: 0 32px;
+  border: 0;
   border-radius: 999px;
+  font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
   text-align: center;
-  transition: transform 200ms, box-shadow 200ms, background 200ms, color 200ms;
+  cursor: pointer;
+  transition: translate 200ms var(--ease), box-shadow 200ms var(--ease), background-color 200ms var(--ease);
 }
-.btn-white { background: #fff; color: var(--ink); }
-.btn-white:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(30,16,60,.2); }
-.btn-white:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
-.btn-outline { border: 1.5px solid var(--ink); color: var(--ink); background: transparent; }
-.btn-outline:hover { background: var(--ink); color: #fff; }
+.btn svg { flex-shrink: 0; transition: transform 200ms var(--ease); }
+.btn:hover { translate: 0 -1px; }
+.btn:hover svg { transform: translateX(3px); }
+.btn-dark { background-color: var(--ink); color: #fff; }
+/* The gradient sits on a layer that fades in, since gradients can't transition directly.
+   White text clears 4.5:1 on both the ink and the deepened gradient. */
+.btn-dark::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--btn-gradient);
+  opacity: 0;
+  transition: opacity 200ms var(--ease);
+}
+.btn-dark:hover::before { opacity: 1; }
+.btn-dark:hover { box-shadow: 0 10px 24px rgba(111,104,190,0.3); }
+.btn-dark:focus-visible { outline: 2px solid var(--color-indigo); outline-offset: 3px; }
+.btn-light { background-color: #fff; color: var(--ink); }
+.btn-light:hover { background-color: var(--lavender); box-shadow: 0 10px 24px rgba(20,18,43,0.25); }
+.btn-light:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  .btn, .btn::before, .btn svg { transition: none; }
+  .btn:hover { translate: none; }
+  .btn:hover svg { transform: none; }
+}
 .check-icon { flex-shrink: 0; width: 18px; height: 18px; }
 
 /* ── Studio Pass (home: #studio-pass, full-bleed gradient) ── */
@@ -1063,7 +1076,8 @@ a.arch-word:focus-visible {
     border-color: var(--purple);
     box-shadow: 0 28px 60px rgba(111,104,190,0.26);
   }
-  .svc-plan:hover .btn-outline { background: var(--ink); color: #fff; }
+  /* Hovering a plan previews its button's hover state */
+  .svc-plan:hover .btn-dark::before { opacity: 1; }
   .svc-addon-row:hover { border-color: var(--purple); box-shadow: 0 12px 28px rgba(111,104,190,0.16); }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -1153,7 +1167,7 @@ a.arch-word:focus-visible {
 .svc-web .sec-intro { color: var(--ink); }
 .svc-web-cols { display: flex; flex-wrap: wrap; align-items: center; gap: 48px 64px; }
 .svc-web-intro { flex: 1 1 400px; min-width: 0; }
-.svc-web-intro .btn-grad { margin-top: 32px; }
+.svc-web-intro .btn { margin-top: 32px; }
 /* Card styling matches the social media plan cards */
 .svc-web-panel {
   flex: 1 1 420px;
@@ -1231,29 +1245,9 @@ a.arch-word:focus-visible {
   .svc-addons { padding: 20px; }
   .svc-addon-row { padding: 18px; }
   .svc-ugc-price { padding: 20px; }
-  .svc-ugc-price .btn-grad { width: 100%; }
+  .svc-ugc-price .btn { width: 100%; }
   .svc-web-panel { padding: 4px 20px; }
 }
-
-/* ── Shared gradient pill button ── */
-.btn-grad {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 52px;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #fff;
-  background: var(--btn-gradient);
-  padding: 0 32px;
-  border-radius: 999px;
-  text-decoration: none;
-  transition: filter 200ms, transform 200ms;
-}
-/* Darken (not fade) on hover so the white label keeps its contrast */
-.btn-grad:hover { filter: brightness(0.92); transform: translateY(-1px); }
 
 /* ════════════════════════ ABOUT ════════════════════════ */
 #team {
@@ -1389,25 +1383,8 @@ a.arch-word:focus-visible {
   margin: 0 auto var(--space-7);
   text-wrap: balance;
 }
-.contact-cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-3);
-  min-height: 56px;
-  padding: 0 40px;
-  border-radius: var(--radius-pill);
-  background: var(--btn-gradient);
-  color: var(--color-white);
-  font-size: 17px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: filter 200ms, transform 200ms;
-}
-.contact-cta svg { flex-shrink: 0; transition: transform var(--duration-base) var(--ease); }
-.contact-cta:hover { filter: brightness(0.92); transform: translateY(-1px); }
-.contact-cta:hover svg { transform: translateX(3px); }
-.contact-cta:focus-visible { outline: 3px solid var(--color-white); outline-offset: 4px; }
+/* Larger than the default button since it is the page's last call to action */
+.contact-cta { min-height: 56px; padding: 0 40px; }
 /* Bloom inquiry form popup, centered by the browser's default dialog margins */
 .inquiry-modal {
   width: min(720px, calc(100vw - 32px));
@@ -1610,13 +1587,7 @@ a.arch-word:focus-visible {
     padding: 16px 0;
     border-bottom: 1px solid var(--rule);
   }
-  .nav-cta {
-    color: var(--fg) !important;
-    text-align: center;
-    margin-top: 20px;
-    padding: 14px 20px;
-  }
-  .nav-cta:hover { background: var(--fg); color: #fff !important; }
+  .btn.nav-cta { margin-top: 20px; min-height: 48px; }
   /* keep the burger + logo readable before scroll, since menu panel is white */
   #nav.menu-open { background: var(--bg-white); border-bottom-color: var(--border-light); --nav-color: var(--fg-on-light); }
   #nav.menu-open #nav-logo-img { filter: none; }
@@ -1703,29 +1674,6 @@ a.cat:hover { filter: brightness(0.95); }
 .card-meta { display: flex; flex-wrap: wrap; gap: 6px; font-size: 14px; color: var(--color-muted); }
 .card-meta > * + *::before { content: '·'; margin-right: 6px; }
 
-/* ── Gradient button (design system: white bold 16px on --gradient-full) ── */
-.btn-gradient {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 52px;
-  padding: 0 var(--space-6);
-  border: 0;
-  border-radius: var(--radius-pill);
-  background: var(--btn-gradient);
-  color: var(--color-white);
-  font-family: var(--font-sans);
-  font-size: var(--text-sm);
-  font-weight: var(--weight-bold);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-decoration: none;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: filter var(--duration-base) var(--ease), transform var(--duration-base) var(--ease);
-}
-.btn-gradient:hover { filter: brightness(0.92); transform: translateY(-1px); }
-.btn-gradient:focus-visible,
 .filter-chip:focus-visible,
 .post-card:focus-visible,
 .mag-lead:focus-visible,

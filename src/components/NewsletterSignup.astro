@@ -24,7 +24,7 @@ const Title = variant === 'inline' ? 'p' : 'h2';
     <label for={`${id}-email`} class:list={{ 'sr-only': variant === 'strip' }}>Email address</label>
     <div class="newsletter-row">
       <input id={`${id}-email`} name="email" type="email" autocomplete="email" placeholder="you@yourbrand.com" required>
-      <button type="submit" class="btn-gradient">Subscribe</button>
+      <button type="submit" class="btn btn-dark">Subscribe</button>
     </div>
     <p class="newsletter-status" role="status"></p>
   </form>
