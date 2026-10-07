@@ -913,31 +913,30 @@ a.arch-word:focus-visible {
 .svc-fit-link:focus-visible { outline: 2px solid var(--color-indigo); outline-offset: 4px; }
 
 /* ── Studio Pass ── */
-/* Services: the offer in a white card on the full-bleed gradient */
+/* Services: the offer in a translucent box on the full-bleed gradient, matching the
+   homepage request tiles (the dark tint keeps white text above 4.5:1) */
 .sp-card {
   flex: 1 1 420px;
   min-width: 0;
   padding: 40px;
   border-radius: 24px;
-  background: #fff;
-  color: var(--ink);
-  box-shadow: 0 24px 60px rgba(20,18,43,0.25);
+  background: rgba(20,18,43,0.22);
+  border: 1px solid rgba(255,255,255,0.4);
+  color: #fff;
 }
 .sp-card .sp-price { margin-top: 0; }
 .sp-card .sp-price-num { font-size: clamp(64px, 18vw, 88px); }
-.sp-card .sp-price-mo { color: var(--ink-muted); }
-.sp-card .sp-label { color: var(--ink-muted); margin: 28px 0 4px; }
+.sp-card .sp-label { margin: 28px 0 4px; }
 .sp-checklist { list-style: none; }
 .sp-checklist li {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 12px 0;
-  border-top: 1px solid var(--line-lavender);
+  border-top: 1px solid rgba(255,255,255,0.3);
   font-size: 15px;
   line-height: 1.4;
 }
-.sp-checklist .check-icon { color: var(--purple); }
 .sp-card-cta { display: flex; width: 100%; margin-top: 28px; }
 .portal.sp-portal { margin: 40px 0 0; }
 
