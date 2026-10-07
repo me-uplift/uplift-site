@@ -39,7 +39,6 @@ const passRequests = [
 ];
 
 // More ways to work with us
-const reportBars = [14, 22, 18, 30, 40];
 const offers = [
   {
     label: 'Social media management',
@@ -263,13 +262,21 @@ const offers = [
                 <Fragment>
                   <div class="oa-card oa-post">
                     <div class="oa-post-img"></div>
-                    <span class="oa-bar oa-w70"></span>
-                    <svg class="oa-heart" viewBox="0 0 24 24" fill="currentColor"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-                    <span class="oa-bar oa-w50"></span>
+                    <div class="oa-post-row">
+                      <svg class="oa-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                      <span class="oa-bar"></span>
+                    </div>
+                    <span class="oa-bar oa-post-bar"></span>
                   </div>
-                  <div class="oa-card oa-report">
-                    <span class="oa-report-label">Monthly report</span>
-                    <div class="oa-chart">{reportBars.map((h) => <i style={`height:${h}px`}></i>)}</div>
+                  <div class="oa-card oa-email">
+                    <div class="oa-email-head">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+                      <span>Your October newsletter</span>
+                    </div>
+                    <div class="oa-email-banner"></div>
+                    <span class="oa-bar oa-email-bar1"></span>
+                    <span class="oa-bar oa-email-bar2"></span>
+                    <span class="oa-email-pill"></span>
                   </div>
                 </Fragment>
               )}
