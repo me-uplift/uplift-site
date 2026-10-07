@@ -1070,36 +1070,39 @@ a.arch-word:focus-visible {
 
 /* ── UGC creators ── */
 .svc-ugc { background: var(--peach); }
-.svc-steps { list-style: none; display: flex; flex-wrap: wrap; gap: 32px 24px; margin-top: 48px; }
-.svc-step { flex: 1 1 220px; min-width: 0; padding-top: 20px; border-top: 1px solid #E6CBC1; }
-.svc-step-num { font-size: 13px; font-weight: 700; letter-spacing: 0.1em; color: var(--accent-rose); }
-.svc-step-title { font-size: 22px; font-weight: 500; color: var(--ink); margin: 10px 0 8px; }
-.svc-step-desc { font-size: 15px; line-height: 1.6; color: var(--ink-muted); }
-.svc-ugc-panel {
+.svc-ugc-cols { display: flex; flex-wrap: wrap; align-items: center; gap: 48px 64px; }
+.svc-ugc-intro { flex: 1.3 1 400px; min-width: 0; }
+.svc-steps { list-style: none; margin-top: 32px; }
+.svc-step {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 64px;
-  margin-top: 72px;
-  padding: 56px;
-  border-radius: 24px;
+  gap: 16px;
+  padding: 14px 0;
+  border-top: 1px solid #E6CBC1;
+}
+.svc-step-num { flex-shrink: 0; width: 24px; padding-top: 2px; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; color: var(--accent-rose); }
+.svc-step-desc { font-size: 15px; line-height: 1.55; color: var(--ink-muted); }
+.svc-step-desc strong { font-weight: 600; color: var(--ink); }
+.svc-ugc-card {
+  flex: 1 1 340px;
+  min-width: 0;
+  padding: 36px;
+  border-radius: 20px;
   background: #fff;
 }
-.svc-ugc-price { flex: 1 1 280px; min-width: 0; }
-.svc-ugc-from { font-size: 15px; color: var(--ink-muted); margin-top: 20px; }
+.svc-ugc-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-top: 16px; font-size: 15px; color: var(--ink-muted); }
 .svc-ugc-num {
-  font-size: clamp(64px, 18vw, 88px);
+  font-size: 56px;
   font-weight: 300; /* no Satoshi Light file, so this renders at Regular */
   line-height: 1;
   letter-spacing: -0.04em;
   color: var(--accent-rose);
 }
-.svc-ugc-per { font-size: 15px; color: var(--ink-muted); margin-top: 6px; }
-.svc-ugc-scope { font-size: 20px; font-weight: 500; color: var(--ink); margin: 20px 0 28px; }
-.svc-ugc-terms { flex: 1 1 320px; min-width: 0; }
-.svc-ugc-terms > div { padding: 20px 0; border-top: 1px solid #ECE7F6; }
-.svc-ugc-terms > div:last-child { border-bottom: 1px solid #ECE7F6; }
-.svc-ugc-terms dd { font-size: 17px; line-height: 1.5; color: var(--ink); margin-top: 8px; }
+.svc-ugc-scope { font-size: 18px; font-weight: 500; color: var(--ink); margin-top: 12px; }
+.svc-ugc-terms { margin-top: 20px; }
+.svc-ugc-terms > div { padding: 12px 0; border-top: 1px solid #ECE7F6; }
+.svc-ugc-terms dt { font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-muted); }
+.svc-ugc-terms dd { font-size: 15px; line-height: 1.5; color: var(--ink); margin-top: 4px; }
+.svc-ugc-cta { display: flex; width: 100%; margin-top: 20px; }
 
 /* ── Web and SEO ── */
 .svc-web { background: var(--lavender); }
@@ -1161,7 +1164,7 @@ a.arch-word:focus-visible {
   .svc-plan { padding: 32px 24px; }
   .svc-addons { padding: 20px; }
   .svc-addon-row { padding: 18px; }
-  .svc-ugc-panel { padding: 32px 24px; gap: 40px; margin-top: 56px; }
+  .svc-ugc-card { padding: 28px 20px; }
   .svc-web-panel { padding: 4px 20px; }
 }
 
