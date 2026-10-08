@@ -19,6 +19,9 @@ html { scroll-behavior: smooth; }
   --gradient-deep: linear-gradient(90deg, var(--gradient-deep-stops));
   /* Every gradient button on the site uses this */
   --btn-gradient: var(--gradient-deep);
+  /* Hover fill for buttons and small icon circles: the purple end of the brand gradient only,
+     since the full five-stop gradient looks crowded in a small space. White text clears 4.5:1. */
+  --btn-hover-gradient: linear-gradient(90deg, #9A58A6 0%, #6F68BE 100%);
   /* Gradient text on light backgrounds: lightest stops nudged to clear 3:1 for large text */
   --gradient-text-safe: linear-gradient(90deg, #CD7D6E 0%, #C779AD 30%, #9B70C0 55%, #7878C8 75%, #5E65B5 100%);
 }
@@ -142,7 +145,7 @@ main:focus { outline: none; } /* focused by the skip link; not interactive itsel
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: var(--btn-gradient);
+  background: var(--btn-hover-gradient);
   opacity: 0;
   transition: opacity 200ms var(--ease);
 }
@@ -640,13 +643,13 @@ a.arch-word:focus-visible {
 .btn:hover svg { transform: translateX(3px); }
 .btn-dark { background-color: var(--ink); color: #fff; }
 /* The gradient sits on a layer that fades in, since gradients can't transition directly.
-   White text clears 4.5:1 on both the ink and the deepened gradient. */
+   White text clears 4.5:1 on both the ink and the hover gradient. */
 .btn-dark::before {
   content: '';
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: var(--btn-gradient);
+  background: var(--btn-hover-gradient);
   opacity: 0;
   transition: opacity 200ms var(--ease);
 }
@@ -973,7 +976,7 @@ a.arch-word:focus-visible {
   border-color: #CFC6E8;
   box-shadow: 0 12px 28px rgba(111,104,190,0.16);
 }
-.svc-fit-link:hover .svc-fit-arrow { background: var(--btn-gradient); color: #fff; }
+.svc-fit-link:hover .svc-fit-arrow { background: var(--btn-hover-gradient); color: #fff; }
 .svc-fit-link:focus-visible { outline: 2px solid var(--color-indigo); outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) {
   .svc-fit-link:hover { translate: none; }
@@ -1280,7 +1283,7 @@ a.arch-word:focus-visible {
 }
 .svc-faq-icon svg { transition: transform var(--duration-base) var(--ease); }
 .svc-faq-q:hover .svc-faq-icon,
-.svc-faq-item[open] .svc-faq-icon { background: var(--btn-gradient); color: #fff; }
+.svc-faq-item[open] .svc-faq-icon { background: var(--btn-hover-gradient); color: #fff; }
 .svc-faq-item[open] .svc-faq-icon svg { transform: rotate(45deg); }
 .svc-faq-q:focus-visible { outline: 2px solid var(--color-indigo); outline-offset: 2px; border-radius: 4px; }
 .svc-faq-a { padding: 0 48px 24px 0; font-size: 15px; line-height: 1.65; color: var(--ink); }
