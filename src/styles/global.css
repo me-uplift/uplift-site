@@ -2013,8 +2013,9 @@ a.cat:hover { filter: brightness(0.95); }
 }
 .newsletter--strip.is-subscribed { animation: none; }
 .newsletter--strip::after { display: none; }
-.newsletter--strip .newsletter-title { font-size: var(--text-md); margin-bottom: 2px; color: #fff; }
-.newsletter--strip .newsletter-sub { font-size: var(--text-sm); color: #fff; }
+/* One step above the post card titles (20px), with the sub matching the card descriptions (16px) */
+.newsletter--strip .newsletter-title { font-size: var(--text-xl); line-height: var(--leading-tight); margin-bottom: var(--space-1); color: #fff; }
+.newsletter--strip .newsletter-sub { font-size: var(--text-base); line-height: var(--leading-normal); color: #fff; }
 .newsletter--strip .newsletter-row input { min-height: 44px; border-color: transparent; border-radius: 999px; }
 .newsletter--strip .newsletter-row .btn { min-height: 44px; padding: 0 24px; }
 .newsletter--strip .newsletter-status { color: #fff; }
@@ -2345,6 +2346,7 @@ a.cat:hover { filter: brightness(0.95); }
   .newsletter { grid-template-columns: 1fr; padding: var(--space-6) var(--space-5); gap: var(--space-5); }
   .newsletter--strip { padding: var(--space-6) var(--container-pad); }
   .newsletter--strip .newsletter-inner { grid-template-columns: 1fr; gap: var(--space-3); }
+  .newsletter--strip .newsletter-title { font-size: var(--text-lg); }
   .post-cover img { height: auto; aspect-ratio: 16 / 9; }
 }
 @media (max-width: 700px) {
