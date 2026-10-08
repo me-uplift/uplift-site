@@ -97,7 +97,11 @@ const faqCols = [faqs.slice(0, 5), faqs.slice(5)];
 
   <!-- STUDIO PASS -->
   <!-- Full-bleed gradient: intro and requests graphic on the gradient, the offer in a white card -->
-  <section id="pass" class="sec sp" data-screen-label="Studio Pass">
+  <section id="pass" class="sec sp sp--arch" data-screen-label="Studio Pass">
+    <!-- The gradient rises into the light header in the same curve as the homepage arch -->
+    <svg class="sp-arch" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 0 H1440 V90 Q720 -30 0 90 Z" />
+    </svg>
     <div class="sec-inner sp-cols">
       <div class="sp-left reveal">
         <h2 class="sec-h2">The Studio Pass</h2>

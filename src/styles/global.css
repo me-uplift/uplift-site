@@ -668,6 +668,18 @@ a.arch-word:focus-visible {
 
 /* ── Studio Pass (home: #studio-pass, full-bleed gradient) ── */
 .sp { background: var(--offer-gradient); color: #fff; }
+/* Services: the top edge curves up into the light header (filled with the header color) */
+.sp--arch { position: relative; padding-top: calc(clamp(72px, 10vw, 112px) + 5vw); }
+.sp-arch {
+  position: absolute;
+  top: -2px; left: 0; /* overlap so no gradient hairline shows at fractional pixel edges */
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1440 / 90;
+  fill: var(--bg-light);
+  pointer-events: none;
+}
 .sp-cols {
   display: flex;
   flex-wrap: wrap;
