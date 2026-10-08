@@ -762,15 +762,15 @@ a.arch-word:focus-visible {
 }
 .offer-card.reveal-d1, .svc-plan.reveal-d1 { transition-delay: 0.08s, 0.08s, 0s, 0s, 0s; }
 .offer-card.reveal-d2, .svc-plan.reveal-d2 { transition-delay: 0.16s, 0.16s, 0s, 0s, 0s; }
-.oa-card { transition: scale 400ms var(--ease); }
+.oa-card { transition: scale 600ms cubic-bezier(0.22, 1, 0.36, 1); }
 @media (hover: hover) {
   .offer-card:hover {
-    translate: 0 -6px;
-    border-color: var(--purple);
-    box-shadow: 0 28px 60px rgba(111,104,190,0.22);
+    translate: 0 -2px;
+    border-color: var(--line-lavender);
+    box-shadow: 0 16px 40px rgba(20,18,43,0.08);
   }
   /* The illustration zooms in slightly; the panel clips the edges */
-  .offer-card:hover .oa-card { scale: 1.08; }
+  .offer-card:hover .oa-card { scale: 1.04; }
   .offer-card:hover .offer-link { text-decoration: underline; text-underline-offset: 4px; }
   .offer-card:hover .offer-link svg { transform: translateX(3px); }
 }
