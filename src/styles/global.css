@@ -2025,15 +2025,15 @@ a.cat:hover { filter: brightness(0.95); }
 /* Inner wrapper only matters for the strip; elsewhere the card's grid lays out its children directly */
 .newsletter-inner { display: contents; }
 
-/* Strip variant: a slim full-width gradient band on the blog index, copy left and form right,
-   aligned with the page content. The gradient's deepened first stop keeps white text above 4.5:1. */
+/* Strip variant: a slim full-width navy band on the blog index, copy left and form right,
+   aligned with the page content. */
 .newsletter--strip {
   display: block;
   margin-inline: calc(50% - 50vw);
   padding: var(--space-6) var(--container-pad);
   border-radius: 0;
   box-shadow: none;
-  background: var(--offer-gradient);
+  background: var(--ink-bg); /* same navy as the "Ready to grow?" section */
 }
 .newsletter--strip .newsletter-inner {
   display: grid;
