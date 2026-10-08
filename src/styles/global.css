@@ -991,9 +991,9 @@ a.arch-word:focus-visible {
   border: 1px solid rgba(255,255,255,0.4);
   color: #fff;
 }
-.sp-card .sp-price { margin-top: 0; }
+.sp-card .sp-price { margin-top: 28px; }
 .sp-card .sp-price-num { font-size: clamp(48px, 13vw, 56px); }
-.sp-card .sp-label { margin: 28px 0 4px; }
+.sp-card .sp-label { margin: 0 0 4px; }
 .sp-checklist { list-style: none; }
 .sp-checklist li {
   display: flex;
