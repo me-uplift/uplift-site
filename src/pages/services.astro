@@ -132,7 +132,7 @@ const faqCols = [faqs.slice(0, 5), faqs.slice(5)];
         <p class="sp-label">What is included</p>
         <ul class="sp-checklist">
           {passIncludes.map((item) => (
-            <li><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>{item}</li>
+            <li><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12"/><path d="m7.5 12.5 3 3 6-6.5"/></svg>{item}</li>
           ))}
         </ul>
         <p class="sp-price"><span class="sp-price-num">$1,900</span><span class="sp-price-mo">/month</span></p>
@@ -156,7 +156,7 @@ const faqCols = [faqs.slice(0, 5), faqs.slice(5)];
             <p class="svc-plan-per">per month</p>
             <ul class="svc-plan-features">
               {p.features.map((f) => (
-                <li><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>{f}</li>
+                <li><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12"/><path d="m7.5 12.5 3 3 6-6.5"/></svg>{f}</li>
               ))}
             </ul>
             <a href={BLOOM_FORM_URL} target="_blank" rel="noopener noreferrer" class="btn btn-dark svc-plan-cta">Choose {p.name}<span class="sr-only"> (opens in a new tab)</span></a>

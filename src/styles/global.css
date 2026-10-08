@@ -664,7 +664,11 @@ a.arch-word:focus-visible {
   .btn:hover { translate: none; }
   .btn:hover svg { transform: none; }
 }
-.check-icon { flex-shrink: 0; width: 18px; height: 18px; }
+/* Check badge: a solid circle with a bold check. White badge on the gradient by default;
+   the light plan cards switch it to lavender (below). */
+.check-icon { flex-shrink: 0; width: 20px; height: 20px; }
+.check-icon circle { fill: #fff; }
+.check-icon path { fill: none; stroke: var(--purple); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
 
 /* ── Studio Pass (home: #studio-pass, full-bleed gradient) ── */
 .sp { background: var(--offer-gradient); color: #fff; }
@@ -1032,13 +1036,11 @@ a.arch-word:focus-visible {
 .sp-card .sp-price { margin-top: 28px; }
 .sp-card .sp-price-num { font-size: clamp(48px, 13vw, 56px); }
 .sp-card .sp-label { margin: 0 0 4px; }
-.sp-checklist { list-style: none; }
+.sp-checklist { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-top: 16px; }
 .sp-checklist li {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 0;
-  border-top: 1px solid rgba(255,255,255,0.3);
   font-size: 15px;
   line-height: 1.4;
 }
@@ -1136,7 +1138,7 @@ a.arch-word:focus-visible {
 .svc-plan-per { font-size: 14px; margin: 8px 0 28px; }
 .svc-plan-features { list-style: none; display: flex; flex-direction: column; gap: 12px; }
 .svc-plan-features li { display: flex; align-items: center; gap: 10px; font-size: 15px; line-height: 1.4; color: var(--ink); }
-.svc-plan-features .check-icon { color: var(--purple); }
+.svc-plan-features .check-icon circle { fill: var(--lavender); }
 /* margin-top: auto lines the buttons up across cards of different lengths */
 .svc-plan-cta { display: flex; width: 100%; margin-top: auto; }
 .svc-plan-features { margin-bottom: 32px; }
