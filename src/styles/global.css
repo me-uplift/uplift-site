@@ -1857,8 +1857,29 @@ a.cat:hover { filter: brightness(0.95); }
   overflow: hidden;
 }
 .mag-item-thumb { aspect-ratio: 3 / 2; border-radius: var(--radius-md); overflow: hidden; background: var(--bg-light); }
-.mag-lead-title, .mag-item-title { transition: opacity var(--duration-fast) var(--ease); }
-.mag-lead:hover .mag-lead-title, .mag-item:hover .mag-item-title { opacity: 0.7; }
+/* Post hovers, matching the homepage offer cards: the image zooms in slightly and the
+   title underlines. Post cards also lift (below). */
+.mag-lead-title, .mag-item-title, .post-card-title {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
+  transition: text-decoration-color var(--duration-base) var(--ease);
+}
+.mag-lead-media > *, .mag-item-thumb > *, .post-card-media > * {
+  transition: scale 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+@media (hover: hover) {
+  .mag-lead:hover .mag-lead-title,
+  .mag-item:hover .mag-item-title,
+  .post-card:hover .post-card-title { text-decoration-color: currentColor; }
+  .mag-lead:hover .mag-lead-media > *,
+  .mag-item:hover .mag-item-thumb > *,
+  .post-card:hover .post-card-media > * { scale: 1.04; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mag-lead-media > *, .mag-item-thumb > *, .post-card-media > * { transition: none; scale: none !important; }
+}
 
 /* ── Filter bar ── */
 .filter-bar { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-bottom: var(--space-6); }
@@ -1895,13 +1916,14 @@ a.cat:hover { filter: brightness(0.95); }
   background: var(--bg-white);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-light-md);
+  border: 1px solid transparent;
   overflow: hidden;
   text-decoration: none;
   color: var(--fg-on-light);
-  transition: transform var(--duration-base) var(--ease), box-shadow var(--duration-base) var(--ease);
+  transition: transform var(--duration-base) var(--ease), box-shadow var(--duration-base) var(--ease), border-color var(--duration-base) var(--ease);
 }
 .post-card[hidden] { display: none; }
-.post-card:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(16,16,26,0.14); }
+.post-card:hover { transform: translateY(-2px); border-color: var(--line-lavender); box-shadow: 0 16px 40px rgba(20,18,43,0.12); }
 .post-card-media { aspect-ratio: 16 / 9; overflow: hidden; background: var(--bg-light); }
 .post-card-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .post-card-body { padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3); flex: 1; }
