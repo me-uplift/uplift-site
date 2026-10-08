@@ -1998,7 +1998,7 @@ a.cat:hover { filter: brightness(0.95); }
 .newsletter--strip {
   display: block;
   margin-inline: calc(50% - 50vw);
-  padding: var(--space-4) var(--container-pad);
+  padding: var(--space-6) var(--container-pad);
   border-radius: 0;
   box-shadow: none;
   background: var(--offer-gradient);
@@ -2343,7 +2343,7 @@ a.cat:hover { filter: brightness(0.95); }
   .blog-index-headline { font-size: 36px; }
   .filter-chip { min-height: 44px; }
   .newsletter { grid-template-columns: 1fr; padding: var(--space-6) var(--space-5); gap: var(--space-5); }
-  .newsletter--strip { padding: var(--space-5) var(--container-pad); }
+  .newsletter--strip { padding: var(--space-6) var(--container-pad); }
   .newsletter--strip .newsletter-inner { grid-template-columns: 1fr; gap: var(--space-3); }
   .post-cover img { height: auto; aspect-ratio: 16 / 9; }
 }
