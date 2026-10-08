@@ -234,10 +234,13 @@ const faqCols = [faqs.slice(0, 5), faqs.slice(5)];
         {faqCols.map((col) => (
           <div class="svc-faq-col">
             {col.map((f) => (
-              <div class="svc-faq-item reveal">
-                <h3 class="svc-faq-q">{f.q}</h3>
+              <details class="svc-faq-item reveal">
+                <summary class="svc-faq-q">
+                  {f.q}
+                  <span class="svc-faq-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span>
+                </summary>
                 <p class="svc-faq-a">{f.a}</p>
-              </div>
+              </details>
             ))}
           </div>
         ))}
