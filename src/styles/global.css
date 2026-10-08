@@ -741,13 +741,42 @@ a.arch-word:focus-visible {
 .offers-head { margin-bottom: 48px; }
 .offers-grid { display: flex; flex-wrap: wrap; gap: 24px; }
 .offer-card {
+  position: relative;
   flex: 1 1 300px;
   min-width: 0;
   display: flex;
   flex-direction: column;
   background: #fff;
+  border: 1px solid transparent;
   border-radius: 20px;
   padding: 28px;
+}
+/* Cards that fade in (.reveal) and lift on hover: the entrance keeps its slow timing and
+   stagger, the hover responds immediately. Uses `translate` so it doesn't fight .reveal's transform. */
+.offer-card,
+.svc-plan {
+  transition-property: opacity, transform, translate, box-shadow, border-color;
+  transition-duration: 0.6s, 0.6s, 250ms, 250ms, 250ms;
+  transition-timing-function: ease, ease, var(--ease), var(--ease), var(--ease);
+  transition-delay: 0s;
+}
+.offer-card.reveal-d1, .svc-plan.reveal-d1 { transition-delay: 0.08s, 0.08s, 0s, 0s, 0s; }
+.offer-card.reveal-d2, .svc-plan.reveal-d2 { transition-delay: 0.16s, 0.16s, 0s, 0s, 0s; }
+.oa-card { transition: scale 400ms var(--ease); }
+@media (hover: hover) {
+  .offer-card:hover {
+    translate: 0 -6px;
+    border-color: var(--purple);
+    box-shadow: 0 28px 60px rgba(111,104,190,0.22);
+  }
+  /* The illustration zooms in slightly; the panel clips the edges */
+  .offer-card:hover .oa-card { scale: 1.08; }
+  .offer-card:hover .offer-link { text-decoration: underline; text-underline-offset: 4px; }
+  .offer-card:hover .offer-link svg { transform: translateX(3px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .offer-card:hover { translate: none; }
+  .offer-card:hover .oa-card { scale: none; }
 }
 /* Offer card illustrations: decorative mini cards in the style of the hero collage.
    Positions are percentages so the cards stay inside the panel at narrow widths. */
@@ -886,6 +915,10 @@ a.arch-word:focus-visible {
 }
 .offer-link svg { transition: transform var(--duration-base) var(--ease); }
 .offer-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+/* The link covers the whole card, so the card is one click target */
+.offer-link::after { content: ''; position: absolute; inset: 0; border-radius: 20px; }
+.offer-link:focus-visible { outline: none; }
+.offer-link:focus-visible::after { outline: 2px solid var(--color-indigo); outline-offset: 3px; }
 .offer-link:hover svg { transform: translateX(3px); }
 .offers-cta { display: flex; justify-content: center; margin-top: 48px; }
 
@@ -1052,7 +1085,6 @@ a.arch-word:focus-visible {
   display: flex;
   flex-direction: column;
   color: var(--ink);
-  transition: translate var(--duration-base) var(--ease), box-shadow var(--duration-base) var(--ease), border-color var(--duration-base) var(--ease);
 }
 .svc-plan.is-featured { border-top: 4px solid var(--purple); }
 .svc-plan-name { font-size: 13px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 18px; }
