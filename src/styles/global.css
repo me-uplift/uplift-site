@@ -801,6 +801,24 @@ a.arch-word:focus-visible {
 .oa-w60 { width: 60%; }
 .oa-w90 { width: 90%; }
 .oa-w92 { width: 92%; }
+/* Studio Pass: a mini requests window and a delivery-time chip */
+.oa-requests { left: 8%; top: 18px; width: 150px; height: 112px; padding: 10px 12px; rotate: -2deg; }
+.oa-requests .oa-dots { margin-bottom: 8px; }
+.oa-req-row { display: flex; align-items: center; gap: 8px; padding: 7px 0; border-top: 1px solid #ECE7F6; }
+.oa-req-row .oa-bar { flex: 1; background: #E6E1F2; }
+.oa-status { flex-shrink: 0; width: 24px; height: 8px; border-radius: 999px; }
+.oa-status--progress { background: #F6D9CF; }
+.oa-status--queued { background: #E9E4F6; }
+.oa-status--done { background: var(--ink); }
+.oa-speed {
+  left: 58%; top: 74px;
+  padding: 8px 12px;
+  rotate: 3deg;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--accent-rose);
+}
 /* Social media management: a post and an email newsletter */
 .oa-post { left: 8%; top: 14px; width: 104px; height: 124px; padding: 7px; rotate: -4deg; }
 .oa-post-img { height: 78px; border-radius: 7px; background: linear-gradient(160deg, #F0A08A, #B07CD6); }
@@ -940,16 +958,17 @@ a.arch-word:focus-visible {
   padding: calc(64px + var(--space-9)) clamp(20px, 4vw, 48px) var(--space-9);
 }
 .svc-hero .blog-index-header { margin-bottom: var(--space-7); }
-/* "Find your fit" choices: white cards that read as buttons */
+/* "Find your fit" choices: white tiles that read as buttons.
+   The offer illustration on top, then the question and answer with the arrow beside them. */
 .svc-fit { display: flex; flex-wrap: wrap; gap: 16px; }
 .svc-fit-link {
   flex: 1 1 260px; /* wide enough that every label and answer fits on one line */
   min-width: 0;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 18px 16px 18px 20px;
+  gap: 16px 12px;
+  padding: 12px 16px 18px 12px;
   border: 1px solid var(--line-lavender);
   border-radius: 16px;
   background: #fff;
@@ -957,7 +976,12 @@ a.arch-word:focus-visible {
   text-decoration: none;
   transition: translate var(--duration-base) var(--ease), box-shadow var(--duration-base) var(--ease), border-color var(--duration-base) var(--ease);
 }
-.svc-fit-text { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+/* The homepage illustration panel, drawn at 75% scale: the panel is widened by 1/0.75 and
+   scaled back down, so the percentage-positioned cards land where they do on the homepage */
+.svc-fit-art { grid-column: 1 / -1; grid-row: 1; height: 112px; overflow: hidden; border-radius: 12px; }
+.svc-fit-art .oa { width: calc(100% / 0.75); margin: 0; transform: scale(0.75); transform-origin: 0 0; }
+.svc-fit-arrow { grid-row: 2; }
+.svc-fit-text { grid-column: 1; grid-row: 2; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .svc-fit-label { font-size: 13px; line-height: 1.3; color: var(--ink-muted); }
 .svc-fit-line { font-size: 17px; font-weight: 600; line-height: 1.25; }
 .svc-fit-arrow {
@@ -977,6 +1001,7 @@ a.arch-word:focus-visible {
   box-shadow: 0 12px 28px rgba(111,104,190,0.16);
 }
 .svc-fit-link:hover .svc-fit-arrow { background: var(--btn-hover-gradient); color: #fff; }
+.svc-fit-link:hover .oa-card { scale: 1.04; }
 .svc-fit-link:focus-visible { outline: 2px solid var(--color-indigo); outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) {
   .svc-fit-link:hover { translate: none; }

@@ -1,17 +1,18 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactSection from '../components/ContactSection.astro';
+import OfferArt from '../components/OfferArt.astro';
 import { BLOOM_FORM_URL } from '../lib/links.js';
 
 const title = 'Services and Pricing | Uplift Digital Studio';
 const description = 'Flat monthly rates for social media management, UGC creator campaigns, web and SEO, and the Studio Pass, your fractional digital team.';
 
 const fit = [
-  { label: 'Need a professional on call?', line: 'Studio Pass', href: '#pass' },
-  { label: 'Want to grow on social media?', line: 'Social media', href: '#social' },
-  { label: 'Running social media ads?', line: 'UGC creators', href: '#campaigns' },
-  { label: 'Need to be found online?', line: 'Web and SEO', href: '#web' },
-];
+  { label: 'Need a professional on call?', line: 'Studio Pass', href: '#pass', art: 'pass' },
+  { label: 'Want to grow on social media?', line: 'Social media', href: '#social', art: 'social' },
+  { label: 'Running social media ads?', line: 'UGC creators', href: '#campaigns', art: 'creators' },
+  { label: 'Need to be found online?', line: 'Web and SEO', href: '#web', art: 'web' },
+] as const;
 
 // Decorative requests portal in the Studio Pass panel
 const portalRows = [
@@ -82,6 +83,7 @@ const faqCols = [faqs.slice(0, 5), faqs.slice(5)];
       <nav class="svc-fit reveal reveal-d1" aria-label="Find your fit">
         {fit.map((f) => (
           <a href={f.href} class="svc-fit-link">
+            <span class="svc-fit-art"><OfferArt art={f.art} /></span>
             <span class="svc-fit-text">
               <span class="svc-fit-label">{f.label}</span>
               <span class="svc-fit-line">{f.line}</span>
