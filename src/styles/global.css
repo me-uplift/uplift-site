@@ -1993,8 +1993,8 @@ a.cat:hover { filter: brightness(0.95); }
 /* Inner wrapper only matters for the strip; elsewhere the card's grid lays out its children directly */
 .newsletter-inner { display: contents; }
 
-/* Strip variant: a full-width gradient band on the blog index. The copy and form sit in
-   a translucent box (same tint as the Studio Pass box) aligned with the page content. */
+/* Strip variant: a slim full-width gradient band on the blog index, copy left and form right,
+   aligned with the page content. The gradient's deepened first stop keeps white text above 4.5:1. */
 .newsletter--strip {
   display: block;
   margin-inline: calc(50% - 50vw);
@@ -2010,10 +2010,6 @@ a.cat:hover { filter: brightness(0.95); }
   gap: var(--space-6);
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: var(--space-3) var(--space-3) var(--space-3) var(--space-6);
-  border-radius: 999px;
-  background: rgba(20,18,43,0.22);
-  border: 1px solid rgba(255,255,255,0.4);
 }
 .newsletter--strip.is-subscribed { animation: none; }
 .newsletter--strip::after { display: none; }
@@ -2347,8 +2343,8 @@ a.cat:hover { filter: brightness(0.95); }
   .blog-index-headline { font-size: 36px; }
   .filter-chip { min-height: 44px; }
   .newsletter { grid-template-columns: 1fr; padding: var(--space-6) var(--space-5); gap: var(--space-5); }
-  .newsletter--strip { padding: var(--space-4) var(--container-pad); }
-  .newsletter--strip .newsletter-inner { grid-template-columns: 1fr; gap: var(--space-3); padding: var(--space-4); border-radius: 20px; }
+  .newsletter--strip { padding: var(--space-5) var(--container-pad); }
+  .newsletter--strip .newsletter-inner { grid-template-columns: 1fr; gap: var(--space-3); }
   .post-cover img { height: auto; aspect-ratio: 16 / 9; }
 }
 @media (max-width: 700px) {
