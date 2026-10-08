@@ -2,7 +2,7 @@
 // Kit "Blog Newsletter" sign-up with the animated thank-you state.
 // variant "banner": the two-column card on the blog index.
 // variant "inline": the stacked card inside a post body.
-// variant "strip": a single slim row on the blog index.
+// variant "strip": a full-width gradient band on the blog index, content in a translucent box.
 interface Props {
   id?: string;
   title: string;
@@ -14,8 +14,11 @@ const { id = 'newsletter', title, sub, variant = 'banner' } = Astro.props;
 const Wrapper = variant === 'inline' ? 'aside' : 'section';
 // Inside a post an <h2> would break the article's heading outline, so the inline title is a <p>
 const Title = variant === 'inline' ? 'p' : 'h2';
+// The strip sits on the gradient, so it takes the light button
+const buttonClass = variant === 'strip' ? 'btn btn-light' : 'btn btn-dark';
 ---
 <Wrapper class:list={['newsletter', { 'newsletter--inline': variant === 'inline', 'newsletter--strip': variant === 'strip' }]} aria-labelledby={`${id}-title`} data-newsletter>
+  <div class="newsletter-inner">
   <div class="newsletter-copy">
     <Title id={`${id}-title`} class="newsletter-title">{title}</Title>
     <p class="newsletter-sub">{sub}</p>
@@ -24,7 +27,7 @@ const Title = variant === 'inline' ? 'p' : 'h2';
     <label for={`${id}-email`} class:list={{ 'sr-only': variant === 'strip' }}>Email address</label>
     <div class="newsletter-row">
       <input id={`${id}-email`} name="email" type="email" autocomplete="email" placeholder="you@yourbrand.com" required>
-      <button type="submit" class="btn btn-dark">Subscribe</button>
+      <button type="submit" class={buttonClass}>Subscribe</button>
     </div>
     <p class="newsletter-status" role="status"></p>
   </form>
@@ -41,6 +44,7 @@ const Title = variant === 'inline' ? 'p' : 'h2';
     <h3 class="newsletter-success-title" tabindex="-1">Thank you for subscribing!</h3>
     <p class="newsletter-success-text"><strong>One more step:</strong> check your inbox and click the confirmation link to start getting Marketing Notes.</p>
     <button type="button" class="newsletter-reset">Edit email</button>
+  </div>
   </div>
 </Wrapper>
 
