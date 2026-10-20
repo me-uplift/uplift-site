@@ -1,15 +1,60 @@
 name: Rebuild on Netlify
 
+# Checks Notion every 3 hours and only triggers a Netlify build when the blog
+# database has changed since the last build, so idle days cost no build credits.
+# The last-built fingerprint is kept in the Actions cache; if it's ever evicted,
+# the next run simply rebuilds once and starts tracking again.
+
 on:
   schedule:
     - cron: '0 */3 * * *'
   workflow_dispatch:
+    inputs:
+      force:
+        description: 'Rebuild even if Notion has not changed'
+        type: boolean
+        default: false
 
 jobs:
   trigger-build:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github/scripts
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Fingerprint Notion database
+        id: notion
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+        run: echo "fingerprint=$(node .github/scripts/notion-fingerprint.mjs)" >> "$GITHUB_OUTPUT"
+
+      - name: Restore last-built fingerprint
+        uses: actions/cache/restore@v4
+        with:
+          path: .notion-fingerprint
+          key: notion-fingerprint-${{ steps.notion.outputs.fingerprint }}
+          restore-keys: notion-fingerprint-
+
+      - name: Compare
+        id: compare
+        run: |
+          last=$(cat .notion-fingerprint 2>/dev/null || true)
+          if [ "${{ inputs.force }}" = "true" ] || [ "$last" != "${{ steps.notion.outputs.fingerprint }}" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "Notion changed (or forced) — rebuilding."
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No Notion changes since the last build — skipping."
+          fi
+
       - name: Trigger Netlify build hook
+        if: steps.compare.outputs.changed == 'true'
         env:
           NETLIFY_BUILD_HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
         run: |
@@ -18,3 +63,11 @@ jobs:
             exit 1
           fi
           curl --fail --silent --show-error -X POST "$NETLIFY_BUILD_HOOK"
+          echo "${{ steps.notion.outputs.fingerprint }}" > .notion-fingerprint
+
+      - name: Save fingerprint
+        if: steps.compare.outputs.changed == 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .notion-fingerprint
+          key: notion-fingerprint-${{ steps.notion.outputs.fingerprint }}-${{ github.run_id }}
